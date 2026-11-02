@@ -62,11 +62,15 @@
     <style>
         *,*::before,*::after{box-sizing:border-box;padding:0;margin:0}
         html{overflow-x:clip;overflow-y:scroll;font-size:16px;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
-        body{max-width:100vw;overflow-x:clip;font-family:'Outfit',system-ui,-apple-system,sans-serif;background:#ffffff;color:#0f172a;line-height:1.6;-webkit-font-smoothing:antialiased}
+        body{max-width:100vw;overflow-x:clip;font-family:'Outfit',system-ui,-apple-system,sans-serif;background:#ffffff;color:#0f172a;line-height:1.65;letter-spacing:normal;-webkit-font-smoothing:antialiased}
         img,video{max-width:100%;height:auto;display:block}
-        h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.2;margin-bottom:1rem;color:#0f172a}
+        h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.3;margin-bottom:1rem;color:#0f172a;letter-spacing:normal}
+        p,span,li,a{line-height:1.65;letter-spacing:normal}
+        .tracking-tight,.tracking-tighter{letter-spacing:normal !important}
         a{color:inherit;text-decoration:none}
         .btn-brand-yellow{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:9999px;background:#ffc107;color:#000000;font-weight:800;font-size:.875rem;box-shadow:0 10px 15px -3px rgba(255,193,7,.3);transition:all .15s;border:none;cursor:pointer}
+        @keyframes pcpSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+        @keyframes pcpPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.96)}}
     </style>
 
     {{-- Non-blocking CSS: load the full home stylesheet without blocking rendering.
@@ -152,13 +156,22 @@
 </head>
 <body class="font-sans antialiased">
     <div id="home-app">
-        <section style="position:relative; width:100%; min-height:400px; display:flex; align-items:center; background:linear-gradient(135deg, #240242 0%, #3e076a 50%, #581292 100%); overflow:hidden;">
-            <div style="position:relative; z-index:10; width:100%; max-width:1600px; margin:0 auto; padding:4rem 1.5rem 2rem; text-align:left;">
-                <p style="color:#ffc107; font-size:0.875rem; font-weight:700; letter-spacing:0.08em; margin-bottom:0.75rem; text-transform:uppercase;">Sikar Education Hub</p>
-                <h1 style="color:#ffffff; font-size:clamp(2rem, 4vw, 3.5rem); font-weight:800; line-height:1.15; margin-bottom:1rem; letter-spacing:-0.025em; margin-top:0;">PCP Sikar &amp; Jaipur | Top JEE &amp; NEET Coaching</h1>
-                <p style="color:#e9d5ff; font-size:1.125rem; max-width:38rem; margin-bottom:1.5rem;">NEET AIR-1 Faculty • 12-Hour Continuous Doubt Desks • Integrated Disciplined Campuses & AC Hostels</p>
+        <div id="home-preloader" style="min-height:80vh; width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#ffffff; padding:3rem 1.5rem;">
+            <div style="position:relative; width:88px; height:88px; display:flex; align-items:center; justify-content:center;">
+                <!-- Spinning gradient border ring -->
+                <div style="position:absolute; inset:0; border-radius:50%; border:3.5px solid #f3e8ff; border-top-color:#5b40cf; border-right-color:#f59e0b; animation:pcpSpin 0.85s cubic-bezier(0.4, 0, 0.2, 1) infinite;"></div>
+                <!-- Soft pulsing ambient core -->
+                <div style="position:absolute; inset:6px; border-radius:50%; background:radial-gradient(circle, rgba(91,64,207,0.12) 0%, transparent 70%); animation:pcpPulse 1.6s ease-in-out infinite;"></div>
+                <!-- PCP Sikar Logo -->
+                <img src="/uploads/pcp_logo.png" alt="PCP Sikar" width="50" height="50" style="width:50px; height:50px; object-fit:contain; border-radius:50%; position:relative; z-index:2;" />
             </div>
-        </section>
+            <div style="margin-top:1.25rem; font-weight:900; font-size:1.125rem; letter-spacing:0.04em; color:#2e0854; font-family:'Outfit',system-ui,sans-serif;">PCP SIKAR</div>
+            <div style="margin-top:0.35rem; display:flex; align-items:center; gap:0.5rem; font-size:0.75rem; font-weight:700; color:#6b21a8; letter-spacing:0.06em; text-transform:uppercase;">
+                <span>Preparing Rankers</span>
+                <span style="display:inline-block; width:5px; height:5px; border-radius:50%; background:#f59e0b; animation:pcpPulse 1s infinite alternate;"></span>
+                <span>Session 2026-27</span>
+            </div>
+        </div>
     </div>
     <script id="home-props" type="application/json">{!! json_encode([
         'featuredPosts' => $featuredPosts ?? [],

@@ -408,7 +408,7 @@ export default function PcpHeroSection() {
                         </div>
 
                         {/* Large Headline with Strict Single-Line Typing Effect */}
-                        <h1 className="reveal-scroll text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-black tracking-tight text-slate-900 leading-[1.15] mb-5">
+                        <h1 className="reveal-scroll text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] font-black tracking-normal text-slate-900 leading-snug sm:leading-tight mb-5">
                             <span>Rankers Built With </span>
                             <span className="inline-block whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-[#2e0854] via-[#5b40cf] to-[#7c52c9] underline decoration-[#5b40cf]/30 underline-offset-8">
                                 {currentText || "\u00A0"}
@@ -421,13 +421,13 @@ export default function PcpHeroSection() {
                             Classroom excellence powered by Prince Eduhub's 25-year academic legacy. Producing All India Rank 1 in NEET and top percentiles in JEE with continuous 12-hour faculty doubt desks and residential mentorship.
                         </p>
 
-                        {/* Brand Action Buttons: 2 Equal Columns on Mobile ("do do me aane chahiye aur column me") */}
-                        <div className="reveal-scroll grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto mb-8">
+                        {/* Brand Action Buttons: Strictly Parallel Row */}
+                        <div className="reveal-scroll flex flex-row items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto mb-8">
                             
                             {/* Primary Button: Apply for Admission */}
                             <a 
                                 href="/category/jee-coachings" 
-                                className="relative inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-7 py-2.5 sm:py-3 rounded-full overflow-hidden bg-[#2e0854] border border-[#2e0854] text-white font-bold text-xs sm:text-sm shadow-none transition-all group cursor-pointer text-center"
+                                className="flex-1 sm:flex-initial relative inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-7 py-2.5 sm:py-3 rounded-full overflow-hidden bg-[#2e0854] border border-[#2e0854] text-white font-bold text-xs sm:text-sm shadow-none transition-all group cursor-pointer text-center"
                             >
                                 <span className="absolute inset-0 w-full h-full bg-[#5b40cf] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out pointer-events-none" />
                                 
@@ -441,7 +441,7 @@ export default function PcpHeroSection() {
                             {/* Secondary Button: Explore All Programs */}
                             <a 
                                 href="#services" 
-                                className="relative inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-slate-100 hover:bg-purple-50 text-slate-900 hover:text-[#2e0854] font-bold text-xs sm:text-sm transition-all border border-slate-300/80 hover:border-purple-300 shadow-none cursor-pointer text-center"
+                                className="flex-1 sm:flex-initial relative inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2.5 sm:py-3 rounded-full bg-slate-100 hover:bg-purple-50 text-slate-900 hover:text-[#2e0854] font-bold text-xs sm:text-sm transition-all border border-slate-300/80 hover:border-purple-300 shadow-none cursor-pointer text-center"
                             >
                                 <span className="sm:hidden">All Programs</span>
                                 <span className="hidden sm:inline">Explore All Programs</span>

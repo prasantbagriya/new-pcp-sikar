@@ -37,7 +37,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
             <span>{badge}</span>
           </div>
         )}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-normal leading-snug sm:leading-tight mb-4">
           {title}
         </h1>
         {description && (
@@ -86,7 +86,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
             <span>{badge}</span>
           </div>
         )}
-        <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-normal leading-snug">
           {title}
         </h2>
         {description && (

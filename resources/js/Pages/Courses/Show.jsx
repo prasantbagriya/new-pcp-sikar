@@ -182,7 +182,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                         </div>
 
                         {/* Main Title & Tagline */}
-                        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] mb-4 max-w-4xl">
+                        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-normal leading-snug sm:leading-tight mb-4 max-w-4xl">
                             {course.title}
                         </h1>
 
@@ -194,31 +194,33 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                             {course.description}
                         </p>
 
-                        {/* Hero CTAs */}
-                        <div className="flex flex-wrap items-center gap-3.5">
+                        {/* Hero CTAs: Parallel on Mobile and Desktop */}
+                        <div className="flex flex-row flex-wrap items-center gap-2.5 sm:gap-3.5 w-full">
                             <button
                                 onClick={() => {
                                     setSelectedBatchForApply(course.batches[0]?.name || '');
                                     setFormData(prev => ({ ...prev, batch: course.batches[0]?.name || '' }));
                                     setIsApplyModalOpen(true);
                                 }}
-                                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#2e0854] font-extrabold text-sm px-7 py-3.5 rounded-xl shadow-lg shadow-amber-950/20 transition-all hover:scale-102 active:scale-98"
+                                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#2e0854] font-extrabold text-xs sm:text-sm px-3.5 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-amber-950/20 transition-all hover:scale-102 active:scale-98 text-center cursor-pointer"
                             >
-                                <CheckCircle2 className="w-4 h-4 text-[#2e0854]" />
-                                <span>Apply For Admission 2026-27</span>
+                                <CheckCircle2 className="w-4 h-4 text-[#2e0854] shrink-0" />
+                                <span className="sm:hidden">Apply Online</span>
+                                <span className="hidden sm:inline">Apply For Admission 2026-27</span>
                             </button>
 
                             <button
                                 onClick={() => setIsPdfModalOpen(true)}
-                                className="inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white font-bold text-sm px-6 py-3.5 rounded-xl border border-white/20 backdrop-blur-md transition-all"
+                                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-white/15 hover:bg-white/25 text-white font-bold text-xs sm:text-sm px-3.5 sm:px-6 py-3 sm:py-3.5 rounded-xl border border-white/20 backdrop-blur-md transition-all text-center cursor-pointer"
                             >
-                                <Download className="w-4 h-4 text-amber-300" />
-                                <span>Download Syllabus &amp; Planner (PDF)</span>
+                                <Download className="w-4 h-4 text-amber-300 shrink-0" />
+                                <span className="sm:hidden">Syllabus PDF</span>
+                                <span className="hidden sm:inline">Download Syllabus (PDF)</span>
                             </button>
 
                             <a 
                                 href="tel:+919610892222"
-                                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-purple-200 hover:text-white font-bold text-sm px-5 py-3.5 rounded-xl border border-white/15 transition-all no-underline"
+                                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-purple-200 hover:text-white font-bold text-xs sm:text-sm px-4 sm:px-5 py-2.5 sm:py-3.5 rounded-xl border border-white/15 transition-all no-underline text-center"
                             >
                                 <Phone className="w-4 h-4 text-purple-300" />
                                 <span>Helpline: 9610-89-2222</span>

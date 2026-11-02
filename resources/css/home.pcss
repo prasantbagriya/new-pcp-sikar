@@ -77,11 +77,21 @@ img, video, iframe, canvas, svg { max-width: 100%; height: auto; display: block;
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.35;
+  letter-spacing: normal;
   margin-bottom: 1rem;
   break-after: avoid;
   page-break-after: avoid;
   -webkit-font-smoothing: antialiased;
+}
+
+p, span, li, a {
+  line-height: 1.65;
+  letter-spacing: normal;
+}
+
+.tracking-tight, .tracking-tighter {
+  letter-spacing: normal !important;
 }
 
 .btn {

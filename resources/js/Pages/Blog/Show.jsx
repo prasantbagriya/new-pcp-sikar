@@ -414,7 +414,7 @@ export default function Show({ post, recentPosts = [], meta, comments = [], user
                                 </div>
 
                                 {/* Article Headline */}
-                                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#2e0854] dark:text-white tracking-tight leading-[1.18] mb-6">
+                                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#2e0854] dark:text-white tracking-normal leading-snug sm:leading-tight mb-6">
                                     {post.title}
                                 </h1>
 
@@ -676,19 +676,21 @@ export default function Show({ post, recentPosts = [], meta, comments = [], user
                                     <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
                                         Get direct alerts for PCP Olympiad, Matrix scholarship tests, NEET UG batch announcements, and CBSE school admissions directly in your inbox.
                                     </p>
-                                    <div className="flex flex-col sm:flex-row gap-3">
+                                    <div className="flex flex-row items-center gap-2.5 sm:gap-3">
                                         <Link 
                                             href={`${basePath}/blog`} 
-                                            className="inline-flex items-center justify-center gap-2 bg-[#5b40cf] hover:bg-[#2e0854] text-white font-bold py-3.5 px-6 rounded-2xl shadow-lg shadow-purple-900/25 transition-all text-sm no-underline active:scale-98"
+                                            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#5b40cf] hover:bg-[#2e0854] text-white font-bold py-3 sm:py-3.5 px-4 sm:px-6 rounded-2xl shadow-lg shadow-purple-900/25 transition-all text-xs sm:text-sm no-underline active:scale-98 text-center"
                                         >
                                             <BookOpen className="w-4 h-4" />
-                                            Explore All Educational Guides
+                                            <span className="sm:hidden">All Guides</span>
+                                            <span className="hidden sm:inline">Explore All Guides</span>
                                         </Link>
                                         <Link 
                                             href={`${basePath}/contact`} 
-                                            className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold py-3.5 px-6 rounded-2xl border border-white/20 transition-all text-sm no-underline"
+                                            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold py-3 sm:py-3.5 px-4 sm:px-6 rounded-2xl border border-white/20 transition-all text-xs sm:text-sm no-underline text-center"
                                         >
-                                            Ask Our Counselors
+                                            <span className="sm:hidden">Counselor</span>
+                                            <span className="hidden sm:inline">Ask Our Counselors</span>
                                         </Link>
                                     </div>
                                 </div>

@@ -4,8 +4,8 @@
   ],
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "resources/css/app.css": [
-    "/build/assets/PostForm-B0SUdD8N.js",
-    "/build/assets/PostForm-C8Mn73Am.css",
+    "/build/assets/PostForm-H-X0lsFl.js",
+    "/build/assets/PostForm-Blvy7tIS.css",
     "/build/assets/outfit-latin-ext-400-normal-5tcqmc2S.woff2",
     "/build/assets/outfit-latin-ext-400-normal-DHm7mdGe.woff",
     "/build/assets/outfit-latin-400-normal-BGsTXAXT.woff2",
@@ -77,19 +77,19 @@
     "/build/assets/GuestLayout-BnzmHQ1V.js"
   ],
   "resources/js/NextComponents/BlogFooter.tsx": [
-    "/build/assets/BlogFooter-CvQ4tjQi.js"
+    "/build/assets/BlogFooter-BCC4IHxH.js"
   ],
   "resources/js/NextComponents/BrandIcons.tsx": [
     "/build/assets/BrandIcons-EKrvry51.js"
   ],
   "resources/js/NextComponents/GlobalNavbar.tsx": [
-    "/build/assets/GlobalNavbar-CLKqeU09.js"
+    "/build/assets/GlobalNavbar-DtKV_09A.js"
   ],
   "resources/js/NextComponents/SeoMeta.jsx": [
     "/build/assets/SeoMeta-DZtUMvKs.js"
   ],
   "resources/js/NextComponents/UI.tsx": [
-    "/build/assets/UI-D7C0OSnN.js"
+    "/build/assets/UI-BQXVD_kQ.js"
   ],
   "resources/js/Pages/Admin/Authors/AuthorForm.tsx": [
     "/build/assets/AuthorForm-sx1aiIhS.js"
@@ -155,8 +155,8 @@
     "/build/assets/Index-ll9CwG5T.js"
   ],
   "resources/js/Pages/Admin/PostForm.tsx": [
-    "/build/assets/PostForm-B0SUdD8N.js",
-    "/build/assets/PostForm-C8Mn73Am.css",
+    "/build/assets/PostForm-H-X0lsFl.js",
+    "/build/assets/PostForm-Blvy7tIS.css",
     "/build/assets/outfit-latin-ext-400-normal-5tcqmc2S.woff2",
     "/build/assets/outfit-latin-ext-400-normal-DHm7mdGe.woff",
     "/build/assets/outfit-latin-400-normal-BGsTXAXT.woff2",
@@ -171,10 +171,10 @@
     "/build/assets/outfit-latin-700-normal-D4itBLBr.woff"
   ],
   "resources/js/Pages/Admin/Posts/Edit.jsx": [
-    "/build/assets/Edit-CIiSCTHQ.js"
+    "/build/assets/Edit-y70BqS0T.js"
   ],
   "resources/js/Pages/Admin/Posts/New.jsx": [
-    "/build/assets/New-Bp-RYM3L.js"
+    "/build/assets/New-DGeTO2c1.js"
   ],
   "resources/js/Pages/Admin/SearchConsole/Index.jsx": [
     "/build/assets/Index-CiB-TMzA.js"
@@ -231,16 +231,16 @@
     "/build/assets/VerifyEmail-cLfR4zR5.js"
   ],
   "resources/js/Pages/Author/Index.jsx": [
-    "/build/assets/Index-Cl50_2Tn.js"
+    "/build/assets/Index-B9uYkL4l.js"
   ],
   "resources/js/Pages/Author/Show.jsx": [
-    "/build/assets/Show-NoqwTwZj.js"
+    "/build/assets/Show-Dwp2PndN.js"
   ],
   "resources/js/Pages/Blog/Index.jsx": [
-    "/build/assets/Index-CBEeOgiu2.js"
+    "/build/assets/Index-jSdMANzU2.js"
   ],
   "resources/js/Pages/Blog/Show.jsx": [
-    "/build/assets/Show-2amxhRP8.js"
+    "/build/assets/Show-X3OPoPXN.js"
   ],
   "resources/js/Pages/Business/Create.jsx": [
     "/build/assets/Create-UbAqWnSK.js"
@@ -249,31 +249,31 @@
     "/build/assets/Edit-DgXEKd5y2.js"
   ],
   "resources/js/Pages/Category/Index.jsx": [
-    "/build/assets/Index-CMbRBBwc.js"
+    "/build/assets/Index-BsnfDbFp.js"
   ],
   "resources/js/Pages/Category/Show.jsx": [
-    "/build/assets/Show-D6QUpLjc.js"
+    "/build/assets/Show-BJW3zPuC.js"
   ],
   "resources/js/Pages/Community/Create.jsx": [
-    "/build/assets/Create-DXFurdbx.js"
+    "/build/assets/Create-CY3cNhdJ.js"
   ],
   "resources/js/Pages/Community/Edit.jsx": [
     "/build/assets/Edit-CWZuYsIl.js"
   ],
   "resources/js/Pages/Community/Feed.jsx": [
-    "/build/assets/Feed-BBl-vLFX.js"
+    "/build/assets/Feed-Cq9-nkaG.js"
   ],
   "resources/js/Pages/Community/ModQueue.jsx": [
     "/build/assets/ModQueue-D2Z2vg_P.js"
   ],
   "resources/js/Pages/Community/Show.jsx": [
-    "/build/assets/Show-P1ONsodu.js"
+    "/build/assets/Show-SNPFWaQF.js"
   ],
   "resources/js/Pages/Courses/Index.jsx": [
-    "/build/assets/Index-D7kjE-X0.js"
+    "/build/assets/Index-2HjQSm_R.js"
   ],
   "resources/js/Pages/Courses/Show.jsx": [
-    "/build/assets/Show-7mIfSY1g.js"
+    "/build/assets/Show-CWYOyUPB.js"
   ],
   "resources/js/Pages/Dashboard.jsx": [
     "/build/assets/Dashboard-Bev2GkH-.js"
@@ -297,13 +297,13 @@
     "/build/assets/HeroMagazine-k32qYTvQ.js"
   ],
   "resources/js/Pages/HomeComponents/HomeFooter.tsx": [
-    "/build/assets/HomeFooter-BSCenmGO.js"
+    "/build/assets/HomeFooter-CzrSgAS7.js"
   ],
   "resources/js/Pages/HomeComponents/HomeHeroSlider.jsx": [
     "/build/assets/HomeHeroSlider-DOaeE8Py.js"
   ],
   "resources/js/Pages/HomeComponents/HomeNavbar.tsx": [
-    "/build/assets/HomeNavbar-DBbSdREA.js"
+    "/build/assets/HomeNavbar-Dn2PGtog.js"
   ],
   "resources/js/Pages/HomeComponents/InstitutesSection.jsx": [
     "/build/assets/InstitutesSection-ByfCJohD.js"
@@ -345,7 +345,7 @@
     "/build/assets/PcpGalleryShowcase-BgGreSxg.js"
   ],
   "resources/js/Pages/HomeComponents/PcpHeroSection.jsx": [
-    "/build/assets/PcpHeroSection-HBkrR0HH.js"
+    "/build/assets/PcpHeroSection-DkUp0Tan.js"
   ],
   "resources/js/Pages/HomeComponents/PcpImagesCloudSection.jsx": [
     "/build/assets/PcpImagesCloudSection-BrQzMla8.js"
@@ -405,10 +405,10 @@
     "/build/assets/utils-BjQF728w.js"
   ],
   "resources/js/Pages/Post/Create.jsx": [
-    "/build/assets/Create-CdPmuCnE.js"
+    "/build/assets/Create-BYyVx0Ua.js"
   ],
   "resources/js/Pages/Post/Show.jsx": [
-    "/build/assets/Show-CoAl0YCE.js"
+    "/build/assets/Show-RHW09b4g.js"
   ],
   "resources/js/Pages/Profile/Edit.jsx": [
     "/build/assets/Edit-D8tIfzQL.js"
@@ -423,7 +423,7 @@
     "/build/assets/UpdateProfileInformationForm-BPUmL4XR.js"
   ],
   "resources/js/Pages/Reviews/Index.tsx": [
-    "/build/assets/Index-Ck2vsE1D.js"
+    "/build/assets/Index-ZwfaEkjT.js"
   ],
   "resources/js/Pages/Reviews/components/AiSearchModal.tsx": [
     "/build/assets/AiSearchModal-CIqeFegw.js"
@@ -435,7 +435,7 @@
     "/build/assets/BusinessProfileView-8ZWiv5lM.js"
   ],
   "resources/js/Pages/Reviews/components/CategoryGrid.tsx": [
-    "/build/assets/CategoryGrid-C39rd72a.js"
+    "/build/assets/CategoryGrid-DWP9cLNS.js"
   ],
   "resources/js/Pages/Reviews/components/HeroSection.tsx": [
     "/build/assets/HeroSection-CkhBf96s.js"
@@ -447,37 +447,37 @@
     "/build/assets/mockData-Bc-mBESl.js"
   ],
   "resources/js/Pages/Search/Index.jsx": [
-    "/build/assets/Index-BBC7qPJi.js"
+    "/build/assets/Index-CeN90Kfe.js"
   ],
   "resources/js/Pages/Static/About.jsx": [
-    "/build/assets/About-CC_a70Xo.js"
+    "/build/assets/About-BuXm5VM4.js"
   ],
   "resources/js/Pages/Static/Contact.jsx": [
-    "/build/assets/Contact-gSDItGzK.js"
+    "/build/assets/Contact-BmxDW6JN.js"
   ],
   "resources/js/Pages/Static/CustomPage.jsx": [
-    "/build/assets/CustomPage-B58PVyAT.js"
+    "/build/assets/CustomPage-BX9zigKV.js"
   ],
   "resources/js/Pages/Static/EditorialPolicy.jsx": [
-    "/build/assets/EditorialPolicy-DJCm2RSo.js"
+    "/build/assets/EditorialPolicy-mFFFRsYr.js"
   ],
   "resources/js/Pages/Static/FactCheckingPolicy.jsx": [
-    "/build/assets/FactCheckingPolicy-Dq5gWCLo.js"
+    "/build/assets/FactCheckingPolicy-Bpih5X4h.js"
   ],
   "resources/js/Pages/Static/Privacy.jsx": [
-    "/build/assets/Privacy-CHvhmmS7.js"
+    "/build/assets/Privacy-BM9o0nyI.js"
   ],
   "resources/js/Pages/Static/Terms.jsx": [
-    "/build/assets/Terms-D9fJGzen.js"
+    "/build/assets/Terms-C0PxJzZE.js"
   ],
   "resources/js/Pages/Story/Index.jsx": [
-    "/build/assets/Index-DXsiSms9.js"
+    "/build/assets/Index-0EgZhSkM.js"
   ],
   "resources/js/Pages/User/Show.jsx": [
-    "/build/assets/Show-L64qrKPV.js"
+    "/build/assets/Show-BVJ0dC_R.js"
   ],
   "resources/js/Pages/Welcome.jsx": [
-    "/build/assets/Welcome-fQqrWril.js"
+    "/build/assets/Welcome-BxjeqhXo.js"
   ],
   "resources/js/ssr.jsx": []
 }

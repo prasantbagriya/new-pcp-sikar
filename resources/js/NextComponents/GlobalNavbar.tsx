@@ -343,7 +343,7 @@ function NavbarCore({
           <a href={getHref('landing')} className="flex items-center gap-2 group shrink-0 decoration-transparent py-1 select-none">
             <div className="flex flex-col items-start leading-none">
               <div className="flex items-center gap-2">
-                <span className="text-xl sm:text-2xl font-black tracking-tight text-[#2e1065] font-sans">PCP Sikar</span>
+                <span className="text-xl sm:text-2xl font-black tracking-normal text-[#2e1065] font-sans">PCP Sikar</span>
                 <span className="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-extrabold uppercase bg-purple-100 text-[#2e1065] border border-purple-200 shadow-xs">IIT-JEE • NEET</span>
               </div>
               <span className="text-[9.5px] sm:text-[10.5px] font-semibold tracking-normal text-[#3b0764] italic mt-0.5">Your Search will End Here...</span>
@@ -703,7 +703,7 @@ function NavbarCore({
             {/* My Account Pill Button (Shadow removed, Clean Purple Brand border) */}
             <a 
               href={currentUser ? "/dashboard" : "/login"}
-              className="relative inline-flex items-center justify-center px-5 sm:px-6 py-2 rounded-full border border-purple-200 hover:border-[#2e0854] bg-white hover:bg-purple-50/50 text-slate-800 hover:text-[#2e0854] font-bold text-xs sm:text-[13px] tracking-tight transition-all duration-200 shadow-none active:scale-95 shrink-0 decoration-transparent leading-normal"
+              className="relative inline-flex items-center justify-center px-5 sm:px-6 py-2 rounded-full border border-purple-200 hover:border-[#2e0854] bg-white hover:bg-purple-50/50 text-slate-800 hover:text-[#2e0854] font-bold text-xs sm:text-[13px] tracking-normal transition-all duration-200 shadow-none active:scale-95 shrink-0 decoration-transparent leading-normal"
             >
               <span>{currentUser ? (currentUser.is_admin ? 'Dashboard' : 'My Account') : 'My Account'}</span>
             </a>

@@ -90,7 +90,7 @@ export default function HomeFooter({ global_nav: passedNav }) {
               <span>Admissions Open 2026-27 • NEET-UG &amp; IIT-JEE</span>
             </div>
             
-            <h3 className="text-2xl sm:text-3xl lg:text-[34px] font-black text-slate-900 tracking-tight leading-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-[34px] font-black text-slate-900 tracking-normal leading-snug">
               Ready to Turn Your Dream into a Top Rank?
             </h3>
             
@@ -99,21 +99,23 @@ export default function HomeFooter({ global_nav: passedNav }) {
             </p>
           </div>
 
-          <div className="relative z-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="relative z-10 flex flex-row items-center justify-center gap-2.5 sm:gap-3.5 w-full lg:w-auto">
             <a 
               href="/contact" 
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#2e0854] via-[#3b1165] to-[#5b40cf] hover:from-[#21053d] hover:to-[#4931b0] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-102 active:scale-98"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-[#2e0854] via-[#3b1165] to-[#5b40cf] hover:from-[#21053d] hover:to-[#4931b0] text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-102 active:scale-98 text-center"
             >
-              <span>Book Free Campus Visit</span>
-              <ArrowRight className="w-4 h-4 text-purple-200" />
+              <span className="sm:hidden">Campus Visit</span>
+              <span className="hidden sm:inline">Book Free Campus Visit</span>
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-200" />
             </a>
 
             <a 
               href="tel:9610892222" 
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white hover:bg-purple-50 text-[#2e0854] font-bold text-xs sm:text-sm border border-purple-200/90 shadow-2xs hover:shadow-xs transition-all"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-full bg-white hover:bg-purple-50 text-[#2e0854] font-bold text-xs sm:text-sm border border-purple-200/90 shadow-2xs hover:shadow-xs transition-all text-center"
             >
-              <Phone className="w-4 h-4 text-[#5b40cf]" />
-              <span>Talk to Counselor</span>
+              <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#5b40cf]" />
+              <span className="sm:hidden">Counselor</span>
+              <span className="hidden sm:inline">Talk to Counselor</span>
             </a>
           </div>
 

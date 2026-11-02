@@ -110,7 +110,7 @@ export default function CoursesIndex({ courses = [], meta }) {
                         </div>
 
                         {/* Headline */}
-                        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] mb-6 max-w-4xl mx-auto">
+                        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-normal leading-snug sm:leading-tight mb-6 max-w-4xl mx-auto">
                             Empowering India’s Future <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-purple-200 to-white">Doctors, IITians &amp; Officers.</span>
                         </h1>
 
@@ -119,23 +119,25 @@ export default function CoursesIndex({ courses = [], meta }) {
                             PCP Sikar pairs high-caliber faculties with an uncompromising daily routine, residential care, and authentic academic transparency across <strong>NEET-UG, IIT-JEE, Pre-Foundation, and NDA Defence</strong> divisions.
                         </p>
 
-                        {/* Quick CTA Buttons */}
-                        <div className="flex flex-wrap items-center justify-center gap-3.5">
+                        {/* Quick CTA Buttons: Strictly Parallel */}
+                        <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-3.5 w-full max-w-xl mx-auto">
                             <a 
                                 href="tel:+919610892222"
-                                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#2e0854] font-extrabold text-sm px-7 py-3.5 rounded-xl shadow-lg shadow-amber-950/20 transition-all hover:scale-102 active:scale-98 no-underline"
+                                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#2e0854] font-extrabold text-xs sm:text-sm px-3 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-amber-950/20 transition-all hover:scale-102 active:scale-98 no-underline text-center"
                             >
                                 <Phone className="w-4 h-4 text-[#2e0854]" />
-                                <span>Admission Helpline: 9610-89-2222</span>
+                                <span className="sm:hidden">Call Helpline</span>
+                                <span className="hidden sm:inline">Helpline: 9610-89-2222</span>
                             </a>
                             <a 
                                 href="https://api.whatsapp.com/send?phone=919610892222&text=Hello%20PCP%20Counselor,%20I%20want%20information%20about%20PCP%20Courses"
                                 target="_blank"
                                 rel="noreferrer"
-                                className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm px-6 py-3.5 rounded-xl border border-white/20 shadow-md transition-all no-underline"
+                                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm px-3 sm:px-6 py-3 sm:py-3.5 rounded-xl border border-white/20 shadow-md transition-all no-underline text-center"
                             >
                                 <MessageSquare className="w-4 h-4 fill-white" />
-                                <span>WhatsApp Career Counselor</span>
+                                <span className="sm:hidden">WhatsApp Desk</span>
+                                <span className="hidden sm:inline">WhatsApp Counselor</span>
                             </a>
                         </div>
                     </div>

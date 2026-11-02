@@ -77,7 +77,7 @@ const FAQSection = ({ customFaqs }) => {
                                 <MessageSquare className="w-3.5 h-3.5 text-[#5b40cf]" />
                                 <span>FAQs For Educational Guides</span>
                             </div>
-                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-tight leading-tight">
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 tracking-normal leading-snug">
                                 Frequently Asked <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2e0854] via-[#5b40cf] to-purple-600">Questions</span>
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
@@ -227,7 +227,7 @@ export default function Index({ posts, sliders, meta, faqs = [] }) {
                         <span>VERIFIED ADMISSION RESEARCH &amp; TOPPER STRATEGIES</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
+                    <h1 className="text-3xl sm:text-5xl font-black text-white tracking-normal leading-snug sm:leading-tight mb-3">
                         {meta?.h1 || 'Educational Guides & Articles'}
                     </h1>
 

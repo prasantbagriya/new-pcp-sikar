@@ -185,7 +185,7 @@ export default function About({ meta }) {
                         </div>
 
                         {/* Main Headline */}
-                        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] mb-6 max-w-4xl mx-auto">
+                        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-normal leading-snug sm:leading-tight mb-6 max-w-4xl mx-auto">
                             Transforming Aspirations Into <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-purple-200 to-white">National Ranks.</span>
                         </h1>
 
@@ -194,21 +194,23 @@ export default function About({ meta }) {
                             PCP Sikar (Prince Career Pioneer), an integral division of <strong>Prince Eduhub</strong>, is North India’s premier residential coaching powerhouse for <strong>NEET-UG, IIT-JEE, and Pre-Foundation</strong>. We pair top-tier faculties with an uncompromising daily routine, residential care, and authentic academic transparency.
                         </p>
 
-                        {/* Quick Action Buttons */}
-                        <div className="flex flex-wrap items-center justify-center gap-3.5">
+                        {/* Quick Action Buttons: Strictly Parallel */}
+                        <div className="flex flex-row items-center justify-center gap-2.5 sm:gap-3.5 w-full max-w-lg mx-auto">
                             <Link 
                                 href={`${basePath}/#courses`}
-                                className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#2e0854] font-extrabold text-sm px-7 py-3.5 rounded-xl shadow-lg shadow-amber-950/20 transition-all hover:scale-102 active:scale-98 no-underline"
+                                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-[#2e0854] font-extrabold text-xs sm:text-sm px-3 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-amber-950/20 transition-all hover:scale-102 active:scale-98 no-underline text-center"
                             >
                                 <BookOpen className="w-4 h-4" />
-                                <span>Explore Coaching Programs</span>
+                                <span className="sm:hidden">Coaching Programs</span>
+                                <span className="hidden sm:inline">Explore Coaching Programs</span>
                             </Link>
                             <a 
                                 href="tel:+919610892222"
-                                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-sm px-6 py-3.5 rounded-xl border border-white/20 backdrop-blur-md transition-all no-underline"
+                                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm px-3 sm:px-6 py-3 sm:py-3.5 rounded-xl border border-white/20 backdrop-blur-md transition-all no-underline text-center"
                             >
                                 <Phone className="w-4 h-4 text-purple-300" />
-                                <span>Call Counselor: 9610-89-2222</span>
+                                <span className="sm:hidden">Call Counselor</span>
+                                <span className="hidden sm:inline">Call: 9610-89-2222</span>
                             </a>
                         </div>
 
@@ -249,7 +251,7 @@ export default function About({ meta }) {
                                 <span>The PCP Story &amp; Ethos</span>
                             </div>
 
-                            <h2 className="text-2xl sm:text-4xl font-black text-[#2e0854] dark:text-white tracking-tight leading-tight">
+                            <h2 className="text-2xl sm:text-4xl font-black text-[#2e0854] dark:text-white tracking-normal leading-snug">
                                 How Sikar Evolved Into India’s Most Disciplined Coaching Capital.
                             </h2>
 
@@ -329,7 +331,7 @@ export default function About({ meta }) {
                                 <Sparkles className="w-3.5 h-3.5 text-[#5b40cf] dark:text-purple-400" />
                                 <span>Founding Leadership &amp; Track Record</span>
                             </div>
-                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#2e0854] dark:text-white tracking-tight leading-tight">
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#2e0854] dark:text-white tracking-normal leading-snug">
                                 The Visionaries Behind Sikar's Educational Revolution
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3.5 leading-relaxed">
@@ -376,7 +378,7 @@ export default function About({ meta }) {
                                                     <span>•</span>
                                                     <span>{leader.org}</span>
                                                 </div>
-                                                <h3 className="text-xl sm:text-2xl font-black text-[#2e0854] dark:text-white tracking-tight">
+                                                <h3 className="text-xl sm:text-2xl font-black text-[#2e0854] dark:text-white tracking-normal">
                                                     {leader.name}
                                                 </h3>
                                                 <p className="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
@@ -474,7 +476,7 @@ export default function About({ meta }) {
                             <span className="text-xs font-black uppercase tracking-wider text-[#5b40cf] block mb-2">
                                 Why Students Succeed Here
                             </span>
-                            <h2 className="text-3xl sm:text-4xl font-black text-[#2e0854] dark:text-white tracking-tight">
+                            <h2 className="text-3xl sm:text-4xl font-black text-[#2e0854] dark:text-white tracking-normal leading-snug">
                                 Four Pillars That Drive All-India Selections
                             </h2>
                             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3">
@@ -524,7 +526,7 @@ export default function About({ meta }) {
                         <span className="text-xs font-black uppercase tracking-wider text-[#5b40cf] block mb-2">
                             Infrastructure &amp; Access
                         </span>
-                        <h2 className="text-3xl sm:text-4xl font-black text-[#2e0854] dark:text-white tracking-tight">
+                        <h2 className="text-3xl sm:text-4xl font-black text-[#2e0854] dark:text-white tracking-normal leading-snug">
                             World-Class Campuses Across Rajasthan
                         </h2>
                         <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mt-3">
@@ -595,7 +597,7 @@ export default function About({ meta }) {
                                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5"></span>
                             </div>
 
-                            <h2 className="text-2xl sm:text-3xl font-black text-[#2e0854] dark:text-white mb-3 tracking-tight leading-snug">
+                            <h2 className="text-2xl sm:text-3xl font-black text-[#2e0854] dark:text-white mb-3 tracking-normal leading-snug">
                                 Ready to Begin Your Medical or Engineering Journey?
                             </h2>
 

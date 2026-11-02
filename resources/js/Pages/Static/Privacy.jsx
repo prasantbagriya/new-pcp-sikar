@@ -30,7 +30,7 @@ export default function Privacy() {
                         <span>DATA PROTECTION &amp; STUDENT PRIVACY</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
+                    <h1 className="text-3xl sm:text-5xl font-black text-white tracking-normal leading-snug sm:leading-tight mb-3">
                         Privacy Policy
                     </h1>
 

@@ -30,7 +30,7 @@ export default function Terms() {
                         <span>INSTITUTIONAL TERMS &amp; CONDITIONS</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
+                    <h1 className="text-3xl sm:text-5xl font-black text-white tracking-normal leading-snug sm:leading-tight mb-3">
                         Terms of Service
                     </h1>
 

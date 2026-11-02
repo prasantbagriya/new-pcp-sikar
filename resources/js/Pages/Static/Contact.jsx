@@ -117,7 +117,7 @@ export default function Contact() {
                         <span>24/7 ADMISSION HELPLINE &amp; CAMPUS VISITS</span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto mb-4">
+                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-normal leading-snug max-w-4xl mx-auto mb-4">
                         We're Here to Guide Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400">Medical &amp; IIT Journey.</span>
                     </h1>
 
@@ -125,23 +125,26 @@ export default function Contact() {
                         Visit our 100+ acre residential campus in Sikar, connect with experienced faculty counselors, or get instant batch and scholarship guidance over phone and WhatsApp.
                     </p>
 
-                    <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+                    {/* Parallel Action Buttons */}
+                    <div className="mt-8 flex flex-row items-center justify-center gap-2.5 sm:gap-4 w-full max-w-md mx-auto">
                         <a 
                             href="tel:+919610892222"
-                            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-sm shadow-lg shadow-amber-500/25 transition-all no-underline"
+                            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-6 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-amber-500/25 transition-all no-underline text-center"
                         >
                             <Phone className="w-4 h-4 text-slate-950" />
-                            <span>Call Helpline: 9610-89-2222</span>
+                            <span className="sm:hidden">Call Helpline</span>
+                            <span className="hidden sm:inline">Call Helpline: 9610-89-2222</span>
                         </a>
 
                         <a 
                             href="https://wa.me/919610892222?text=Hello%20PCP%20Sikar,%20I%20want%20to%20know%20more%20about%20admissions."
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm shadow-lg shadow-emerald-600/25 transition-all no-underline"
+                            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3.5 sm:px-6 py-3 sm:py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs sm:text-sm shadow-lg shadow-emerald-600/25 transition-all no-underline text-center"
                         >
                             <MessageSquare className="w-4 h-4 text-white" />
-                            <span>Chat on WhatsApp</span>
+                            <span className="sm:hidden">WhatsApp</span>
+                            <span className="hidden sm:inline">Chat on WhatsApp</span>
                         </a>
                     </div>
 
@@ -207,7 +210,7 @@ export default function Contact() {
                                 <ShieldCheck className="w-3.5 h-3.5 text-[#5b40cf]" />
                                 Direct Admission Desk
                             </span>
-                            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
+                            <h2 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-normal leading-snug">
                                 Plan Your Campus Visit or <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2e0854] to-[#5b40cf]">Request Counseling.</span>
                             </h2>
                             <p className="mt-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
@@ -290,7 +293,7 @@ export default function Contact() {
                                         <span className="text-xs font-bold text-[#5b40cf] uppercase tracking-wider block mb-1">
                                             Direct Student Form
                                         </span>
-                                        <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                                        <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-normal">
                                             Send Us An Inquiry
                                         </h3>
                                         <p className="text-xs text-slate-500 mt-1">
