@@ -1,0 +1,665 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\Post;
+
+class BlogController extends Controller
+{
+    public function index(\Illuminate\Http\Request $request)
+    {
+        $slug = $request->path(); // 'blog', 'news', or custom
+        $isNews = $request->is('news*');
+        $pageType = $isNews ? 'News' : 'Blog';
+
+        $dbPage = null;
+        try {
+            $dbPage = \App\Models\Page::where('slug', $slug)->first();
+        } catch (\Exception $e) {
+            // Table doesn't exist yet, fallback
+        }
+
+        $query = Post::where('published', true)->whereNull('community_id')->orderByRaw('COALESCE(date, created_at) desc');
+
+        if ($isNews) {
+            $query->where('url_format', 'like', 'news/%');
+        } elseif ($slug === 'blog') {
+            $query->where(function ($q) {
+                $q->whereNull('url_format')
+                  ->orWhere('url_format', '')
+                  ->orWhere('url_format', 'not like', 'news/%');
+            });
+        } elseif ($dbPage && $dbPage->type === 'feed') {
+            $query->where('url_format', 'like', $slug . '/%');
+        }
+        
+        $allPosts = $query->paginate(9);
+        
+        // Fetch active sliders for this page
+        // A slider is shown if locations contains the slug, or 'blog' for the main blog page
+        $sliders = \App\Models\Slider::where('active', true)
+            ->where(function ($q) use ($slug) {
+                $q->where('locations', 'like', '%"' . $slug . '"%')
+                  ->orWhere('locations', 'like', '%' . $slug . '%');
+            })
+            ->orderBy('order', 'asc')
+            ->get();
+
+        if ($dbPage) {
+            $pageType = $dbPage->title;
+            $meta = [
+                'title'               => $dbPage->seo_title ?: $dbPage->title,
+                'h1'                  => $dbPage->h1 ?? $dbPage->title,
+                'description'         => $dbPage->seo_description ?: '',
+                'keywords'            => $dbPage->seo_keywords ?: '',
+                'og_title'            => $dbPage->og_title ?: ($dbPage->seo_title ?: $dbPage->title),
+                'og_description'      => $dbPage->og_description ?: $dbPage->seo_description,
+                'twitter_title'       => $dbPage->og_title ?: ($dbPage->seo_title ?: $dbPage->title),
+                'twitter_description' => $dbPage->og_description ?: $dbPage->seo_description,
+                'url'                 => url('/' . $slug),
+                'type'                => 'website',
+                'og_image'            => $dbPage->og_image ?: url('/uploads/social-cover.webp'),
+                'schemas'             => [
+                    [
+                        "@context"    => "https://schema.org",
+                        "@type"       => "CollectionPage",
+                        "headline"    => $dbPage->seo_title ?: $dbPage->title,
+                        "description" => $dbPage->seo_description ?: '',
+                        "url"         => url('/' . $slug)
+                    ]
+                ]
+            ];
+        } else {
+            // If the page doesn't exist in the database, use high-quality default metadata
+            $meta = [
+                'title'               => $isNews ? 'Education & Coaching News in Sikar | Sikar Education Hub' : 'Latest Articles, Guides & Education Insights | Sikar Education Hub',
+                'h1'                  => $isNews ? 'Education & Coaching News' : 'Articles & Insights',
+                'description'         => $isNews ? 'Stay updated with the latest exam notifications, results, and education news in Sikar.' : 'Read expert education guides, school & college admission strategies, and top institute reviews in Sikar.',
+                'keywords'            => $isNews ? 'sikar education news, jee news, neet updates, exam alerts' : 'sikar education hub, neet coaching, jee coaching, schools in sikar blog',
+                'og_title'            => $isNews ? 'Education News | Sikar Education Hub' : 'Articles & Guides | Sikar Education Hub',
+                'og_description'      => $isNews ? 'Stay updated with the latest education news in Sikar.' : 'Read expert coaching and school guides in Sikar.',
+                'twitter_title'       => $isNews ? 'Education News | Sikar Education Hub' : 'Articles & Guides | Sikar Education Hub',
+                'twitter_description' => '',
+                'url'                 => url('/' . $slug),
+                'type'                => 'website',
+                'og_image'            => url('/uploads/social-cover.webp'),
+                'schemas'             => [
+                    [
+                        "@context"    => "https://schema.org",
+                        "@type"       => "CollectionPage",
+                        "headline"    => $isNews ? 'Education & Coaching News' : 'Articles & Insights',
+                        "description" => $isNews ? 'Latest coaching and education updates from Sikar.' : 'Latest coaching guides and insights from Sikar.',
+                        "url"         => url('/' . $slug)
+                    ]
+                ]
+            ];
+        }
+
+        $allPosts->getCollection()->transform(function ($post) {
+            $post->coverImage = Post::responsiveImageUrl($post->coverImage, 640);
+            return $post;
+        });
+
+        $firstPost = $allPosts->first();
+        if ($firstPost && !empty($firstPost->coverImage)) {
+            $meta['preload_image'] = $firstPost->coverImage;
+        }
+
+        return Inertia::render('Blog/Index', [
+            'posts' => $allPosts,
+            'sliders' => $sliders,
+            'pageType' => $pageType,
+            'meta' => $meta,
+            'faqs' => $dbPage ? ($dbPage->faqs ?? []) : [],
+        ]);
+    }
+
+    public function show(\Illuminate\Http\Request $request, $slugOrCategory, $optionalSlug = null)
+    {
+        $slug = $optionalSlug ?: $slugOrCategory;
+        $post = Post::where('slug', $slug)->first();
+
+        if (!$post || (!$post->published && (!auth()->check() || (!auth()->user()->isSuperAdmin() && !auth()->user()->isModerator())))) {
+            abort(404);
+        }
+
+        // Canonical URL enforcement:
+        // A post must only be public on its configured format (e.g. /blog/{slug}, /news/{slug}, or direct /{slug}).
+        // If accessed at a non-canonical format, permanently redirect (301) to its canonical path to prevent duplicate URLs.
+        $currentPath = '/' . trim(strtolower($request->path()), '/');
+        $canonicalPath = '/' . trim(strtolower($post->url_path), '/');
+
+        if ($currentPath !== $canonicalPath) {
+            return redirect($canonicalPath, 301);
+        }
+
+        // Dynamically serve optimized .webp images instead of .png/.jpg from uploads across all fields
+        $postArray = $post->toArray();
+        // array_walk_recursive($postArray, function(&$item, $key) {
+        //     if (is_string($item) && str_contains($item, 'uploads/')) {
+        //         $item = preg_replace('/(uploads\/[^"\'\s>]+)\.(png|jpg|jpeg|bmp)/i', '$1.webp', $item);
+        //     }
+        // });
+        $post->forceFill($postArray);
+
+        $plainTextExcerpt = $post->excerpt ? strip_tags($post->excerpt) : \Illuminate\Support\Str::limit(strip_tags($post->content), 160);
+        
+        $seoTitle = !empty($post->seoTitle) ? $post->seoTitle : $post->title;
+        $seoDescription = !empty($post->metaDescription) ? $post->metaDescription : $plainTextExcerpt;
+
+        // Schemas Generation (Server-Side for Pure Static HTML)
+        $currentUrl = url()->current();
+        $finalCanonicalUrl = !empty($post->canonicalUrl) ? $post->canonicalUrl : $currentUrl;
+        
+        $pathSegments = array_values(array_filter(explode('/', trim($canonicalPath, '/'))));
+        $isDirectRoot = count($pathSegments) <= 1;
+        $basePageSlug = !$isDirectRoot ? $pathSegments[0] : 'blog';
+        $pageType = $isDirectRoot ? 'Article' : ucfirst($basePageSlug);
+
+        $schemas = [];
+        
+        // 1. Breadcrumb Schema
+        $breadcrumbItems = [
+            ["@type" => "ListItem", "position" => 1, "name" => "Home", "item" => url('/')]
+        ];
+        
+        $position = 2;
+        if (!$isDirectRoot) {
+            $breadcrumbItems[] = ["@type" => "ListItem", "position" => $position, "name" => $pageType, "item" => url('/' . $basePageSlug)];
+            $position++;
+        }
+        $categoryName = $post->category;
+
+        if (!empty($categoryName)) {
+            $catSlug = strtolower(str_replace(' ', '-', $categoryName));
+            $breadcrumbItems[] = ["@type" => "ListItem", "position" => $position, "name" => $categoryName, "item" => url("/category/{$catSlug}")];
+            $position++;
+        }
+        $breadcrumbItems[] = ["@type" => "ListItem", "position" => $position, "name" => $post->title, "item" => $finalCanonicalUrl];
+
+        $schemas[] = [
+            "@context" => "https://schema.org",
+            "@type" => "BreadcrumbList",
+            "itemListElement" => $breadcrumbItems
+        ];
+        // 2. Organization Schema
+        $schemas[] = [
+            "@context" => "https://schema.org",
+            "@type" => "Organization",
+            "name" => "Sikar Education Hub",
+            "url" => url('/'),
+            "logo" => url('/uploads/2026/07/Logo_sikareducationhub.png'),
+            "contactPoint" => [
+                "@type" => "ContactPoint",
+                "contactType" => "customer support",
+                "email" => "admin@sikarshiksha.com"
+            ],
+            "sameAs" => [
+                "https://sikareducationhub.com"
+            ]
+        ];
+        
+        // 2b. WebSite Schema
+        $schemas[] = [
+            "@context" => "https://schema.org",
+            "@type" => "WebSite",
+            "name" => "Sikar Education Hub",
+            "url" => url('/'),
+            "potentialAction" => [
+                "@type" => "SearchAction",
+                "target" => [
+                    "@type" => "EntryPoint",
+                    "urlTemplate" => url('/search?q={search_term_string}')
+                ],
+                "query-input" => "required name=search_term_string"
+            ]
+        ];
+
+        // 3. BlogPosting Schema
+        $authorName = 'Prasant';
+        if (!empty($post->author)) {
+            if (is_string($post->author)) {
+                $authorName = $post->author;
+            } elseif (is_object($post->author) && !empty($post->author->name)) {
+                $authorName = $post->author->name;
+            }
+        }
+        if (in_array(strtolower($authorName), ['super administrator', 'admin', 'root', ''])) {
+            $authorName = 'Prasant';
+        }
+        $authorData = [
+            "@type" => "Person",
+            "name" => $authorName,
+            "url" => url('/author/' . \Illuminate\Support\Str::slug($authorName))
+        ];
+        if (!empty($post->authorJobTitle)) {
+            $authorData['jobTitle'] = $post->authorJobTitle;
+        } else {
+            $authorData['jobTitle'] = 'Senior Education Analyst & SEO Expert';
+        }
+        if (!empty($post->authorBio)) {
+            $authorData['description'] = $post->authorBio;
+        } else {
+            $authorData['description'] = 'Senior Education Analyst and Content Lead at Sikar Education Hub with over 5+ years of experience researching coaching institutes, school benchmarks, and competitive exams in Rajasthan.';
+        }
+        if (!empty($post->authorSocials) && is_array($post->authorSocials)) {
+            $socials = array_values(array_filter($post->authorSocials));
+            if (!empty($socials)) {
+                $authorData['sameAs'] = $socials;
+                // Use the first social link as the author's primary URL if applicable
+                $authorData['url'] = $socials[0];
+            }
+        }
+        if (!empty($post->authorImage)) {
+            $authorData['image'] = $post->authorImage;
+        }
+        if (!empty($post->authorAwards) && is_array($post->authorAwards)) {
+            $authorData['award'] = $post->authorAwards;
+        }
+        if (!empty($post->authorAlumniOf) && is_array($post->authorAlumniOf)) {
+            $authorData['alumniOf'] = array_map(function($org) {
+                return ["@type" => "Organization", "name" => $org['name'] ?? '', "sameAs" => $org['sameAs'] ?? ''];
+            }, $post->authorAlumniOf);
+        }
+        if (!empty($post->authorKnowsAbout) && is_array($post->authorKnowsAbout)) {
+            $authorData['knowsAbout'] = array_map(function($topic) {
+                return ["@type" => "Thing", "name" => $topic['name'] ?? '', "sameAs" => $topic['sameAs'] ?? ''];
+            }, $post->authorKnowsAbout);
+        }
+
+        $schemas[] = [
+            "@context" => "https://schema.org",
+            "@type" => "Person",
+            "name" => $authorName,
+            "url" => $authorData['url'] ?? null,
+            "jobTitle" => $authorData['jobTitle'] ?? null,
+            "description" => $authorData['description'] ?? null,
+            "sameAs" => $authorData['sameAs'] ?? null,
+            "image" => $authorData['image'] ?? null
+        ];
+
+        // 4. Article Schema Generation
+        $wordCount = str_word_count(strip_tags($post->content));
+        
+        $schemaType = "Article";
+        if (!empty($post->schema_type)) {
+            $schemaType = $post->schema_type;
+        } elseif (!empty($post->url_format)) {
+            $pageSlug = explode('/', $post->url_format)[0];
+            try {
+                $page = \App\Models\Page::where('slug', $pageSlug)->first();
+                if ($page && !empty($page->schema_type)) {
+                    $schemaType = $page->schema_type;
+                } elseif (str_contains($post->url_format, 'news')) {
+                    $schemaType = "NewsArticle";
+                }
+            } catch (\Exception $e) {
+                if (str_contains($post->url_format, 'news')) {
+                    $schemaType = "NewsArticle";
+                }
+            }
+        }
+
+        $articleSchema = [
+            "@context" => "https://schema.org",
+            "@type" => $schemaType,
+            "inLanguage" => app()->getLocale() ?? "en",
+            "isAccessibleForFree" => true,
+            "wordCount" => $wordCount,
+            "articleSection" => $post->category ?? 'Education',
+            "keywords" => $post->keywords ?? (!empty($post->tags) ? implode(", ", $post->tags) : ''),
+            "mainEntityOfPage" => [
+                "@type" => "WebPage",
+                "@id" => $finalCanonicalUrl
+            ],
+            "headline" => $seoTitle,
+            "description" => $seoDescription,
+            "image" => [
+                "@type" => "ImageObject",
+                "url" => !empty($post->coverImage) ? (str_starts_with($post->coverImage, 'http') ? $post->coverImage : url($post->coverImage)) : url('/images/default-blog.jpg'),
+                "width" => 1200,
+                "height" => 630
+            ],
+            "author" => $authorData,
+            "publisher" => [
+                "@type" => "Organization",
+                "name" => "Sikar Education Hub",
+                "logo" => [
+                    "@type" => "ImageObject",
+                    "url" => url('/uploads/2026/07/Logo_sikareducationhub.png')
+                ]
+            ],
+            "datePublished" => \Carbon\Carbon::parse($post->date)->setTimezone('Asia/Kolkata')->toIso8601String(),
+            "dateModified" => \Carbon\Carbon::parse($post->updated_at ?? $post->date)->setTimezone('Asia/Kolkata')->toIso8601String(),
+        ];
+
+        if (!empty($post->semanticMentions) && is_array($post->semanticMentions)) {
+            $articleSchema['mentions'] = array_map(function($mention) {
+                return ["@type" => "Thing", "name" => $mention['name'] ?? '', "sameAs" => $mention['sameAs'] ?? ''];
+            }, $post->semanticMentions);
+        }
+
+        $citations = [];
+        if (!empty($post->references) && is_array($post->references)) {
+            foreach ($post->references as $ref) {
+                $citations[] = is_string($ref) ? $ref : ($ref['url'] ?? $ref['text'] ?? '');
+            }
+        }
+        if (!empty($post->sources) && is_array($post->sources)) {
+            foreach ($post->sources as $src) {
+                $citations[] = is_string($src) ? $src : ($src['url'] ?? $src['name'] ?? '');
+            }
+        }
+        $citations = array_filter($citations);
+        if (!empty($citations)) {
+            $articleSchema['citation'] = array_values($citations);
+        }
+
+        // 3a. Add Advanced NewsArticle Fields (Key Takeaways, Corrections, Expiry)
+        if (!empty($post->keyTakeaways) && is_array($post->keyTakeaways)) {
+            $takeaways = array_filter(array_map(function($item) {
+                return is_array($item) ? ($item['text'] ?? $item['name'] ?? json_encode($item)) : (is_string($item) ? $item : json_encode($item));
+            }, $post->keyTakeaways));
+            $articleSchema["abstract"] = implode(" ", $takeaways);
+        }
+        if (!empty($post->corrections) && is_array($post->corrections)) {
+            $correctionsList = array_filter(array_map(function($item) {
+                return is_array($item) ? ($item['text'] ?? $item['name'] ?? json_encode($item)) : (is_string($item) ? $item : json_encode($item));
+            }, $post->corrections));
+            $articleSchema["correction"] = implode(" ", $correctionsList);
+        }
+        if (!empty($post->nextReviewDate)) {
+            $articleSchema["expires"] = \Carbon\Carbon::parse($post->nextReviewDate)->toIso8601String();
+        }
+
+        $schemas[] = $articleSchema;
+
+        // 5. FAQ Schema (if available)
+        if (!empty($post->faqs) && is_array($post->faqs)) {
+            $faqItems = [];
+            foreach ($post->faqs as $faq) {
+                if (isset($faq['question']) && isset($faq['answer'])) {
+                    $faqItems[] = [
+                        "@type" => "Question",
+                        "name" => $faq['question'],
+                        "acceptedAnswer" => [
+                            "@type" => "Answer",
+                            "text" => $faq['answer']
+                        ]
+                    ];
+                }
+            }
+            if (count($faqItems) > 0) {
+                $schemas[] = [
+                    "@context" => "https://schema.org",
+                    "@type" => "FAQPage",
+                    "mainEntity" => $faqItems
+                ];
+            }
+        }
+        
+        // 6. HowTo Schema (if available)
+        $howToStepsData = $post->howToSteps ?? $post->howtosteps ?? $post->how_to_steps ?? null;
+        if (is_string($howToStepsData)) {
+            $howToStepsData = json_decode($howToStepsData, true);
+        }
+        // Fallback: If it's a string inside an array (double-encoded)
+        if (is_array($howToStepsData) && count($howToStepsData) === 1 && is_string($howToStepsData[0])) {
+            $howToStepsData = json_decode($howToStepsData[0], true);
+        }
+
+        if (!empty($howToStepsData) && is_array($howToStepsData)) {
+            $howToItems = [];
+            foreach ($howToStepsData as $index => $step) {
+                // Handle objects if they were casted to objects instead of associative arrays
+                if (is_object($step)) {
+                    $step = (array) $step;
+                }
+                
+                if (!empty($step['name']) && !empty($step['text'])) {
+                    $howToItems[] = [
+                        "@type" => "HowToStep",
+                        "position" => $index + 1,
+                        "name" => $step['name'],
+                        "itemListElement" => [
+                            [
+                                "@type" => "HowToDirection",
+                                "position" => 1,
+                                "text" => $step['text']
+                            ]
+                        ]
+                    ];
+                }
+            }
+            if (count($howToItems) > 0) {
+                $schemas[] = [
+                    "@context" => "https://schema.org",
+                    "@type" => "HowTo",
+                    "name" => !empty($post->seoTitle) ? $post->seoTitle : $post->title,
+                    "description" => $seoDescription,
+                    "image" => !empty($post->coverImage) ? (str_starts_with($post->coverImage, 'http') ? $post->coverImage : url($post->coverImage)) : url('/images/default-blog.jpg'),
+                    "step" => $howToItems
+                ];
+            }
+        }
+        
+        // 7. LocalBusiness Schema (if available)
+        $localBusinessData = $post->localBusiness ?? $post->localbusiness ?? $post->local_business ?? null;
+        if (is_string($localBusinessData)) {
+            $localBusinessData = json_decode($localBusinessData, true);
+        }
+
+        if (!empty($localBusinessData) && !empty($localBusinessData['name'])) {
+            $lbSchema = [
+                "@context" => "https://schema.org",
+                "@type" => "LocalBusiness",
+                "name" => $localBusinessData['name'],
+                "image" => !empty($post->coverImage) ? (str_starts_with($post->coverImage, 'http') ? $post->coverImage : url($post->coverImage)) : url('/uploads/2026/07/Logo_sikareducationhub.png'),
+                "@id" => url($finalCanonicalUrl),
+                "url" => url($finalCanonicalUrl)
+            ];
+            if (!empty($localBusinessData['telephone'])) {
+                $lbSchema['telephone'] = $localBusinessData['telephone'];
+            }
+            if (!empty($localBusinessData['priceRange'])) {
+                $lbSchema['priceRange'] = $localBusinessData['priceRange'];
+            }
+            if (!empty($localBusinessData['streetAddress']) || !empty($localBusinessData['addressLocality'])) {
+                $lbSchema['address'] = [
+                    "@type" => "PostalAddress",
+                    "streetAddress" => $localBusinessData['streetAddress'] ?? '',
+                    "addressLocality" => $localBusinessData['addressLocality'] ?? '',
+                    "addressRegion" => $localBusinessData['addressRegion'] ?? '',
+                    "postalCode" => $localBusinessData['postalCode'] ?? '',
+                    "addressCountry" => $localBusinessData['addressCountry'] ?? ''
+                ];
+            }
+            if (!empty($localBusinessData['ratingValue']) && !empty($localBusinessData['reviewCount'])) {
+                $lbRatingVal = floatval($localBusinessData['ratingValue']);
+                $lbRevCount = intval($localBusinessData['reviewCount']);
+                if ($lbRevCount > 0 && $lbRatingVal >= 1 && $lbRatingVal <= 5) {
+                    $lbSchema['aggregateRating'] = [
+                        "@type" => "AggregateRating",
+                        "ratingValue" => round($lbRatingVal, 1),
+                        "reviewCount" => $lbRevCount,
+                        "bestRating" => 5,
+                        "worstRating" => 1,
+                    ];
+                }
+            }
+            $schemas[] = $lbSchema;
+        }
+
+        // 8. Custom Review/Product Schema for SEO Rating
+        $seoRatingData = $post->seoRating ?? $post->seo_rating ?? null;
+        if (is_string($seoRatingData)) {
+            $seoRatingData = json_decode($seoRatingData, true);
+        }
+
+        if (!empty($seoRatingData) && !empty($seoRatingData['ratingValue']) && !empty($seoRatingData['reviewCount'])) {
+            $seoRatingVal = floatval($seoRatingData['ratingValue']);
+            $seoRevCount = intval($seoRatingData['reviewCount']);
+            if ($seoRevCount > 0 && $seoRatingVal >= 1 && $seoRatingVal <= 5) {
+                $productSchema = [
+                    "@context" => "https://schema.org",
+                    "@type" => "Product",
+                    "name" => !empty($post->seoTitle) ? $post->seoTitle : $post->title,
+                    "description" => $seoDescription,
+                    "image" => !empty($post->coverImage) ? (str_starts_with($post->coverImage, 'http') ? $post->coverImage : url($post->coverImage)) : url('/uploads/2026/07/Logo_sikareducationhub.png'),
+                    "brand" => [
+                        "@type" => "Brand",
+                        "name" => "Sikar Education Hub"
+                    ],
+                    "offers" => [
+                        "@type" => "Offer",
+                        "url" => url($finalCanonicalUrl),
+                        "priceCurrency" => "INR",
+                        "price" => "0",
+                        "availability" => "https://schema.org/InStock"
+                    ],
+                    "aggregateRating" => [
+                        "@type" => "AggregateRating",
+                        "ratingValue" => round($seoRatingVal, 1),
+                        "reviewCount" => $seoRevCount,
+                        "bestRating" => "5",
+                        "worstRating" => "1"
+                    ]
+                ];
+                $schemas[] = $productSchema;
+            }
+        }
+
+        $keywords = is_array($post->keywords) ? implode(',', $post->keywords) : ($post->keywords ?? '');
+        $focusKeyword = is_array($post->focusKeyword) ? implode(',', $post->focusKeyword) : ($post->focusKeyword ?? '');
+        $lsiKeywords = is_array($post->lsiKeywords) ? implode(',', $post->lsiKeywords) : ($post->lsiKeywords ?? '');
+        
+        $rawKeywords = $keywords . ',' . $focusKeyword . ',' . $lsiKeywords;
+        $keywordArray = array_map('trim', explode(',', $rawKeywords));
+        $keywordArray = array_filter($keywordArray);
+        $keywordArray = array_unique($keywordArray);
+        $cleanKeywords = !empty($keywordArray) ? implode(', ', $keywordArray) : null;
+
+        $recentPostsCache = \Illuminate\Support\Facades\Cache::remember('recent_posts_sidebar_v3', 3600, function () {
+            return Post::where('published', true)
+                ->whereNull('community_id')
+                ->select(['id', 'title', 'slug', 'coverImage', 'date', 'category', 'url_format'])
+                ->orderBy('date', 'desc')
+                ->limit(6)
+                ->get()
+                ->map(function ($p) {
+                    $p->coverImage = Post::responsiveImageUrl($p->coverImage, 192);
+                    return $p;
+                })
+                ->toArray();
+        });
+
+        $recentPostsArray = collect($recentPostsCache)
+            ->where('id', '!=', $post->id)
+            ->take(5)
+            ->values()
+            ->toArray();
+
+        $comments = \App\Models\Comment::with(['author', 'replies', 'replies.author'])
+            ->where('post_id', $post->id)
+            ->whereNull('parent_id')
+            ->where('is_spam', false)
+            ->orderBy('is_pinned', 'desc')
+            ->orderByRaw('CASE WHEN author_id = ? THEN 1 ELSE 0 END DESC', [$post->author_id])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $userCommentVotes = [];
+        if (auth()->check()) {
+            $userCommentVotes = \Illuminate\Support\Facades\DB::table('votes')
+                ->where('user_id', auth()->id())
+                ->where('votable_type', \App\Models\Comment::class)
+                ->pluck('value', 'votable_id')
+                ->toArray();
+        }
+
+        $preloadImage = null;
+        if (!empty($post->coverImage)) {
+            $optimizedCover = Post::responsiveImageUrl($post->coverImage, 1024);
+            $preloadImage = str_starts_with($optimizedCover, 'http') ? $optimizedCover : url($optimizedCover);
+            $post->coverImage = $optimizedCover;
+        }
+
+        if (!empty($post->content)) {
+            // Rewrite embedded content images pointing to /uploads/ to use responsive WebP (width 800)
+            $post->content = preg_replace_callback('/<img\s+([^>]*?)src=["\'](\/?uploads\/[^"\'>]+?\.(?:png|jpe?g|bmp))["\']([^>]*?)>/i', function($m) {
+                $rawSrc = $m[2];
+                $webpSrc = Post::responsiveImageUrl($rawSrc, 800) ?: $rawSrc;
+                $restBefore = $m[1];
+                $restAfter = $m[3];
+                $extra = '';
+                if (!str_contains($restBefore . $restAfter, 'loading=')) {
+                    $extra .= ' loading="lazy"';
+                }
+                if (!str_contains($restBefore . $restAfter, 'decoding=')) {
+                    $extra .= ' decoding="async"';
+                }
+                return '<img ' . $restBefore . 'src="' . $webpSrc . '"' . $restAfter . $extra . '>';
+            }, $post->content);
+        }
+        
+        // Always optimize the first image in the content for LCP if no coverImage
+        if (empty($preloadImage) && preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i', $post->content, $matches)) {
+            $preloadImage = $matches[1];
+            if (!str_starts_with($preloadImage, 'http') && !str_starts_with($preloadImage, 'data:')) {
+                $preloadImage = url($preloadImage);
+            }
+            
+            // Fix initial SSR HTML: Remove lazy loading and add high fetch priority for the first image
+            $post->content = preg_replace_callback('/(<img[^>]+)(>)/i', function($m) {
+                $imgTag = preg_replace('/\s+loading=["\']lazy["\']/i', '', $m[1]);
+                $imgTag = preg_replace('/\s+fetchpriority=["\'][a-z]+["\']/i', '', $imgTag);
+                return $imgTag . ' fetchpriority="high" loading="eager"' . $m[2];
+            }, $post->content, 1);
+        }
+
+        $postData = $post->toArray();
+        $rawAuthor = is_array($postData['author'] ?? null)
+            ? ($postData['author']['name'] ?? $postData['author']['username'] ?? 'Prasant')
+            : ($postData['author'] ?? 'Prasant');
+        if (in_array(strtolower($rawAuthor), ['super administrator', 'admin', 'root', ''])) {
+            $rawAuthor = 'Prasant';
+        }
+        $postData['author_name'] = $rawAuthor;
+        $postData['factCheckedBy'] = !empty($postData['factCheckedBy']) ? $postData['factCheckedBy'] : 'Prasant';
+        $postData['factCheckerRole'] = !empty($postData['factCheckerRole']) ? $postData['factCheckerRole'] : 'Senior Education Analyst';
+        $postData['authorJobTitle'] = !empty($postData['authorJobTitle']) ? $postData['authorJobTitle'] : 'Senior Education Analyst & SEO Expert';
+        $postData['authorBio'] = !empty($postData['authorBio']) ? $postData['authorBio'] : 'Senior Education Analyst and Content Lead at Sikar Education Hub with over 5+ years of experience researching coaching institutes, school benchmarks, and competitive exams in Rajasthan.';
+        $postData['authorImage'] = !empty($postData['authorImage']) ? $postData['authorImage'] : '/uploads/logo.png';
+        $postData['authorExperienceYears'] = !empty($postData['authorExperienceYears']) ? $postData['authorExperienceYears'] : 5;
+
+        return Inertia::render('Blog/Show', [
+            'post' => $postData,
+            'recentPosts' => $recentPostsArray,
+            'pageType' => $pageType,
+            'comments' => $comments,
+            'userCommentVotes' => $userCommentVotes,
+            'meta' => [
+                'title' => $seoTitle,
+                'description' => $seoDescription,
+                'keywords' => $cleanKeywords,
+                'og_title' => $post->ogTitle ?? $seoTitle,
+                'og_description' => $post->ogDescription ?? $seoDescription,
+                'is_ai_assisted' => $post->isAiAssisted ?? false,
+                'og_image' => !empty($post->coverImage) ? (str_starts_with($post->coverImage, 'http') ? $post->coverImage : url($post->coverImage)) : url('/images/default-blog.jpg'),
+                'og_image_alt' => $post->coverImageAlt ?? $seoTitle,
+                'preload_image' => $preloadImage,
+                'twitter_card' => !empty($post->twitterCard) ? $post->twitterCard : 'summary_large_image',
+                'twitter_title' => !empty($post->twitterTitle) ? $post->twitterTitle : $seoTitle,
+                'twitter_description' => !empty($post->twitterDescription) ? $post->twitterDescription : $seoDescription,
+                'url' => $finalCanonicalUrl,
+                'type' => 'article',
+                'robots' => $post->isNoIndex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+                'schemas' => $schemas
+            ]
+        ])->withViewData([
+            'html_content' => '<h1>' . $post->title . '</h1>' . $post->content,
+        ]);
+    }
+}

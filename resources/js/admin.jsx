@@ -1,0 +1,46 @@
+import '../css/app.css';
+import './bootstrap';
+
+import { createInertiaApp } from '@inertiajs/react';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { createRoot } from 'react-dom/client';
+
+createInertiaApp({
+    resolve: (name) =>
+        resolvePageComponent(
+            [`./Pages/${name}.jsx`, `./Pages/${name}.tsx`],
+            // Admin-only entry pages. Shared forms and layout components are
+            // imported by those pages, never exposed as individual route chunks.
+            import.meta.glob([
+                './Pages/Admin/Index.jsx',
+                './Pages/Admin/Authors/{Edit,Index,New}.jsx',
+                './Pages/Admin/Bing/Index.jsx',
+                './Pages/Admin/Businesses/Index.jsx',
+                './Pages/Admin/Categories/Index.jsx',
+                './Pages/Admin/Communities/{Edit,Index}.jsx',
+                './Pages/Admin/CommunityPosts/Index.jsx',
+                './Pages/Admin/ContactMessages/Index.jsx',
+                './Pages/Admin/Facebook/Index.jsx',
+                './Pages/Admin/Inquiries/Index.jsx',
+                './Pages/Admin/Instagram/Index.jsx',
+                './Pages/Admin/LinkedIn/Index.jsx',
+                './Pages/Admin/Media/Index.jsx',
+                './Pages/Admin/Newsletters/Index.jsx',
+                './Pages/Admin/Pages/Index.jsx',
+                './Pages/Admin/Pinterest/Index.jsx',
+                './Pages/Admin/Posts/{Edit,New}.jsx',
+                './Pages/Admin/SearchConsole/Index.jsx',
+                './Pages/Admin/SeoAudit/Index.jsx',
+                './Pages/Admin/Settings/{Slider,Navigation}.jsx',
+                './Pages/Admin/Stories/{Edit,Index,New}.jsx',
+                './Pages/Admin/Users/Index.jsx',
+                './Pages/Admin/X/Index.jsx',
+            ]),
+        ),
+    setup({ el, App, props }) {
+        createRoot(el).render(<App {...props} />);
+    },
+    progress: {
+        color: '#4B5563',
+    },
+});

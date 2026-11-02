@@ -1,0 +1,248 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\Post;
+use App\Models\Author;
+
+class TaxonomyController extends Controller
+{
+    public function categoryIndex()
+    {
+        $categories = \App\Models\Category::all()->toArray();
+        $title = "Categories";
+        $description = "Browse all Blog Categories and Institute Categories on Sikar Education Hub. Find articles and verified coaching institutes for JEE, NEET, CA, NDA, CLAT, and schools in Sikar by topic.";
+        $keywords = "Coaching Sikar Categories, blog categories Sikar coaching, institute categories Sikar, verified coaching institutes Sikar, expert guidance coaching Sikar, topic-wise coaching guides Sikar";
+        $og_title = "Sikar Education Hub Explore Categories";
+        $og_description = "Discover insightful articles, verified coaching institutes, and expert guidance on JEE, NEET, CA, CLAT, and schools in Sikar, neatly organized into Blog Categories and Institute Categories.";
+        $twitter_title = "Sikar Education Categories | Institutes, Blogs, & Guides";
+        $twitter_description = "Access institute categories, blog topics, coaching guides, reviews, school information, and other education resources for Sikar.";
+        
+        $schemas = [[
+            "@context" => "https://schema.org",
+            "@type" => "CollectionPage",
+            "name" => $title,
+            "description" => $description,
+            "url" => url('/category')
+        ]];
+
+        return Inertia::render('Category/Index', [
+            'categories' => $categories,
+            'meta' => [
+                'title' => $title,
+                'h1' => 'Explore All Categories',
+                'description' => $description,
+                'keywords' => $keywords,
+                'og_title' => $og_title,
+                'og_description' => $og_description,
+                'twitter_title' => $twitter_title,
+                'twitter_description' => $twitter_description,
+                'url' => url('/category'),
+                'type' => 'website',
+                'schemas' => $schemas
+            ]
+        ]);
+    }
+
+    public function categoryShow($slug)
+    {
+        // Simple matching for category (in the old code it was a string matching)
+        $target = strtolower(str_replace('-', ' ', $slug));
+        $categoryName = ucwords(str_replace('-', ' ', $slug));
+        
+        $category = \App\Models\Category::where('slug', $slug)->orWhere('name', 'LIKE', $categoryName)->first();
+        
+        // Return 404 if category is not found in database
+        if (!$category) {
+            abort(404);
+        }
+        
+        $posts = Post::where('published', true)
+                     ->whereNull('community_id')
+                     ->where('category', 'LIKE', '%' . $target . '%')
+                     ->select(['id', 'slug', 'title', 'excerpt', 'coverImage', 'category', 'date', 'author', 'url_format'])
+                     ->orderBy('date', 'desc')
+                     ->get()
+                     ->map(function ($p) {
+                         $p->coverImage = Post::responsiveImageUrl($p->coverImage, 640);
+                         return $p;
+                     })
+                     ->toArray();
+
+        $title = $category && !empty($category->seo_title) ? $category->seo_title : $categoryName;
+        $description = $category && !empty($category->seo_description) ? $category->seo_description : "Read all articles filed under {$categoryName}.";
+        $keywords = $category && !empty($category->seo_keywords) ? $category->seo_keywords : null;
+        
+        $og_title = $category && !empty($category->og_title) ? $category->og_title : $title;
+        $og_description = $category && !empty($category->og_description) ? $category->og_description : $description;
+        $og_image = $category && !empty($category->og_image) ? $category->og_image : null;
+
+        $schemas = [[
+            "@context" => "https://schema.org",
+            "@type" => "CollectionPage",
+            "name" => $title,
+            "description" => $description,
+            "url" => url("/category/{$slug}")
+        ]];
+
+        $meta = [
+            'title' => $title,
+            'h1' => $categoryName,
+            'description' => $description,
+            'url' => url("/category/{$slug}"),
+            'type' => 'website',
+            'schemas' => $schemas,
+            'og_title' => $og_title,
+            'og_description' => $og_description
+        ];
+
+        if ($og_image) {
+            $meta['og_image'] = $og_image;
+        }
+
+        if ($keywords) {
+            $meta['keywords'] = $keywords;
+        }
+
+        return Inertia::render('Category/Show', [
+            'categoryName' => $categoryName,
+            'category' => $category ? $category->toArray() : null,
+            'posts' => $posts,
+            'meta' => $meta
+        ]);
+    }
+
+    public function authorIndex()
+    {
+        $authors = Author::all()->toArray();
+        $title = "Our Authors & Education Experts | Sikar Education Hub";
+        $description = "Meet the experienced authors and education experts contributing to Sikar Education Hub. Read their articles on coaching institutes, school admissions, and competitive exams like JEE, NEET, and CA.";
+        $keywords = "Sikar Education Hub authors, education experts Sikar, blog writers, coaching guides, Sikar education writers, JEE NEET advisors";
+        
+        $schemas = [[
+            "@context" => "https://schema.org",
+            "@type" => "CollectionPage",
+            "name" => $title,
+            "description" => $description,
+            "url" => url('/author')
+        ]];
+
+        return Inertia::render('Author/Index', [
+            'authors' => $authors,
+            'meta' => [
+                'title' => $title,
+                'h1' => 'Meet Our Authors & Experts',
+                'description' => $description,
+                'keywords' => $keywords,
+                'url' => url('/author'),
+                'type' => 'website',
+                'schemas' => $schemas
+            ]
+        ]);
+    }
+
+    public function authorShow($slug)
+    {
+        $author = Author::where('slug', $slug)->first();
+        
+        if (!$author) {
+            abort(404);
+        }
+
+        $posts = Post::where('published', true)
+                     ->whereNull('community_id')
+                     ->where(function($q) use ($author) {
+                         $q->where('author_id', 1)
+                           ->orWhere('author_id', $author->id)
+                           ->orWhereNull('author_id');
+                     })
+                     ->select(['id', 'slug', 'title', 'excerpt', 'coverImage', 'category', 'date', 'url_format', 'factCheckedBy', 'factCheckerRole'])
+                     ->orderBy('date', 'desc')
+                     ->get()
+                     ->map(function ($p) {
+                         $p->coverImage = Post::responsiveImageUrl($p->coverImage, 640);
+                         return $p;
+                     })
+                     ->toArray();
+                     
+        $cleanBio = $author->bio ? substr(strip_tags($author->bio), 0, 160) : "Articles and education guides written by {$author->name} on Sikar Education Hub.";
+        $jobTitle = $author->jobTitle ? " - " . $author->jobTitle : "";
+        
+        // Improved SEO strings
+        $title = "{$author->name}{$jobTitle} | Sikar Education Hub";
+        $description = "Read all articles, coaching reviews, and education guides by {$author->name}. {$cleanBio}";
+        $keywords = "{$author->name}, {$author->name} author, Sikar Education Hub {$author->name}, education expert Sikar, coaching guide writer";
+
+        $sameAsLinks = [];
+        if (!empty($author->socials) && is_array($author->socials)) {
+            if (!empty($author->socials['twitter'])) $sameAsLinks[] = $author->socials['twitter'];
+            if (!empty($author->socials['linkedin'])) $sameAsLinks[] = $author->socials['linkedin'];
+            if (!empty($author->socials['website'])) $sameAsLinks[] = $author->socials['website'];
+        }
+
+        $personSchema = [
+            "@type" => "Person",
+            "name" => $author->name,
+            "url" => url("/author/{$slug}")
+        ];
+
+        if (!empty($author->jobTitle)) $personSchema["jobTitle"] = $author->jobTitle;
+        if (!empty($author->image)) $personSchema["image"] = $author->image;
+        if (!empty($cleanBio)) $personSchema["description"] = $cleanBio;
+        if (!empty($sameAsLinks)) $personSchema["sameAs"] = $sameAsLinks;
+
+        if (!empty($author->alumniOf) && is_array($author->alumniOf)) {
+            $personSchema["alumniOf"] = array_map(function($alumni) {
+                return [
+                    "@type" => "EducationalOrganization",
+                    "name" => $alumni['name'] ?? '',
+                    "sameAs" => $alumni['sameAs'] ?? ''
+                ];
+            }, $author->alumniOf);
+        }
+
+        if (!empty($author->knowsAbout) && is_array($author->knowsAbout)) {
+            $personSchema["knowsAbout"] = array_map(function($topic) {
+                return [
+                    "@type" => "Thing",
+                    "name" => $topic['name'] ?? '',
+                    "sameAs" => $topic['sameAs'] ?? ''
+                ];
+            }, $author->knowsAbout);
+        }
+
+        $schemas = [[
+            "@context" => "https://schema.org",
+            "@type" => "CollectionPage",
+            "name" => $title,
+            "description" => $description,
+            "url" => url("/author/{$slug}")
+        ], [
+            "@context" => "https://schema.org",
+            "@type" => "ProfilePage",
+            "mainEntity" => $personSchema
+        ]];
+        
+        $meta = [
+            'title' => $title,
+            'h1' => $author->name,
+            'description' => $description,
+            'keywords' => $keywords,
+            'url' => url("/author/{$slug}"),
+            'type' => 'profile',
+            'schemas' => $schemas
+        ];
+        
+        if (!empty($author->image)) {
+            $meta['og_image'] = str_starts_with($author->image, 'http') ? $author->image : url(str_starts_with($author->image, '/') ? $author->image : '/' . $author->image);
+        }
+
+        return Inertia::render('Author/Show', [
+            'author' => $author->toArray(),
+            'posts' => $posts,
+            'meta' => $meta
+        ]);
+    }
+}

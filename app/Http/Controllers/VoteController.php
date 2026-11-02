@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Post;
+use App\Models\Comment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+class VoteController extends Controller
+{
+    public function vote(Request $request)
+    {
+        $validated = $request->validate([
+            'votable_type' => 'required|in:post,comment',
+            'votable_id' => 'required',
+            'value' => 'required|in:1,-1,0',
+        ]);
+
+        $user = $request->user();
+        $type = $validated['votable_type'];
+        $id = $validated['votable_id'];
+        $value = (int) $validated['value'];
+
+        $model = $type === 'post' ? Post::findOrFail($id) : Comment::findOrFail($id);
+        $modelType = $type === 'post' ? Post::class : Comment::class;
+
+        DB::transaction(function () use ($user, $model, $modelType, $id, $value, $type) {
+            $existingVote = DB::table('votes')
+                ->where('user_id', $user->id)
+                ->where('votable_type', $modelType)
+                ->where('votable_id', $id)
+                ->first();
+
+            if ($existingVote) {
+                if ($existingVote->value === $value || $value === 0) {
+                    // The user clicked the same vote button they already have active, or passed 0: unvote/neutralize
+                    DB::table('votes')->where('id', $existingVote->id)->delete();
+                    $model->decrement('score', $existingVote->value);
+                    return;
+                } else {
+                    // Changing the vote (e.g., from up to down, or down to up)
+                    DB::table('votes')->where('id', $existingVote->id)->update([
+                        'value' => $value,
+                        'updated_at' => now()
+                    ]);
+                    $diff = $value - $existingVote->value;
+                    $model->increment('score', $diff);
+                }
+            } elseif ($value !== 0) {
+                // New vote
+                DB::table('votes')->insert([
+                    'user_id' => $user->id,
+                    'votable_type' => $modelType,
+                    'votable_id' => $id,
+                    'value' => $value,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+                $model->increment('score', $value);
+
+                if ($value === 1 && $model->author_id && $model->author_id !== $user->id) {
+                    $post = $type === 'post' ? $model : $model->post;
+                    $authorUser = \App\Models\User::find($model->author_id);
+                    if ($authorUser) {
+                        $authorUser->notify(new \App\Notifications\PostUpvoted($user, $post));
+                    }
+                }
+            }
+        });
+
+        if ($request->expectsJson() && ! $request->header('X-Inertia')) {
+            return response()->json([
+                'success' => true,
+                'score' => $model->fresh()->score,
+            ]);
+        }
+
+        return back();
+    }
+}

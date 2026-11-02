@@ -1,0 +1,588 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
+use App\Models\Business;
+
+class BusinessController extends Controller
+{
+    public function getCategories()
+    {
+        $categories = [
+            [
+                'id' => 'cat-1',
+                'name' => 'SaaS & Cloud Platforms',
+                'slug' => 'saas',
+                'iconName' => 'Cloud',
+                'description' => 'Software-as-a-service, productivity tools, enterprise CRM, and cloud infrastructures.',
+                'businessCount' => 1420,
+                'subcategories' => ['CRM', 'Project Management', 'Analytics', 'DevOps', 'Security']
+            ],
+            [
+                'id' => 'cat-2',
+                'name' => 'AI Tools & Models',
+                'slug' => 'ai-tools',
+                'iconName' => 'Sparkles',
+                'description' => 'Generative AI, code assistants, LLM wrappers, speech synthesis, and image generators.',
+                'businessCount' => 980,
+                'subcategories' => ['Text Generation', 'Image AI', 'Voice Synthetic', 'Code Assistants', 'AI Agents']
+            ],
+            [
+                'id' => 'cat-3',
+                'name' => 'E-commerce & Retail',
+                'slug' => 'ecommerce',
+                'iconName' => 'ShoppingBag',
+                'description' => 'Online stores, direct-to-consumer brands, fashion hubs, and marketplace merchants.',
+                'businessCount' => 3410,
+                'subcategories' => ['Electronics', 'Fashion', 'Home & Living', 'Beauty', 'Subscription Boxes']
+            ],
+            [
+                'id' => 'cat-4',
+                'name' => 'Hospitals & Healthcare',
+                'slug' => 'hospitals',
+                'iconName' => 'Hospital',
+                'description' => 'Medical centers, telehealth platforms, dental clinics, and specialized surgery hubs.',
+                'businessCount' => 840,
+                'subcategories' => ['Telehealth', 'Dental Clinics', 'Diagnostics', 'Speciality Care', 'Wellness']
+            ],
+            [
+                'id' => 'cat-5',
+                'name' => 'Web Hosting & Servers',
+                'slug' => 'hosting',
+                'iconName' => 'Server',
+                'description' => 'VPS providers, managed WordPress hosting, domain registrars, and CDN services.',
+                'businessCount' => 530,
+                'subcategories' => ['Cloud VPS', 'Managed WordPress', 'Dedicated Servers', 'Domain Registrars']
+            ],
+            [
+                'id' => 'cat-6',
+                'name' => 'Coaching & Institutes',
+                'slug' => 'coaching',
+                'iconName' => 'GraduationCap',
+                'description' => 'EdTech platforms, coding bootcamps, executive coaching, and competitive exam hubs.',
+                'businessCount' => 1150,
+                'subcategories' => ['Coding Bootcamps', 'Test Prep', 'Executive Coaching', 'Skill Academies']
+            ],
+            [
+                'id' => 'cat-7',
+                'name' => 'Hotels & Hospitality',
+                'slug' => 'hotels',
+                'iconName' => 'Building',
+                'description' => 'Boutique hotels, luxury resorts, vacation rentals, and business travel stays.',
+                'businessCount' => 2190,
+                'subcategories' => ['Luxury Resorts', 'Boutique Hotels', 'Serviced Apartments', 'Budget Stays']
+            ],
+            [
+                'id' => 'cat-8',
+                'name' => 'Fintech & Banking',
+                'slug' => 'finance',
+                'iconName' => 'CreditCard',
+                'description' => 'Digital banks, payment gateways, personal finance apps, and investment platforms.',
+                'businessCount' => 1670,
+                'subcategories' => ['Payment Gateways', 'Neobanks', 'Investment Apps', 'Lending Services']
+            ]
+        ];
+        
+        return response()->json($categories);
+    }
+
+    public function index(Request $request)
+    {
+        // Public listings never need the owner account identifier or business inbox.
+        // `user_id` is selected only on the server to calculate the current user's canEdit flag.
+        $query = Business::select([...Business::publicColumns(), 'user_id']);
+
+        if ($request->filled('category') && $request->category !== 'all') {
+            $query->where('category', $request->category);
+        }
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%")
+                  ->orWhere('category_name', 'like', "%{$search}%")
+                  ->orWhere('tags', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('minRating')) {
+            $query->where('rating', '>=', $request->minRating);
+        }
+
+        if ($request->filled('minTrustScore')) {
+            $query->where('trust_score', '>=', $request->minTrustScore);
+        }
+
+        if ($request->filled('verifiedOnly') && $request->verifiedOnly === 'true') {
+            $query->where('is_verified', true);
+        }
+
+        $sort = $request->get('sort');
+        if ($sort === 'trust_score') {
+            $query->orderByDesc('trust_score');
+        } elseif ($sort === 'rating') {
+            $query->orderByDesc('rating');
+        } elseif ($sort === 'reviews') {
+            $query->orderByDesc('review_count');
+        } else {
+            $query->orderByDesc('trust_score');
+        }
+
+        return response()->json(
+            $query->get()
+                ->map(fn (Business $business) => $business->publicPayload($request->user()))
+                ->values()
+        );
+    }
+
+    public function show(Request $request, $slugOrId)
+    {
+        $business = Business::select([...Business::publicColumns(), 'user_id'])
+            ->where('slug', $slugOrId)
+            ->orWhere('id', $slugOrId)
+            ->first();
+        if (!$business) {
+            return response()->json(['error' => 'Business not found'], 404);
+        }
+        return response()->json($business->publicPayload($request->user()));
+    }
+
+    public function store(Request $request)
+    {
+        // Decode payloads if they were encoded to bypass ModSecurity
+        if ($request->has('_encoded_payloads')) {
+            $fieldsToDecode = ['detailed_description', 'faqs', 'services'];
+            foreach ($fieldsToDecode as $field) {
+                if ($request->has($field) && is_string($request->$field)) {
+                    $decoded = base64_decode($request->$field, true);
+                    if ($decoded !== false) {
+                        $request->merge([$field => urldecode($decoded)]);
+                    }
+                }
+            }
+        }
+
+        if ($request->has('faqs') && is_string($request->faqs)) {
+            $request->merge(['faqs' => json_decode($request->faqs, true)]);
+        }
+        if ($request->has('services') && is_string($request->services)) {
+            $request->merge(['services' => json_decode($request->services, true)]);
+        }
+        if ($request->has('claimed_by_owner')) {
+            $request->merge(['claimed_by_owner' => filter_var($request->claimed_by_owner, FILTER_VALIDATE_BOOLEAN)]);
+        }
+
+        $website = $request->input('website');
+        if ($website && !preg_match("~^(?:f|ht)tps?://~i", $website)) {
+            $request->merge(['website' => 'https://' . ltrim($website, '/')]);
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'website' => 'required|string|max:255',
+            'category_name' => 'required|string',
+            'description' => 'required|string',
+            'detailed_description' => 'nullable|string',
+            'slug' => 'nullable|string|max:255|unique:businesses,slug',
+            'phone' => 'nullable|string|max:255',
+            'email' => 'nullable|email|max:255',
+            'address' => 'nullable|string|max:500',
+            'city' => 'nullable|string|max:100',
+            'tags' => 'nullable',
+            'social_links' => 'nullable',
+            'claimed_by_owner' => 'boolean',
+            'faqs' => 'nullable|array',
+            'faqs.*.question' => 'required|string',
+            'faqs.*.answer' => 'required|string',
+            'services' => 'nullable|array',
+            'services.*.name' => 'required|string',
+            'services.*.description' => 'nullable|string',
+            'services.*.price' => 'nullable|string',
+            'logo' => 'nullable|image|max:2048',
+            'cover_image' => 'nullable|image|max:4096',
+            'logo_url' => 'nullable|string|max:1000',
+            'cover_image_url' => 'nullable|string|max:1000',
+            'opening_hours' => 'nullable|string|max:255',
+        ]);
+
+        $slug = $request->filled('slug') 
+            ? \Illuminate\Support\Str::slug($validated['slug']) 
+            : \Illuminate\Support\Str::slug($validated['name']) . '-' . rand(1000, 9999);
+
+        // Ensure unique if provided custom slug clashes after Str::slug
+        if (Business::where('slug', $slug)->exists()) {
+            $slug = $slug . '-' . rand(100, 999);
+        }
+
+        $logoPath = 'https://ui-avatars.com/api/?name=' . urlencode($validated['name']) . '&background=random';
+        if ($request->hasFile('logo')) {
+            $logoPath = $this->storeOptimizedImage($request->file('logo'), 'businesses/logos', 672);
+        } elseif ($request->filled('logo_url')) {
+            $downloadedLogo = $this->storeOptimizedImageFromUrl($request->input('logo_url'), 'businesses/logos', 672);
+            if ($downloadedLogo) {
+                $logoPath = $downloadedLogo;
+            }
+        }
+
+        $coverPath = 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=2070';
+        if ($request->hasFile('cover_image')) {
+            $coverPath = $this->storeOptimizedImage($request->file('cover_image'), 'businesses/covers', 1600);
+        } elseif ($request->filled('cover_image_url')) {
+            $downloadedCover = $this->storeOptimizedImageFromUrl($request->input('cover_image_url'), 'businesses/covers', 1600);
+            if ($downloadedCover) {
+                $coverPath = $downloadedCover;
+            }
+        }
+
+        $rawTags = $request->input('tags');
+        $tagsList = is_array($rawTags) ? $rawTags : (is_string($rawTags) ? json_decode($rawTags, true) : null);
+        if (!is_array($tagsList) || empty($tagsList)) {
+            $tagsList = ['new', strtolower($validated['category_name'])];
+        }
+
+        $rawSocial = $request->input('social_links');
+        $socialLinks = is_array($rawSocial) ? $rawSocial : (is_string($rawSocial) ? json_decode($rawSocial, true) : null);
+
+        try {
+            $business = Business::create([
+                'id' => 'b-' . time(),
+                // Ownership always comes from the authenticated session, never the request body.
+                'user_id' => $request->user()->id,
+                'name' => $validated['name'],
+                'slug' => $slug,
+                'website' => $validated['website'],
+                'category' => \Illuminate\Support\Str::slug($validated['category_name']),
+                'category_name' => $validated['category_name'],
+                'description' => $validated['description'],
+                'detailed_description' => $validated['detailed_description'] ?? null,
+                'phone' => $validated['phone'] ?? null,
+                'email' => $validated['email'] ?? null,
+                'address' => $validated['address'] ?? null,
+                'city' => $request->input('city', 'Sikar'),
+                'opening_hours' => $validated['opening_hours'] ?? null,
+                'claimed_by_owner' => filter_var($validated['claimed_by_owner'] ?? false, FILTER_VALIDATE_BOOLEAN),
+                'faqs' => $validated['faqs'] ?? null,
+                'products' => $validated['services'] ?? null,
+                'social_links' => $socialLinks,
+                'logo' => $logoPath,
+                'cover_image' => $coverPath,
+                'rating' => 0,
+                'review_count' => 0,
+                'is_verified' => false,
+                'tags' => $tagsList,
+            ]);
+
+            try {
+                $gscSettings = \App\Models\GscSetting::instance();
+                if ($gscSettings->is_connected && $gscSettings->auto_index_businesses) {
+                    $siteBase = rtrim(config('services.google.site_url', 'https://sikareducationhub.com'), '/');
+                    $cat = $business->category ?: 'coaching-institutes';
+                    $bizUrl = $siteBase . '/business/' . $cat . '/' . ($business->slug ?: $business->id);
+                    app(\App\Services\Google\GoogleIndexingService::class)->publishUrl($bizUrl, 'URL_UPDATED', 'auto_business_publish');
+                }
+            } catch (\Throwable $ignore) {}
+
+            try {
+                $bingSettings = \App\Models\BingWebmasterSetting::current();
+                if ($bingSettings->auto_index_posts) {
+                    $siteBase = rtrim(config('services.bing.site_url', 'https://sikareducationhub.com'), '/');
+                    $cat = $business->category ?: 'coaching-institutes';
+                    $bizUrl = $siteBase . '/business/' . $cat . '/' . ($business->slug ?: $business->id);
+                    app(\App\Services\Bing\BingWebmasterService::class)->submitUrl($bizUrl);
+                    app(\App\Services\Bing\BingWebmasterService::class)->submitIndexNow([$bizUrl]);
+                }
+            } catch (\Throwable $ignore) {}
+
+            return response()->json($business->publicPayload($request->user()), 201);
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Business listing creation error: ' . $e->getMessage());
+            return response()->json(['errors' => ['general' => 'Server Error: ' . $e->getMessage()]], 500);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Decode payloads if they were encoded to bypass ModSecurity
+        if ($request->has('_encoded_payloads')) {
+            $fieldsToDecode = ['detailed_description', 'faqs', 'services'];
+            foreach ($fieldsToDecode as $field) {
+                if ($request->has($field) && is_string($request->$field)) {
+                    $decoded = base64_decode($request->$field, true);
+                    if ($decoded !== false) {
+                        $request->merge([$field => urldecode($decoded)]);
+                    }
+                }
+            }
+        }
+
+        $business = Business::findOrFail($id);
+        
+        // Authorization check: User must be owner or super admin
+        $user = auth()->user();
+        if (!$user) {
+            \Illuminate\Support\Facades\Log::warning('Business update failed: Unauthorized. User is null.');
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+        
+        $canAdminister = in_array($user->role, ['admin', 'super_admin'], true)
+            || (bool) $user->getAttribute('is_admin');
+        if ($business->user_id !== $user->id && !$canAdminister) {
+            \Illuminate\Support\Facades\Log::warning('Business update failed: Forbidden. User ID: ' . $user->id . ' Business User ID: ' . $business->user_id);
+            return response()->json(['message' => 'Forbidden - You do not have permission to edit this business'], 403);
+        }
+
+        if ($request->has('faqs') && is_string($request->faqs)) {
+            $request->merge(['faqs' => json_decode($request->faqs, true)]);
+        }
+        if ($request->has('services') && is_string($request->services)) {
+            $request->merge(['services' => json_decode($request->services, true)]);
+        }
+
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'slug' => 'nullable|string|max:255',
+                'website' => 'nullable|string|max:255',
+                'category_name' => 'required|string',
+                'description' => 'required|string',
+                'detailed_description' => 'nullable|string',
+                'phone' => 'nullable|string|max:255',
+                'email' => 'nullable|email|max:255',
+                'address' => 'nullable|string|max:500',
+                'city' => 'nullable|string|max:100',
+                'tags' => 'nullable',
+                'social_links' => 'nullable',
+                'opening_hours' => 'nullable|string|max:255',
+                'faqs' => 'nullable|array',
+                'faqs.*.question' => 'required|string',
+                'faqs.*.answer' => 'required|string',
+                'services' => 'nullable|array',
+                'services.*.name' => 'required|string',
+                'services.*.description' => 'nullable|string',
+                'services.*.price' => 'nullable|string',
+                'logo' => 'nullable|image|max:2048',
+                'cover_image' => 'nullable|image|max:4096',
+                'logo_url' => 'nullable|string|max:1000',
+                'cover_image_url' => 'nullable|string|max:1000',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            \Illuminate\Support\Facades\Log::warning('Business update validation failed: ' . json_encode($e->errors()));
+            throw $e;
+        }
+
+        try {
+            $updateData = [
+                'name' => $validated['name'],
+                'website' => $validated['website'] ?? $business->website,
+                'category' => \Illuminate\Support\Str::slug($validated['category_name']),
+                'category_name' => $validated['category_name'],
+                'description' => $validated['description'],
+                'detailed_description' => $validated['detailed_description'] ?? $business->detailed_description,
+                'phone' => $validated['phone'] ?? $business->phone,
+                'email' => $validated['email'] ?? $business->email,
+                'address' => $validated['address'] ?? $business->address,
+                'city' => $request->has('city') ? $request->input('city') : $business->city,
+                'opening_hours' => $validated['opening_hours'] ?? $business->opening_hours,
+                'faqs' => $validated['faqs'] ?? $business->faqs,
+            ];
+
+            if ($request->has('tags')) {
+                $rawTags = $request->input('tags');
+                $tagsList = is_array($rawTags) ? $rawTags : (is_string($rawTags) ? json_decode($rawTags, true) : null);
+                if (is_array($tagsList)) {
+                    $updateData['tags'] = $tagsList;
+                }
+            }
+
+            if ($request->has('social_links')) {
+                $rawSocial = $request->input('social_links');
+                $updateData['social_links'] = is_array($rawSocial) ? $rawSocial : (is_string($rawSocial) ? json_decode($rawSocial, true) : null);
+            }
+
+            if (!empty($validated['slug'])) {
+                $newSlug = \Illuminate\Support\Str::slug($validated['slug']);
+                // Ensure unique slug if changed
+                if ($newSlug !== $business->slug && !Business::where('slug', $newSlug)->exists()) {
+                    $updateData['slug'] = $newSlug;
+                }
+            }
+
+            if (isset($validated['services'])) {
+                $updateData['products'] = $validated['services'];
+            }
+
+            if ($request->hasFile('logo')) {
+                $updateData['logo'] = $this->storeOptimizedImage($request->file('logo'), 'businesses/logos', 672);
+            } elseif ($request->filled('logo_url')) {
+                $downloadedLogo = $this->storeOptimizedImageFromUrl($request->input('logo_url'), 'businesses/logos', 672);
+                if ($downloadedLogo) {
+                    $updateData['logo'] = $downloadedLogo;
+                }
+            }
+
+            if ($request->hasFile('cover_image')) {
+                $updateData['cover_image'] = $this->storeOptimizedImage($request->file('cover_image'), 'businesses/covers', 1600);
+            } elseif ($request->filled('cover_image_url')) {
+                $downloadedCover = $this->storeOptimizedImageFromUrl($request->input('cover_image_url'), 'businesses/covers', 1600);
+                if ($downloadedCover) {
+                    $updateData['cover_image'] = $downloadedCover;
+                }
+            }
+
+            $business->update($updateData);
+
+            try {
+                $gscSettings = \App\Models\GscSetting::instance();
+                if ($gscSettings->is_connected && $gscSettings->auto_index_businesses) {
+                    $siteBase = rtrim(config('services.google.site_url', 'https://sikareducationhub.com'), '/');
+                    $cat = $business->category ?: 'coaching-institutes';
+                    $bizUrl = $siteBase . '/business/' . $cat . '/' . ($business->slug ?: $business->id);
+                    app(\App\Services\Google\GoogleIndexingService::class)->publishUrl($bizUrl, 'URL_UPDATED', 'auto_business_publish');
+                }
+            } catch (\Throwable $ignore) {}
+
+            try {
+                $bingSettings = \App\Models\BingWebmasterSetting::current();
+                if ($bingSettings->auto_index_posts) {
+                    $siteBase = rtrim(config('services.bing.site_url', 'https://sikareducationhub.com'), '/');
+                    $cat = $business->category ?: 'coaching-institutes';
+                    $bizUrl = $siteBase . '/business/' . $cat . '/' . ($business->slug ?: $business->id);
+                    app(\App\Services\Bing\BingWebmasterService::class)->submitUrl($bizUrl);
+                    app(\App\Services\Bing\BingWebmasterService::class)->submitIndexNow([$bizUrl]);
+                }
+            } catch (\Throwable $ignore) {}
+
+            return response()->json($business->publicPayload($request->user()));
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Business listing update error: ' . $e->getMessage());
+            return response()->json(['errors' => ['general' => 'Server Error: ' . $e->getMessage()]], 500);
+        }
+    }
+
+    private function storeOptimizedImage(UploadedFile $file, string $directory, int $maxWidth): string
+    {
+        // Preserve animated GIF uploads; converting them with GD would drop frames.
+        if (strtolower($file->getClientOriginalExtension()) === 'gif') {
+            return '/uploads/' . $file->store($directory, 'uploads');
+        }
+
+        $image = (new ImageManager(new Driver()))->decodePath($file->getRealPath());
+        
+        if ($image->width() > $maxWidth) {
+            $image->scaleDown(width: $maxWidth);
+        }
+
+        $quality = 85;
+        $encoded = $image->encodeUsingFileExtension('webp', $quality);
+        
+        // Iteratively reduce quality if file is > 100KB, but keep visual quality high (min 65)
+        while (strlen((string) $encoded) > 102400 && $quality > 65) {
+            $quality -= 5;
+            $encoded = $image->encodeUsingFileExtension('webp', $quality);
+        }
+
+        // If still > 100KB, shrink dimensions instead of ruining quality
+        while (strlen((string) $encoded) > 102400 && $image->width() > 400) {
+            $image->scaleDown(width: (int)($image->width() * 0.85));
+            $encoded = $image->encodeUsingFileExtension('webp', $quality);
+        }
+
+        $filename = Str::uuid() . '.webp';
+        Storage::disk('uploads')->put(
+            $directory . '/' . $filename,
+            (string) $encoded
+        );
+
+        return '/uploads/' . $directory . '/' . $filename;
+    }
+
+    /**
+     * Download an image from an external URL (scraped from official website),
+     * optimize and convert it to WebP format, and save locally into uploads directory.
+     */
+    private function storeOptimizedImageFromUrl(string $url, string $directory, int $maxWidth): ?string
+    {
+        $url = trim($url);
+        if (!filter_var($url, FILTER_VALIDATE_URL) || !\App\Http\Controllers\Api\AiBusinessController::isSafePublicUrl($url)) {
+            return null;
+        }
+
+        try {
+            $response = Http::timeout(8)
+                ->withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+                    'Accept' => 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
+                ])
+                ->get($url);
+
+            if (!$response->successful() || empty($response->body())) {
+                return null;
+            }
+
+            $contentType = strtolower($response->header('Content-Type') ?? '');
+            $body = $response->body();
+            $pathOnly = strtolower(parse_url($url, PHP_URL_PATH) ?? '');
+
+            // 1. Handle SVG images directly with strict security filters
+            if (str_contains($contentType, 'svg') || str_ends_with($pathOnly, '.svg')) {
+                // Prevent SVG script execution, event handlers, and data injection
+                if (preg_match('/<script|javascript:|on[a-z]+\s*=|xlink:href|<iframe|<embed|<object/i', $body)) {
+                    return null;
+                }
+                $filename = Str::uuid() . '.svg';
+                Storage::disk('uploads')->put($directory . '/' . $filename, $body);
+                return '/uploads/' . $directory . '/' . $filename;
+            }
+
+            // 2. Handle animated GIF images
+            if (str_contains($contentType, 'gif') || str_ends_with($pathOnly, '.gif')) {
+                $filename = Str::uuid() . '.gif';
+                Storage::disk('uploads')->put($directory . '/' . $filename, $body);
+                return '/uploads/' . $directory . '/' . $filename;
+            }
+
+            // 3. Decode & optimize with Intervention Image
+            $imageManager = new ImageManager(new Driver());
+            $image = $imageManager->decodeBinary($body);
+
+            // Reject tiny tracking pixels, spacers, or corrupt empty downloads (< 40px)
+            if ($image->width() < 40 || $image->height() < 40) {
+                return null;
+            }
+
+            if ($image->width() > $maxWidth) {
+                $image->scaleDown(width: $maxWidth);
+            }
+
+            $quality = 85;
+            $encoded = $image->encodeUsingFileExtension('webp', $quality);
+
+            while (strlen((string) $encoded) > 102400 && $quality > 65) {
+                $quality -= 5;
+                $encoded = $image->encodeUsingFileExtension('webp', $quality);
+            }
+
+            while (strlen((string) $encoded) > 102400 && $image->width() > 400) {
+                $image->scaleDown(width: (int)($image->width() * 0.85));
+                $encoded = $image->encodeUsingFileExtension('webp', $quality);
+            }
+
+            $filename = Str::uuid() . '.webp';
+            Storage::disk('uploads')->put($directory . '/' . $filename, (string) $encoded);
+
+            return '/uploads/' . $directory . '/' . $filename;
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning("Failed to download and optimize image from {$url}: " . $e->getMessage());
+            return null;
+        }
+    }
+}

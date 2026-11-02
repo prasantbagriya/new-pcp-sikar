@@ -1,0 +1,80 @@
+import React from 'react';
+import { Head, Link } from '@inertiajs/react';
+import GlobalNavbar from '../../NextComponents/GlobalNavbar';
+import BlogFooter from '../../NextComponents/BlogFooter';
+import { CheckCheck, Sparkles, ShieldCheck } from 'lucide-react';
+
+export default function FactCheckingPolicy() {
+    return (
+        <div className="bg-[#faf7fe] dark:bg-[#070d1e] min-h-screen flex flex-col font-sans selection:bg-purple-800 selection:text-white">
+            <Head>
+                <title>Fact-Checking Policy | Sikar Education Hub</title>
+                <meta name="description" content="Learn how Sikar Education Hub validates coaching results, faculty claims, fee structures, and campus facilities across Sikar institutes." />
+            </Head>
+            <GlobalNavbar />
+
+            {/* PCP Hero Header */}
+            <section className="relative pt-12 pb-20 md:pt-16 md:pb-24 bg-gradient-to-b from-[#2e0854] via-[#240642] to-[#120326] text-white overflow-hidden">
+                <div className="absolute top-1/4 -left-20 w-[450px] h-[450px] bg-[#5b40cf]/25 rounded-full blur-[140px] pointer-events-none" />
+                <div className="absolute top-1/3 -right-20 w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[130px] pointer-events-none" />
+
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                    <div className="inline-flex items-center gap-2 text-xs font-semibold text-purple-200/80 mb-5 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-md">
+                        <Link href="/" className="hover:text-amber-300 transition-colors">Home</Link>
+                        <span>›</span>
+                        <span className="text-amber-300 font-bold">Fact-Checking Policy</span>
+                    </div>
+
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-amber-300 text-xs font-black uppercase tracking-widest mb-4">
+                        <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                        <span>VERIFICATION &amp; AUTHENTICITY</span>
+                    </div>
+
+                    <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-3">
+                        Fact-Checking Policy
+                    </h1>
+
+                    <p className="text-purple-100/80 text-xs sm:text-sm font-medium">
+                        Last Updated: September 2026 • 100% Verified Education Data
+                    </p>
+                </div>
+            </section>
+
+            {/* Content Container */}
+            <main className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-12 mb-20 relative z-20 flex-grow">
+                <div className="bg-white dark:bg-[#0c1428] rounded-3xl border border-purple-100/90 dark:border-slate-800 shadow-xl shadow-purple-950/5 p-6 sm:p-12 text-slate-700 dark:text-slate-300 leading-relaxed space-y-6 text-sm sm:text-base">
+                    
+                    <div className="p-4 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200/80 dark:border-purple-800 text-xs sm:text-sm text-[#2e0854] dark:text-purple-200 font-medium">
+                        Our research team strictly verifies all published information against primary sources before releasing articles and institute comparison guides.
+                    </div>
+
+                    <h2 className="text-xl sm:text-2xl font-black text-[#2e0854] dark:text-white pt-4 border-t border-purple-100 dark:border-slate-800">
+                        1. Verification Methodology
+                    </h2>
+                    <ul className="list-disc pl-6 space-y-2">
+                        <li><strong>Topper &amp; Rank Claims:</strong> Cross-verified with official NTA NEET and NTA JEE Advanced merit rolls and authentic scorecard verification.</li>
+                        <li><strong>Fee Schedules:</strong> Authenticated through official prospectus releases and direct admissions desk confirmation.</li>
+                        <li><strong>Hostel &amp; Mess Hygiene:</strong> Documented via physical campus visits, CCTV security audits, and mechanized steam kitchen checks.</li>
+                    </ul>
+
+                    <h2 className="text-xl sm:text-2xl font-black text-[#2e0854] dark:text-white pt-4 border-t border-purple-100 dark:border-slate-800">
+                        2. Multi-Step Review Process
+                    </h2>
+                    <p>
+                        Every educational guide undergoes a two-tier review: first by an educational research journalist, followed by senior academic mentors familiar with Sikar's coaching ecosystem.
+                    </p>
+
+                    <h2 className="text-xl sm:text-2xl font-black text-[#2e0854] dark:text-white pt-4 border-t border-purple-100 dark:border-slate-800">
+                        3. Corrections Protocol
+                    </h2>
+                    <p>
+                        If you believe any data point published on our platform requires factual rectification, please submit supporting documentation to <a href="mailto:info@sikareducationhub.com" className="text-[#5b40cf] font-semibold hover:underline">info@sikareducationhub.com</a>. Our team investigates and rectifies verified errors within 24 hours.
+                    </p>
+
+                </div>
+            </main>
+
+            <BlogFooter />
+        </div>
+    );
+}

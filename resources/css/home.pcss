@@ -1,0 +1,405 @@
+/* Landing-page-only stylesheet for PCP Sikar (Prince Career Pioneer) */
+/* Outfit font — bundled here so there are no separate render-blocking font CSS requests */
+@import '@fontsource/outfit/400.css';
+@import '@fontsource/outfit/600.css';
+@import '@fontsource/outfit/700.css';
+@config "../../tailwind.home.config.js";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #3b0764;
+  --primary-hover: #581c87;
+  --primary-deep: #240242;
+  --primary-dark: #19022e;
+  --accent-yellow: #ffc107;
+  --accent-gold: #ffb703;
+  --accent-orange: #ffb703;
+  --accent-purple: #7e22ce;
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --muted: #f8fafc;
+  --muted-foreground: #64748b;
+  --accent: #fffbeb;
+  --border: #e2e8f0;
+  --radius: 1rem;
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+  --glass: rgba(255, 255, 255, 0.90);
+  --glass-dark: rgba(36, 2, 66, 0.88);
+  --glass-border: rgba(168, 85, 247, 0.25);
+  --header-height: 64px;
+}
+
+.dark {
+  --background: #140124;
+  --foreground: #fcf9ff;
+  --muted: #240242;
+  --muted-foreground: #cbb3e3;
+  --border: #3b0764;
+}
+
+::selection { background: rgba(255, 193, 7, 0.35); color: #240242; }
+*, *::before, *::after { box-sizing: border-box; padding: 0; margin: 0; }
+*:focus, button { outline: none !important; }
+button { border: none; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+  overflow-y: scroll;
+  font-size: 16px;
+  font-size-adjust: from-font;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: clip;
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+img, video, iframe, canvas, svg { max-width: 100%; height: auto; display: block; }
+
+/* Lighthouse 100 Performance Optimization: Content Visibility for offscreen sections */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  break-after: avoid;
+  page-break-after: avoid;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-family: inherit;
+  contain: layout;
+  min-height: 44px;
+  min-width: 44px;
+}
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(126, 34, 206, 0.4); }
+
+.glass-panel { 
+  background: var(--glass); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px); 
+  border: 1px solid var(--glass-border); 
+  border-radius: var(--radius); 
+  box-shadow: 0 10px 30px 0 rgba(36, 2, 66, 0.08); 
+}
+
+.dark-glass-panel {
+  background: rgba(36, 2, 66, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+
+.card-hover { 
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease; 
+}
+.card-hover:hover { 
+  transform: translateY(-4px) scale(1.01); 
+  box-shadow: 0 20px 25px -5px rgba(59, 7, 100, 0.15), 0 8px 10px -6px rgba(59, 7, 100, 0.1); 
+  border-color: var(--primary); 
+  will-change: transform; 
+}
+.card-hover:not(:hover) { will-change: auto; }
+.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Keep below-the-fold work out of initial mobile rendering path */
+section:not(:first-of-type):not(.lcp-section):not(.hero-skeleton):not(.overflow-visible):not(.no-contain) { content-visibility: auto; contain-intrinsic-size: 0 auto 400px; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: #d8b4fe; border-radius: 10px; border: 3px solid var(--background); }
+::-webkit-scrollbar-thumb:hover { background: #a855f7; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.animate-fade-in { animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both; }
+
+@media print {
+  .glass-panel { box-shadow: none; border: 1px solid #ccc; }
+  nav, header, footer, aside, .card-hover, #reading-progress { display: none !important; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #666; }
+  h1, h2, h3 { page-break-after: avoid; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+@media (forced-colors: active) {
+  .glass-panel { border: 2px solid ButtonText; }
+  .btn-primary { forced-color-adjust: none; }
+}
+
+@media (max-width: 768px) {
+  html { font-size: 15px; }
+  .container { padding: 0 1rem; }
+  h1 { font-size: clamp(1.75rem, 5vw, 2.25rem); }
+  h2 { font-size: clamp(1.25rem, 4vw, 1.5rem); }
+}
+
+/* Hide scrollbar helper */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-delayed { animation: float-delayed 7s ease-in-out infinite; }
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 35s linear infinite; will-change: transform; }
+.animate-marquee:hover { animation-play-state: paused; }
+
+@keyframes marquee-vertical-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes marquee-vertical-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-up {
+  animation: marquee-vertical-up 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-down {
+  animation: marquee-vertical-down 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left {
+  animation: marquee-left 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-up:hover,
+.animate-marquee-down:hover,
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse-slow {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+  will-change: transform;
+}
+
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 50s linear infinite;
+  will-change: transform;
+}
+
+/* Blueberry Futures Floating Card Animations */
+@keyframes float-smooth-1 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float-smooth-2 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(12px); }
+}
+
+@keyframes float-smooth-3 {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float-1 {
+  animation: float-smooth-1 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-2 {
+  animation: float-smooth-2 6s ease-in-out infinite 1s;
+  will-change: transform;
+}
+
+.animate-float-3 {
+  animation: float-smooth-3 5.5s ease-in-out infinite 0.5s;
+  will-change: transform;
+}
+
+
+
+
+/* Modern Unified Button Design System (Fyers Tech Grade) */
+.btn-brand-yellow, a.btn-brand-yellow, button.btn-brand-yellow,
+.btn-brand-primary, a.btn-brand-primary, button.btn-brand-primary {
+  background-color: #182bff !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(24, 43, 255, 0.25) !important;
+}
+.btn-brand-yellow:hover, a.btn-brand-yellow:hover, button.btn-brand-yellow:hover,
+.btn-brand-primary:hover, a.btn-brand-primary:hover, button.btn-brand-primary:hover {
+  background-color: #0d1fe8 !important;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(24, 43, 255, 0.35) !important;
+}
+
+.btn-brand-purple, a.btn-brand-purple, button.btn-brand-purple,
+.btn-brand-secondary, a.btn-brand-secondary, button.btn-brand-secondary {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+.btn-brand-purple:hover, a.btn-brand-purple:hover, button.btn-brand-purple:hover,
+.btn-brand-secondary:hover, a.btn-brand-secondary:hover, button.btn-brand-secondary:hover {
+  background-color: #f8fafc !important;
+  color: #000000 !important;
+  border-color: #cbd5e1 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Backward compatibility aliases */
+.btn-brand-orange, a.btn-brand-orange, button.btn-brand-orange {
+  background-color: #182bff !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 14px rgba(24, 43, 255, 0.25) !important;
+}
+.btn-brand-navy, a.btn-brand-navy, button.btn-brand-navy {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+}
+
+/* Fyers-Style Custom Scrollbar for Journey Timeline */
+.fd-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.fd-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+}
+.fd-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 9999px;
+}
+.fd-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* ========================================================================= */
+/* Aquafix-Style Continuous Vertical Marquees & Global Scroll Reveal System  */
+/* ========================================================================= */
+@keyframes marquee-down { 
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0%); }
+}
+@keyframes marquee-up { 
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-50%); }
+}
+.animate-marquee-down {
+  display: flex;
+  flex-direction: column;
+  animation: marquee-down 24s linear infinite;
+}
+.animate-marquee-up {
+  display: flex;
+  flex-direction: column;
+  animation: marquee-up 24s linear infinite;
+}
+.animate-marquee-down:hover, .animate-marquee-up:hover {
+  animation-play-state: paused;
+}
+
+/* Aquafix-Style Smooth Scroll Reveal */
+.reveal-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
