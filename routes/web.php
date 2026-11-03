@@ -102,6 +102,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.index');
     Route::get('/admin/database/export-sql', [\App\Http\Controllers\Admin\DatabaseExportController::class, 'downloadFullSql'])->name('admin.database.export-sql');
     Route::get('/admin/database/export-data-sql', [\App\Http\Controllers\Admin\DatabaseExportController::class, 'downloadDataOnlySql'])->name('admin.database.export-data-sql');
+    Route::redirect('/admin/posts', '/admin');
     Route::get('/admin/posts/new', [\App\Http\Controllers\Admin\PostController::class, 'create'])->name('admin.posts.new');
     Route::get('/admin/posts/edit/{id}', [\App\Http\Controllers\Admin\PostController::class, 'edit'])->name('admin.posts.edit');
     Route::post('/api/admin/posts', [\App\Http\Controllers\Admin\PostController::class, 'store'])->name('admin.posts.store');

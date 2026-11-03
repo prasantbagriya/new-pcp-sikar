@@ -23,7 +23,7 @@ export default function AuthorIndex({ authors, meta }) {
             <main className="flex-grow">
                 {/* Hero Section */}
                 <section className="relative w-full py-24 md:py-32 flex items-center justify-center overflow-hidden bg-slate-900">
-                    <div className="absolute inset-0 z-0 opacity-40 bg-[url('/uploads/aboutus.webp')] bg-cover bg-center" role="img" aria-label="Authors Background"></div>
+                    <div className="absolute inset-0 z-0 opacity-40 bg-cover bg-center" style={{ backgroundImage: "url('/uploads/aboutus.webp')" }} role="img" aria-label="Authors Background"></div>
                     <div className="absolute inset-0 z-0 bg-gradient-to-t from-slate-900 via-slate-900/90 to-slate-900/60"></div>
                     
                     <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-4 md:pt-6">

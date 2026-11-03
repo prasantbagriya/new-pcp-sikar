@@ -566,7 +566,7 @@ function NavbarCore({
                           </span>
                         </div>
                         <a 
-                          href="#scholarship" 
+                          href="/#scholarship" 
                           onClick={() => setActiveDropdownId(null)}
                           className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2e1065] hover:text-purple-800 hover:underline shrink-0"
                         >
@@ -715,7 +715,7 @@ function NavbarCore({
                 alt="360° Campus Tour" 
                 width="28"
                 height="28"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
                 className="w-7 h-7 object-contain group-hover/360:rotate-45 transition-transform duration-300" 
               />
@@ -723,7 +723,7 @@ function NavbarCore({
 
             {/* Admission 2026 Soft Pill (Restored exactly as before) */}
             <a 
-              href="#courses" 
+              href="/#courses" 
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-bold text-xs text-[#2e1065] bg-purple-100/90 hover:bg-purple-200/90 border border-purple-200/90 transition-all shrink-0 decoration-transparent shadow-2xs"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-purple-600 animate-pulse" />
@@ -754,7 +754,7 @@ function NavbarCore({
                 alt="360° Campus Tour" 
                 width="24"
                 height="24"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
                 className="w-6 h-6 object-contain" 
               />
