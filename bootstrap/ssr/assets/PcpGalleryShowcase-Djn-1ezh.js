@@ -195,7 +195,7 @@ function PcpGalleryShowcase() {
 		onTouchStart: handleTouchStart,
 		onTouchMove: handleTouchMove,
 		onClick: () => setScaledIndex(null),
-		className: "relative w-full pt-6 pb-12 sm:pt-8 sm:pb-16 bg-white overflow-visible select-none border-t border-purple-100",
+		className: "relative w-full pt-6 pb-10 sm:pt-8 sm:pb-12 bg-white overflow-visible select-none border-t border-purple-100",
 		style: {
 			cursor: isHoveringSection ? "none" : "default",
 			contain: "none"
@@ -207,24 +207,24 @@ function PcpGalleryShowcase() {
 				children: [/* @__PURE__ */ jsx("div", { className: "absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[350px] bg-purple-100/40 rounded-full blur-[140px]" }), /* @__PURE__ */ jsx("div", { className: "absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[300px] bg-amber-100/30 rounded-full blur-[130px]" })]
 			}),
 			/* @__PURE__ */ jsx("div", {
-				className: "max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 mb-4 relative z-10",
+				className: "max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 mb-2 sm:mb-3 relative z-10",
 				children: /* @__PURE__ */ jsxs("div", {
-					className: "flex flex-col sm:flex-row sm:items-end justify-between gap-3",
+					className: "flex flex-col sm:flex-row sm:items-end justify-between gap-2.5",
 					children: [/* @__PURE__ */ jsxs("div", { children: [
 						/* @__PURE__ */ jsxs("div", {
-							className: "inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 text-[#2e0854] text-xs font-black uppercase tracking-wider border border-purple-200/80 mb-2",
+							className: "inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-purple-50 text-[#2e0854] text-xs font-black uppercase tracking-wider border border-purple-200/60 mb-1.5",
 							children: [/* @__PURE__ */ jsx(Trophy, { className: "w-3.5 h-3.5 text-amber-500" }), /* @__PURE__ */ jsx("span", { children: "HALL OF FAME & CHAMPIONS" })]
 						}),
 						/* @__PURE__ */ jsx("h2", {
-							className: "text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-normal",
+							className: "text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-normal mb-1",
 							children: "Meet Our National Rankers & Selections"
 						}),
 						/* @__PURE__ */ jsx("p", {
-							className: "text-slate-600 text-xs sm:text-sm mt-1",
+							className: "text-slate-600 text-xs sm:text-sm",
 							children: "Click any topper card to expand details in-place. Move mouse horizontally to browse."
 						})
 					] }), /* @__PURE__ */ jsxs("div", {
-						className: "hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-50/80 border border-purple-200/80 text-xs font-bold text-[#2e0854] shrink-0",
+						className: "hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50/80 border border-purple-200/60 text-xs font-bold text-[#2e0854] shrink-0",
 						children: [/* @__PURE__ */ jsx(Sparkles, { className: "w-3.5 h-3.5 text-amber-500" }), /* @__PURE__ */ jsx("span", { children: "Interactive Ribbon • Click to Expand" })]
 					})]
 				})
@@ -234,24 +234,24 @@ function PcpGalleryShowcase() {
 					left: `${mousePos.x}px`,
 					top: `${mousePos.y}px`
 				},
-				className: `fixed z-[120] pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-150 ease-out hidden md:flex ${scaledIndex !== null ? "w-[54px] h-[54px] bg-[#2e0854] text-white shadow-xl ring-2 ring-purple-300" : "w-[48px] h-[48px] bg-white text-[#2e0854] shadow-md ring-1 ring-purple-200 font-bold"}`,
+				className: `fixed z-[120] pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-150 ease-out hidden md:flex ${scaledIndex !== null ? "w-[50px] h-[50px] bg-[#2e0854] text-white shadow-xl ring-1 ring-purple-300" : "w-[44px] h-[44px] bg-white text-[#2e0854] shadow-md ring-1 ring-purple-200 font-bold"}`,
 				children: /* @__PURE__ */ jsx("span", {
-					className: "text-[10px] font-bold tracking-wider uppercase select-none",
+					className: "text-[9px] font-bold tracking-wider uppercase select-none",
 					children: scaledIndex !== null ? "Close" : "Scale"
 				})
 			}),
 			/* @__PURE__ */ jsx("div", {
-				className: "relative z-20 w-full overflow-visible pt-28 sm:pt-32 pb-4",
+				className: "relative z-20 w-full overflow-visible pt-5 sm:pt-7 pb-4 sm:pb-6",
 				children: /* @__PURE__ */ jsx("div", {
 					ref: trackRef,
 					style: {
 						transform: `translate3d(${panningX}px, 0px, 0px)`,
 						transition: scaledIndex !== null ? "transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)" : "transform 0.2s ease-out"
 					},
-					className: "flex items-end gap-3.5 sm:gap-4 px-4 sm:px-8 lg:px-12 will-change-transform overflow-visible",
+					className: "flex items-start gap-3 sm:gap-3.5 px-4 sm:px-8 lg:px-12 will-change-transform overflow-visible",
 					children: galleryItems.map((item, idx) => {
 						const isScaled = scaledIndex === idx;
-						const siblingShift = Math.round(itemWidth * .65);
+						const siblingShift = Math.round(itemWidth * .42);
 						let siblingTransform = "translate3d(0px, 0px, 0px)";
 						if (scaledIndex !== null) {
 							if (idx < scaledIndex) siblingTransform = `translate3d(-${siblingShift}px, 0px, 0px)`;
@@ -261,18 +261,18 @@ function PcpGalleryShowcase() {
 							ref: (el) => cardRefs.current[idx] = el,
 							onClick: (e) => handleCardClick(idx, e),
 							style: {
-								transformOrigin: "50% 90%",
-								transform: isScaled ? "scale(2.15, 2.15)" : `${siblingTransform} scale(1, 1)`,
+								transformOrigin: "50% 20%",
+								transform: isScaled ? "scale(1.4, 1.4)" : `${siblingTransform} scale(1, 1)`,
 								zIndex: isScaled ? 90 : 10,
-								boxShadow: isScaled ? "0 25px 60px -15px rgba(46, 8, 84, 0.5), 0 0 0 2px rgba(168, 85, 247, 0.6)" : "0 4px 15px -3px rgba(46, 8, 84, 0.1)",
-								transition: "transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s ease, box-shadow 0.4s ease"
+								boxShadow: isScaled ? "0 18px 36px -8px rgba(46, 8, 84, 0.35)" : "0 2px 8px -2px rgba(46, 8, 84, 0.08)",
+								transition: "transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s ease, box-shadow 0.3s ease"
 							},
-							className: `w-[145px] sm:w-[170px] lg:w-[195px] h-[190px] sm:h-[220px] lg:h-[250px] shrink-0 cursor-pointer relative overflow-hidden select-none will-change-transform rounded-2xl border ${isScaled ? "border-purple-400 bg-[#2e0854]" : "border-purple-200/90 bg-[#250646] hover:border-purple-400"}`,
+							className: `w-[145px] sm:w-[170px] lg:w-[195px] h-[190px] sm:h-[220px] lg:h-[250px] shrink-0 cursor-pointer relative overflow-hidden select-none will-change-transform rounded-xl border ${isScaled ? "border-purple-400 bg-[#2e0854]" : "border-purple-100/90 bg-[#250646] hover:border-purple-300"}`,
 							children: [
 								/* @__PURE__ */ jsx("div", {
-									className: "absolute top-2 left-2 z-20",
+									className: "absolute top-1.5 left-1.5 z-20",
 									children: /* @__PURE__ */ jsxs("span", {
-										className: "inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-amber-300 font-extrabold text-[9px] uppercase tracking-wide border border-amber-300/30",
+										className: "inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md text-amber-300 font-extrabold text-[8.5px] uppercase tracking-wide border border-amber-300/30",
 										children: [/* @__PURE__ */ jsx(Trophy, { className: "w-2.5 h-2.5 text-amber-400 shrink-0" }), /* @__PURE__ */ jsx("span", { children: item.badge })]
 									})
 								}),
@@ -286,7 +286,7 @@ function PcpGalleryShowcase() {
 									className: "w-full h-full object-cover object-top block select-none pointer-events-none transition-transform duration-500"
 								}),
 								/* @__PURE__ */ jsxs("div", {
-									className: "absolute inset-x-0 bottom-0 z-20 p-2 sm:p-2.5 bg-gradient-to-t from-[#2e0854] via-[#2e0854]/85 to-transparent text-white",
+									className: "absolute inset-x-0 bottom-0 z-20 p-2 bg-gradient-to-t from-[#2e0854] via-[#2e0854]/85 to-transparent text-white",
 									children: [
 										/* @__PURE__ */ jsx("p", {
 											className: "text-[11px] sm:text-xs font-bold tracking-tight text-white leading-tight truncate",

@@ -227,7 +227,7 @@ export default function PcpGalleryShowcase() {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onClick={() => setScaledIndex(null)}
-            className="relative w-full pt-6 pb-12 sm:pt-8 sm:pb-16 bg-white overflow-visible select-none border-t border-purple-100"
+            className="relative w-full pt-6 pb-10 sm:pt-8 sm:pb-12 bg-white overflow-visible select-none border-t border-purple-100"
             style={{ 
                 cursor: isHoveringSection ? 'none' : 'default',
                 contain: 'none'
@@ -239,23 +239,23 @@ export default function PcpGalleryShowcase() {
                 <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[600px] h-[300px] bg-amber-100/30 rounded-full blur-[130px]" />
             </div>
 
-            {/* Section Header */}
-            <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 mb-4 relative z-10">
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+            {/* Section Header with Minimal Compact Gap */}
+            <div className="max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-8 mb-2 sm:mb-3 relative z-10">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2.5">
                     <div>
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-50 text-[#2e0854] text-xs font-black uppercase tracking-wider border border-purple-200/80 mb-2">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-purple-50 text-[#2e0854] text-xs font-black uppercase tracking-wider border border-purple-200/60 mb-1.5">
                             <Trophy className="w-3.5 h-3.5 text-amber-500" />
                             <span>HALL OF FAME &amp; CHAMPIONS</span>
                         </div>
-                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-normal">
+                        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-normal mb-1">
                             Meet Our National Rankers &amp; Selections
                         </h2>
-                        <p className="text-slate-600 text-xs sm:text-sm mt-1">
+                        <p className="text-slate-600 text-xs sm:text-sm">
                             Click any topper card to expand details in-place. Move mouse horizontally to browse.
                         </p>
                     </div>
 
-                    <div className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-50/80 border border-purple-200/80 text-xs font-bold text-[#2e0854] shrink-0">
+                    <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50/80 border border-purple-200/60 text-xs font-bold text-[#2e0854] shrink-0">
                         <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                         <span>Interactive Ribbon • Click to Expand</span>
                     </div>
@@ -271,21 +271,21 @@ export default function PcpGalleryShowcase() {
                     }}
                     className={`fixed z-[120] pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-150 ease-out hidden md:flex ${
                         scaledIndex !== null
-                            ? 'w-[54px] h-[54px] bg-[#2e0854] text-white shadow-xl ring-2 ring-purple-300' 
-                            : 'w-[48px] h-[48px] bg-white text-[#2e0854] shadow-md ring-1 ring-purple-200 font-bold'
+                            ? 'w-[50px] h-[50px] bg-[#2e0854] text-white shadow-xl ring-1 ring-purple-300' 
+                            : 'w-[44px] h-[44px] bg-white text-[#2e0854] shadow-md ring-1 ring-purple-200 font-bold'
                     }`}
                 >
-                    <span className="text-[10px] font-bold tracking-wider uppercase select-none">
+                    <span className="text-[9px] font-bold tracking-wider uppercase select-none">
                         {scaledIndex !== null ? 'Close' : 'Scale'}
                     </span>
                 </div>
             )}
 
             {/* ========================================================================= */}
-            {/* HORIZONTAL CARDS TRACK: Direct In-Place Scale + Sibling Parting Shift     */}
-            {/* Generous top headroom (pt-28 sm:pt-32) prevents any clipping of head/top  */}
+            {/* HORIZONTAL CARDS TRACK: Compact Natural Gap Beneath Text                  */}
+            {/* Minimal thin border (border-[1px] border-purple-200/50), no heavy frames   */}
             {/* ========================================================================= */}
-            <div className="relative z-20 w-full overflow-visible pt-28 sm:pt-32 pb-4">
+            <div className="relative z-20 w-full overflow-visible pt-5 sm:pt-7 pb-4 sm:pb-6">
                 
                 {/* Smooth Mouse-Panned Ribbon Track */}
                 <div 
@@ -294,16 +294,13 @@ export default function PcpGalleryShowcase() {
                         transform: `translate3d(${panningX}px, 0px, 0px)`,
                         transition: scaledIndex !== null ? 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'transform 0.2s ease-out'
                     }}
-                    className="flex items-end gap-3.5 sm:gap-4 px-4 sm:px-8 lg:px-12 will-change-transform overflow-visible"
+                    className="flex items-start gap-3 sm:gap-3.5 px-4 sm:px-8 lg:px-12 will-change-transform overflow-visible"
                 >
                     {galleryItems.map((item, idx) => {
                         const isScaled = scaledIndex === idx;
                         
-                        // Sibling shift ("Parting the Sea"):
-                        // Center item scales 2.15x in-place upwards (transformOrigin: 50% 90%)
-                        // Left siblings translate smoothly to the left
-                        // Right siblings translate smoothly to the right
-                        const siblingShift = Math.round(itemWidth * 0.65);
+                        // Sibling shift ("Parting the Sea")
+                        const siblingShift = Math.round(itemWidth * 0.42);
                         let siblingTransform = 'translate3d(0px, 0px, 0px)';
                         if (scaledIndex !== null) {
                             if (idx < scaledIndex) {
@@ -319,25 +316,25 @@ export default function PcpGalleryShowcase() {
                                 ref={(el) => (cardRefs.current[idx] = el)}
                                 onClick={(e) => handleCardClick(idx, e)}
                                 style={{
-                                    transformOrigin: '50% 90%',
+                                    transformOrigin: '50% 20%',
                                     transform: isScaled 
-                                        ? 'scale(2.15, 2.15)' 
+                                        ? 'scale(1.4, 1.4)' 
                                         : `${siblingTransform} scale(1, 1)`,
                                     zIndex: isScaled ? 90 : 10,
                                     boxShadow: isScaled 
-                                        ? '0 25px 60px -15px rgba(46, 8, 84, 0.5), 0 0 0 2px rgba(168, 85, 247, 0.6)' 
-                                        : '0 4px 15px -3px rgba(46, 8, 84, 0.1)',
-                                    transition: 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s ease, box-shadow 0.4s ease'
+                                        ? '0 18px 36px -8px rgba(46, 8, 84, 0.35)' 
+                                        : '0 2px 8px -2px rgba(46, 8, 84, 0.08)',
+                                    transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s ease, box-shadow 0.3s ease'
                                 }}
-                                className={`w-[145px] sm:w-[170px] lg:w-[195px] h-[190px] sm:h-[220px] lg:h-[250px] shrink-0 cursor-pointer relative overflow-hidden select-none will-change-transform rounded-2xl border ${
+                                className={`w-[145px] sm:w-[170px] lg:w-[195px] h-[190px] sm:h-[220px] lg:h-[250px] shrink-0 cursor-pointer relative overflow-hidden select-none will-change-transform rounded-xl border ${
                                     isScaled 
                                         ? 'border-purple-400 bg-[#2e0854]' 
-                                        : 'border-purple-200/90 bg-[#250646] hover:border-purple-400'
+                                        : 'border-purple-100/90 bg-[#250646] hover:border-purple-300'
                                 }`}
                             >
                                 {/* Top Rank Badge Pill */}
-                                <div className="absolute top-2 left-2 z-20">
-                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-amber-300 font-extrabold text-[9px] uppercase tracking-wide border border-amber-300/30">
+                                <div className="absolute top-1.5 left-1.5 z-20">
+                                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-md text-amber-300 font-extrabold text-[8.5px] uppercase tracking-wide border border-amber-300/30">
                                         <Trophy className="w-2.5 h-2.5 text-amber-400 shrink-0" />
                                         <span>{item.badge}</span>
                                     </span>
@@ -355,7 +352,7 @@ export default function PcpGalleryShowcase() {
                                 />
 
                                 {/* Bottom Label Strip */}
-                                <div className="absolute inset-x-0 bottom-0 z-20 p-2 sm:p-2.5 bg-gradient-to-t from-[#2e0854] via-[#2e0854]/85 to-transparent text-white">
+                                <div className="absolute inset-x-0 bottom-0 z-20 p-2 bg-gradient-to-t from-[#2e0854] via-[#2e0854]/85 to-transparent text-white">
                                     <p className="text-[11px] sm:text-xs font-bold tracking-tight text-white leading-tight truncate">
                                         {item.title}
                                     </p>

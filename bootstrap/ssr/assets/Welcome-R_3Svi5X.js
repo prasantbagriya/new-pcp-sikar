@@ -4,7 +4,7 @@ import "./HomeNavbar-NrOJq1H_.js";
 import PcpBlogUpdatesSection from "./PcpBlogUpdatesSection-C--MpPfK.js";
 import PcpCoursesSection from "./PcpCoursesSection-Dn60Y6LF.js";
 import PcpFaqSection from "./PcpFaqSection-B5hfmR20.js";
-import PcpGalleryShowcase from "./PcpGalleryShowcase-gj59WorW.js";
+import PcpGalleryShowcase from "./PcpGalleryShowcase-Djn-1ezh.js";
 import PcpHeroSection from "./PcpHeroSection-B3EFIoJ8.js";
 import PcpJaipurLaunchSection from "./PcpJaipurLaunchSection-yxXhLa1V.js";
 import PcpJourneySection from "./PcpJourneySection-B4ry74_L.js";
