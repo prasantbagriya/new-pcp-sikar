@@ -4,8 +4,8 @@
   ],
   "node_modules/laravel-vite-plugin/inertia-helpers/index.js": [],
   "resources/css/app.css": [
-    "/build/assets/PostForm-H-X0lsFl.js",
-    "/build/assets/PostForm-Blvy7tIS.css",
+    "/build/assets/PostForm-ujYovVB5.js",
+    "/build/assets/PostForm-BzjuPIk2.css",
     "/build/assets/outfit-latin-ext-400-normal-5tcqmc2S.woff2",
     "/build/assets/outfit-latin-ext-400-normal-DHm7mdGe.woff",
     "/build/assets/outfit-latin-400-normal-BGsTXAXT.woff2",
@@ -155,8 +155,8 @@
     "/build/assets/Index-ll9CwG5T.js"
   ],
   "resources/js/Pages/Admin/PostForm.tsx": [
-    "/build/assets/PostForm-H-X0lsFl.js",
-    "/build/assets/PostForm-Blvy7tIS.css",
+    "/build/assets/PostForm-ujYovVB5.js",
+    "/build/assets/PostForm-BzjuPIk2.css",
     "/build/assets/outfit-latin-ext-400-normal-5tcqmc2S.woff2",
     "/build/assets/outfit-latin-ext-400-normal-DHm7mdGe.woff",
     "/build/assets/outfit-latin-400-normal-BGsTXAXT.woff2",
@@ -171,10 +171,10 @@
     "/build/assets/outfit-latin-700-normal-D4itBLBr.woff"
   ],
   "resources/js/Pages/Admin/Posts/Edit.jsx": [
-    "/build/assets/Edit-y70BqS0T.js"
+    "/build/assets/Edit-Ce6nsiQp.js"
   ],
   "resources/js/Pages/Admin/Posts/New.jsx": [
-    "/build/assets/New-DGeTO2c1.js"
+    "/build/assets/New-BS1Q6twX.js"
   ],
   "resources/js/Pages/Admin/SearchConsole/Index.jsx": [
     "/build/assets/Index-CiB-TMzA.js"
@@ -354,7 +354,7 @@
     "/build/assets/PcpJaipurLaunchSection-yxXhLa1V.js"
   ],
   "resources/js/Pages/HomeComponents/PcpJourneySection.jsx": [
-    "/build/assets/PcpJourneySection-DD32POk3.js"
+    "/build/assets/PcpJourneySection-B4ry74_L.js"
   ],
   "resources/js/Pages/HomeComponents/PcpOlympiadCountdown.jsx": [
     "/build/assets/PcpOlympiadCountdown-DfUiLQeM.js"
@@ -477,7 +477,7 @@
     "/build/assets/Show-BVJ0dC_R.js"
   ],
   "resources/js/Pages/Welcome.jsx": [
-    "/build/assets/Welcome-BxjeqhXo.js"
+    "/build/assets/Welcome-ljpQjIm0.js"
   ],
   "resources/js/ssr.jsx": []
 }

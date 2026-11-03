@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 //#region resources/js/Pages/HomeComponents/PcpJourneySection.jsx
 function PcpJourneySection() {
 	const basePath = typeof window !== "undefined" && window.BASE_PATH ? window.BASE_PATH : "";
@@ -131,93 +131,94 @@ function PcpJourneySection() {
 							className: "w-full min-w-0 min-[1324px]:flex-1",
 							children: [/* @__PURE__ */ jsxs("div", {
 								className: "relative hidden overflow-hidden bg-white rounded-2xl sm:rounded-3xl border border-purple-200/90 shadow-[0_12px_40px_-15px_rgba(46,16,101,0.07)] md:flex min-h-[460px]",
-								children: [
-									/* @__PURE__ */ jsx("div", {
-										className: "absolute bottom-0 left-0 w-[42%]",
-										style: { top: "15px" },
-										children: /* @__PURE__ */ jsx("img", {
-											alt: "Dr. Piyush Sunda - Chairman, Prince Eduhub",
-											loading: "lazy",
-											decoding: "async",
-											width: "320",
-											height: "420",
-											className: "object-contain object-bottom min-[1324px]:object-[center_70%] grayscale contrast-105 hover:grayscale-0 transition-all duration-500",
-											style: {
-												position: "absolute",
-												height: "100%",
-												width: "100%",
-												left: 0,
-												top: 0,
-												right: 0,
-												bottom: 0
-											},
-											src: "/uploads/piyush_sunda_chairman.jpg",
-											onError: (e) => {
-												e.currentTarget.src = basePath + "/uploads/aboutus.webp";
-											}
-										})
-									}),
-									/* @__PURE__ */ jsxs("div", {
-										className: "relative z-10 ml-auto flex w-[60%] flex-col pb-6 pt-7 pr-6 sm:pr-8",
-										children: [
-											/* @__PURE__ */ jsxs("svg", {
-												className: "h-[40px] w-[50px] shrink-0",
-												viewBox: "0 0 59 50",
-												fill: "none",
-												xmlns: "http://www.w3.org/2000/svg",
-												"aria-hidden": "true",
-												children: [/* @__PURE__ */ jsx("path", {
-													d: "M24.0324 23.4015H13.7048C10.8841 21.1469 18.2114 15.6914 24.562 11.581C25.1818 11.1798 25.45 10.4053 25.204 9.70911C23.8049 5.74921 23.4824 5.33502 19.6644 0.430118L19.6634 0.428915C17.0772 -2.8935 1.78759 13.8782 0 23.4015V47.4069C0 48.2848 0.711697 48.9965 1.58962 48.9965H24.0324C24.9104 48.9965 25.6221 48.2848 25.6221 47.4069V24.9911C25.6221 24.1132 24.9104 23.4015 24.0324 23.4015Z",
-													fill: "#a855f7",
-													fillOpacity: "0.25"
-												}), /* @__PURE__ */ jsx("path", {
-													d: "M57.4074 23.8341H47.0798C44.2591 21.5795 51.5864 16.124 57.937 12.0136C58.5568 11.6124 58.825 10.8379 58.579 10.1417C57.1799 6.18183 56.8574 5.76764 53.0394 0.862735L53.0384 0.861532C50.4522 -2.46089 35.1626 14.3108 33.375 23.8341V47.8395C33.375 48.7174 34.0867 49.4291 34.9646 49.4291H57.4074C58.2854 49.4291 58.9971 48.7174 58.9971 47.8395V25.4237C58.9971 24.5458 58.2854 23.8341 57.4074 23.8341Z",
-													fill: "#a855f7",
-													fillOpacity: "0.25"
-												})]
-											}),
-											/* @__PURE__ */ jsxs("div", {
-												className: "mt-3.5 space-y-3 pr-2 text-sm sm:text-[15px] tracking-normal text-slate-700 leading-relaxed",
-												children: [
-													/* @__PURE__ */ jsx("p", {
-														className: "font-normal italic",
-														children: "When we established Prince Eduhub and PCP Sikar, we saw a clear gap in coaching culture. Students were burdened with immense stress, but the personal doubt mentoring, emotional hand-holding, and rigorous daily follow-ups they needed weren't evolving at the same pace."
-													}),
-													/* @__PURE__ */ jsx("p", {
-														className: "font-normal italic",
-														children: "We believed aspirants deserved better: 12-hour continuous faculty doubt desks, integrated residential campuses, uncompromised test analysis, and genuine care that helps them prepare with conviction, not just attend lectures."
-													}),
-													/* @__PURE__ */ jsx("p", {
-														className: "font-normal italic",
-														children: "That belief still drives us today. We are continuously building and elevating India's benchmark coaching ecosystem for students who take their IIT-JEE and NEET dreams seriously."
-													})
-												]
-											}),
-											/* @__PURE__ */ jsxs("div", {
-												className: "mt-auto pt-4 border-t border-purple-100 flex items-center justify-between",
-												children: [/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("p", {
-													className: "text-base sm:text-lg font-bold tracking-tight text-slate-800",
-													children: "Dr. Piyush Sunda"
-												}), /* @__PURE__ */ jsx("p", {
-													className: "text-xs text-purple-700 font-semibold mt-0.5",
-													children: "Chairman, Prince Eduhub (PCP Sikar & Jaipur)"
-												})] }), /* @__PURE__ */ jsx("span", {
-													className: "hidden sm:inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-full border border-purple-200",
-													children: "Founding Vision"
-												})]
+								children: [/* @__PURE__ */ jsxs("div", {
+									className: "relative w-[38%] min-w-[280px] bg-gradient-to-tr from-purple-50/80 via-white to-purple-50/30 border-r border-purple-100 flex flex-col justify-between p-6",
+									children: [
+										/* @__PURE__ */ jsx("div", { className: "absolute inset-0 bg-gradient-to-tr from-purple-200/40 via-purple-100/20 to-transparent blur-xl pointer-events-none -z-10" }),
+										/* @__PURE__ */ jsxs("div", {
+											className: "relative z-10 inline-flex items-center gap-1.5 self-start px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-purple-200/90 shadow-xs",
+											children: [/* @__PURE__ */ jsx("span", { className: "h-2 w-2 rounded-full bg-emerald-500 animate-pulse" }), /* @__PURE__ */ jsx("span", {
+												className: "text-[11px] font-bold tracking-tight text-purple-900",
+												children: "Prince Brainy Campus"
+											})]
+										}),
+										/* @__PURE__ */ jsx("div", {
+											className: "relative z-10 w-full flex-1 flex items-end justify-center pt-3",
+											children: /* @__PURE__ */ jsx("img", {
+												alt: "PCP Sikar Prince Brainy Campus Building",
+												loading: "lazy",
+												decoding: "async",
+												width: "554",
+												height: "577",
+												className: "w-full h-auto max-h-[340px] object-contain object-bottom drop-shadow-[0_16px_25px_rgba(46,16,101,0.14)] transition-transform duration-500 hover:scale-[1.03]",
+												src: basePath + "/uploads/pcp_brainy_building.webp",
+												onError: (e) => {
+													e.currentTarget.src = basePath + "/uploads/pcp_brainy_building.png";
+												}
 											})
-										]
-									}),
-									/* @__PURE__ */ jsx("div", {
-										"aria-hidden": "true",
-										className: "pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-20 backdrop-blur-[2px]",
-										style: {
-											background: "linear-gradient(to top, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0) 100%)",
-											maskImage: "linear-gradient(to top, #000 20%, transparent 100%)",
-											WebkitMaskImage: "linear-gradient(to top, #000 20%, transparent 100%)"
-										}
-									})
-								]
+										}),
+										/* @__PURE__ */ jsxs("div", {
+											className: "relative z-10 mt-2 flex items-center justify-between text-[11px] font-semibold text-slate-500 pt-2.5 border-t border-purple-100/80",
+											children: [/* @__PURE__ */ jsxs("span", {
+												className: "flex items-center gap-1 text-purple-800 font-bold",
+												children: [/* @__PURE__ */ jsx(MapPin, { className: "w-3.5 h-3.5 text-purple-600" }), "Sikar Campus"]
+											}), /* @__PURE__ */ jsx("span", {
+												className: "text-slate-500",
+												children: "Palwas / Bypass"
+											})]
+										})
+									]
+								}), /* @__PURE__ */ jsxs("div", {
+									className: "relative z-10 flex-1 flex flex-col pb-6 pt-7 px-6 sm:px-8",
+									children: [
+										/* @__PURE__ */ jsxs("svg", {
+											className: "h-[40px] w-[50px] shrink-0",
+											viewBox: "0 0 59 50",
+											fill: "none",
+											xmlns: "http://www.w3.org/2000/svg",
+											"aria-hidden": "true",
+											children: [/* @__PURE__ */ jsx("path", {
+												d: "M24.0324 23.4015H13.7048C10.8841 21.1469 18.2114 15.6914 24.562 11.581C25.1818 11.1798 25.45 10.4053 25.204 9.70911C23.8049 5.74921 23.4824 5.33502 19.6644 0.430118L19.6634 0.428915C17.0772 -2.8935 1.78759 13.8782 0 23.4015V47.4069C0 48.2848 0.711697 48.9965 1.58962 48.9965H24.0324C24.9104 48.9965 25.6221 48.2848 25.6221 47.4069V24.9911C25.6221 24.1132 24.9104 23.4015 24.0324 23.4015Z",
+												fill: "#a855f7",
+												fillOpacity: "0.25"
+											}), /* @__PURE__ */ jsx("path", {
+												d: "M57.4074 23.8341H47.0798C44.2591 21.5795 51.5864 16.124 57.937 12.0136C58.5568 11.6124 58.825 10.8379 58.579 10.1417C57.1799 6.18183 56.8574 5.76764 53.0394 0.862735L53.0384 0.861532C50.4522 -2.46089 35.1626 14.3108 33.375 23.8341V47.8395C33.375 48.7174 34.0867 49.4291 34.9646 49.4291H57.4074C58.2854 49.4291 58.9971 48.7174 58.9971 47.8395V25.4237C58.9971 24.5458 58.2854 23.8341 57.4074 23.8341Z",
+												fill: "#a855f7",
+												fillOpacity: "0.25"
+											})]
+										}),
+										/* @__PURE__ */ jsxs("div", {
+											className: "mt-3.5 space-y-3 pr-2 text-sm sm:text-[15px] tracking-normal text-slate-700 leading-relaxed",
+											children: [
+												/* @__PURE__ */ jsx("p", {
+													className: "font-normal italic",
+													children: "When we established Prince Eduhub and PCP Sikar, we saw a clear gap in coaching culture. Students were burdened with immense stress, but the personal doubt mentoring, emotional hand-holding, and rigorous daily follow-ups they needed weren't evolving at the same pace."
+												}),
+												/* @__PURE__ */ jsx("p", {
+													className: "font-normal italic",
+													children: "We believed aspirants deserved better: 12-hour continuous faculty doubt desks, integrated residential campuses, uncompromised test analysis, and genuine care that helps them prepare with conviction, not just attend lectures."
+												}),
+												/* @__PURE__ */ jsx("p", {
+													className: "font-normal italic",
+													children: "That belief still drives us today. We are continuously building and elevating India's benchmark coaching ecosystem for students who take their IIT-JEE and NEET dreams seriously."
+												})
+											]
+										}),
+										/* @__PURE__ */ jsxs("div", {
+											className: "mt-auto pt-4 border-t border-purple-100 flex items-center justify-between",
+											children: [/* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("p", {
+												className: "text-base sm:text-lg font-bold tracking-tight text-slate-800",
+												children: "Dr. Piyush Sunda"
+											}), /* @__PURE__ */ jsx("p", {
+												className: "text-xs text-purple-700 font-semibold mt-0.5",
+												children: "Chairman, Prince Eduhub (PCP Sikar & Jaipur)"
+											})] }), /* @__PURE__ */ jsx("span", {
+												className: "hidden sm:inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-full border border-purple-200",
+												children: "Founding Vision"
+											})]
+										})
+									]
+								})]
 							}), /* @__PURE__ */ jsxs("div", {
 								className: "flex flex-col gap-3.5 bg-white p-4 sm:p-5 rounded-2xl border border-purple-200/85 shadow-xs md:hidden",
 								children: [
@@ -242,42 +243,30 @@ function PcpJourneySection() {
 										children: [/* @__PURE__ */ jsx("p", { children: "When we started Prince Eduhub and PCP Sikar, we saw a clear gap in coaching culture. Aspirants deserved better: 12-hour continuous faculty doubt desks, integrated residential campuses, and genuine care that helps them prepare with conviction." }), /* @__PURE__ */ jsx("p", { children: "That belief still drives us today as we continuously elevate India's top academic ecosystem for serious IIT-JEE & NEET-UG students." })]
 									}),
 									/* @__PURE__ */ jsxs("div", {
-										className: "relative mt-1 h-[220px] w-full overflow-hidden rounded-xl bg-purple-50/50 border border-purple-150",
+										className: "relative mt-2 h-[220px] w-full overflow-hidden rounded-xl bg-gradient-to-b from-purple-50/70 to-purple-100/40 border border-purple-200/80 flex items-end justify-center",
 										children: [
+											/* @__PURE__ */ jsxs("div", {
+												className: "absolute top-2.5 left-2.5 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-md border border-purple-200 shadow-xs",
+												children: [/* @__PURE__ */ jsx("span", { className: "h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" }), /* @__PURE__ */ jsx("span", {
+													className: "text-[10px] font-bold text-purple-900",
+													children: "Prince Brainy Eco-Campus"
+												})]
+											}),
 											/* @__PURE__ */ jsx("img", {
-												alt: "Dr. Piyush Sunda - Chairman, Prince Eduhub",
+												alt: "PCP Sikar Prince Brainy Campus Building",
 												loading: "lazy",
 												decoding: "async",
-												width: "320",
-												height: "220",
-												className: "object-contain object-top grayscale",
-												style: {
-													position: "absolute",
-													height: "100%",
-													width: "100%",
-													left: 0,
-													top: 0,
-													right: 0,
-													bottom: 0
-												},
-												src: "/uploads/piyush_sunda_chairman.jpg",
+												width: "554",
+												height: "577",
+												className: "h-[88%] w-auto max-w-[90%] object-contain object-bottom drop-shadow-[0_12px_20px_rgba(46,16,101,0.12)]",
+												src: basePath + "/uploads/pcp_brainy_building.webp",
 												onError: (e) => {
-													e.currentTarget.src = basePath + "/uploads/aboutus.webp";
+													e.currentTarget.src = basePath + "/uploads/pcp_brainy_building.png";
 												}
 											}),
 											/* @__PURE__ */ jsx("div", {
-												className: "absolute inset-0",
-												style: { backgroundImage: "linear-gradient(to top, rgba(255,255,255,0.95) 15%, rgba(255,255,255,0) 70%)" }
-											}),
-											/* @__PURE__ */ jsxs("div", {
-												className: "absolute bottom-2.5 left-3 z-[2]",
-												children: [/* @__PURE__ */ jsx("p", {
-													className: "text-base font-bold leading-tight text-slate-900",
-													children: "Dr. Piyush Sunda"
-												}), /* @__PURE__ */ jsx("p", {
-													className: "text-[11px] leading-tight text-purple-700 font-semibold",
-													children: "Chairman, Prince Eduhub"
-												})]
+												className: "absolute bottom-2 right-2 z-[2] px-2 py-0.5 rounded bg-white/90 text-[10px] font-semibold text-slate-700 border border-purple-100",
+												children: "Sikar Campus"
 											})
 										]
 									})

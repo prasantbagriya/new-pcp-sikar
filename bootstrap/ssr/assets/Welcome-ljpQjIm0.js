@@ -7,7 +7,7 @@ import PcpFaqSection from "./PcpFaqSection-CXfONiiy.js";
 import PcpGalleryShowcase from "./PcpGalleryShowcase-BgGreSxg.js";
 import PcpHeroSection from "./PcpHeroSection-DkUp0Tan.js";
 import PcpJaipurLaunchSection from "./PcpJaipurLaunchSection-yxXhLa1V.js";
-import PcpJourneySection from "./PcpJourneySection-DD32POk3.js";
+import PcpJourneySection from "./PcpJourneySection-B4ry74_L.js";
 import PcpResultsOrbitSection from "./PcpResultsOrbitSection-C2pcFfTg.js";
 import PcpReviewsSection from "./PcpReviewsSection-Co2U9s_G.js";
 import PcpServicesSection from "./PcpServicesSection-CcxV8A_V.js";

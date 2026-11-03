@@ -40,9 +40,9 @@ createServer((page) => createInertiaApp({
 		"./Pages/Admin/Newsletters/Index.jsx": () => import("./assets/Index-CGQ2ezPz.js"),
 		"./Pages/Admin/Pages/Index.jsx": () => import("./assets/Index-xFizSJ23.js"),
 		"./Pages/Admin/Pinterest/Index.jsx": () => import("./assets/Index-ll9CwG5T.js"),
-		"./Pages/Admin/PostForm.tsx": () => import("./assets/PostForm-H-X0lsFl.js"),
-		"./Pages/Admin/Posts/Edit.jsx": () => import("./assets/Edit-y70BqS0T.js"),
-		"./Pages/Admin/Posts/New.jsx": () => import("./assets/New-DGeTO2c1.js"),
+		"./Pages/Admin/PostForm.tsx": () => import("./assets/PostForm-ujYovVB5.js"),
+		"./Pages/Admin/Posts/Edit.jsx": () => import("./assets/Edit-Ce6nsiQp.js"),
+		"./Pages/Admin/Posts/New.jsx": () => import("./assets/New-BS1Q6twX.js"),
 		"./Pages/Admin/SearchConsole/Index.jsx": () => import("./assets/Index-CiB-TMzA.js"),
 		"./Pages/Admin/SearchConsole/PageSpeedTab.jsx": () => import("./assets/PageSpeedTab-B0xBypMx.js"),
 		"./Pages/Admin/SeoAudit/Index.jsx": () => import("./assets/Index-BYAC5lrs.js"),
@@ -102,7 +102,7 @@ createServer((page) => createInertiaApp({
 		"./Pages/HomeComponents/PcpHeroSection.jsx": () => import("./assets/PcpHeroSection-DkUp0Tan.js"),
 		"./Pages/HomeComponents/PcpImagesCloudSection.jsx": () => import("./assets/PcpImagesCloudSection-BrQzMla8.js"),
 		"./Pages/HomeComponents/PcpJaipurLaunchSection.jsx": () => import("./assets/PcpJaipurLaunchSection-yxXhLa1V.js"),
-		"./Pages/HomeComponents/PcpJourneySection.jsx": () => import("./assets/PcpJourneySection-DD32POk3.js"),
+		"./Pages/HomeComponents/PcpJourneySection.jsx": () => import("./assets/PcpJourneySection-B4ry74_L.js"),
 		"./Pages/HomeComponents/PcpOlympiadCountdown.jsx": () => import("./assets/PcpOlympiadCountdown-DfUiLQeM.js"),
 		"./Pages/HomeComponents/PcpProcessSection.jsx": () => import("./assets/PcpProcessSection-DvQzYa6z.js"),
 		"./Pages/HomeComponents/PcpResultsGallery.jsx": () => import("./assets/PcpResultsGallery-D5mWsttW.js"),
@@ -142,7 +142,7 @@ createServer((page) => createInertiaApp({
 		"./Pages/Static/Terms.jsx": () => import("./assets/Terms-C0PxJzZE.js"),
 		"./Pages/Story/Index.jsx": () => import("./assets/Index-0EgZhSkM.js"),
 		"./Pages/User/Show.jsx": () => import("./assets/Show-BVJ0dC_R.js"),
-		"./Pages/Welcome.jsx": () => import("./assets/Welcome-BxjeqhXo.js")
+		"./Pages/Welcome.jsx": () => import("./assets/Welcome-ljpQjIm0.js")
 	})),
 	setup({ App, props }) {
 		return /* @__PURE__ */ jsx(App, { ...props });
