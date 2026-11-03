@@ -4,7 +4,7 @@ import "./HomeNavbar-NrOJq1H_.js";
 import PcpBlogUpdatesSection from "./PcpBlogUpdatesSection-C--MpPfK.js";
 import PcpCoursesSection from "./PcpCoursesSection-Dn60Y6LF.js";
 import PcpFaqSection from "./PcpFaqSection-B5hfmR20.js";
-import PcpGalleryShowcase from "./PcpGalleryShowcase-D1HOcWWZ.js";
+import PcpGalleryShowcase from "./PcpGalleryShowcase-DufQ7uhe.js";
 import PcpHeroSection from "./PcpHeroSection-B3EFIoJ8.js";
 import PcpJaipurLaunchSection from "./PcpJaipurLaunchSection-yxXhLa1V.js";
 import PcpJourneySection from "./PcpJourneySection-B4ry74_L.js";
@@ -67,7 +67,7 @@ function Welcome(props) {
 							children: /* @__PURE__ */ jsx(PcpReviewsSection, { initialData: reviewsData })
 						}),
 						/* @__PURE__ */ jsx("div", {
-							className: "cv-auto",
+							className: "relative z-30 overflow-visible",
 							children: /* @__PURE__ */ jsx(PcpGalleryShowcase, {})
 						}),
 						/* @__PURE__ */ jsx("div", {

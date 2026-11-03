@@ -84,7 +84,7 @@ export default function Welcome(props) {
                     </div>
 
                     {/* 6. Campus & Student Life Spaces Showcase (Noho-style Ribbon with Custom Scale Cursor & Zoom) */}
-                    <div className="cv-auto">
+                    <div className="relative z-30 overflow-visible">
                         <PcpGalleryShowcase />
                     </div>
 

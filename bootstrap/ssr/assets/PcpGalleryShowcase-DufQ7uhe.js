@@ -163,29 +163,29 @@ function PcpGalleryShowcase() {
 			cursor: isHoveringSection ? "none" : "default",
 			contain: "none"
 		},
-		className: `w-full relative overflow-visible select-none py-8 sm:py-10 lg:py-12 flex flex-col justify-center border-y border-purple-100/90 transition-all duration-200 ${scaledIndex !== null ? "z-[100]" : "z-30"}`,
+		className: `w-full relative overflow-visible select-none py-2 sm:py-2.5 flex flex-col justify-center border-y border-purple-100/80 transition-all duration-200 ${scaledIndex !== null ? "z-[100]" : "z-30"}`,
 		children: [isHoveringSection && /* @__PURE__ */ jsx("div", {
 			style: {
 				left: `${mousePos.x}px`,
 				top: `${mousePos.y}px`
 			},
-			className: `fixed z-[120] pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-150 ease-out hidden md:flex ${scaledIndex !== null ? "w-[52px] h-[52px] bg-[#2e0854] text-white shadow-xl ring-2 ring-purple-300" : "w-[46px] h-[46px] bg-white text-[#2e0854] shadow-md ring-1 ring-purple-200 font-bold"}`,
+			className: `fixed z-[130] pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-150 ease-out hidden md:flex ${scaledIndex !== null ? "w-[52px] h-[52px] bg-[#2e0854] text-white shadow-xl ring-2 ring-purple-300" : "w-[46px] h-[46px] bg-white text-[#2e0854] shadow-md ring-1 ring-purple-200 font-bold"}`,
 			children: /* @__PURE__ */ jsx("span", {
 				className: "text-[10px] font-bold tracking-wider uppercase select-none",
 				children: scaledIndex !== null ? "Close" : "Scale"
 			})
 		}), /* @__PURE__ */ jsx("div", {
-			className: "relative z-20 w-full overflow-visible py-2",
+			className: "relative z-20 w-full overflow-visible py-1",
 			children: /* @__PURE__ */ jsx("div", {
 				ref: trackRef,
 				style: {
 					transform: `translate3d(${panningX}px, 0px, 0px)`,
-					transition: scaledIndex !== null ? "transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)" : "transform 0.2s ease-out"
+					transition: scaledIndex !== null ? "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)" : "transform 0.2s ease-out"
 				},
 				className: "flex items-center gap-3 sm:gap-3.5 px-4 sm:px-8 lg:px-12 will-change-transform overflow-visible",
 				children: galleryItems.map((item, idx) => {
 					const isScaled = scaledIndex === idx;
-					const siblingShift = Math.round(itemWidth * .55);
+					const siblingShift = Math.round(itemWidth * .72);
 					let siblingTransform = "translate3d(0px, 0px, 0px)";
 					if (scaledIndex !== null) {
 						if (idx < scaledIndex) siblingTransform = `translate3d(-${siblingShift}px, 0px, 0px)`;
@@ -196,9 +196,9 @@ function PcpGalleryShowcase() {
 						onClick: (e) => handleCardClick(idx, e),
 						style: {
 							transformOrigin: "50% 50%",
-							transform: isScaled ? "scale(1.65, 1.65)" : `${siblingTransform} scale(1, 1)`,
-							zIndex: isScaled ? 90 : 10,
-							boxShadow: isScaled ? "0 25px 60px -15px rgba(46, 8, 84, 0.45), 0 0 0 1px rgba(91, 64, 207, 0.3)" : "0 2px 8px -2px rgba(46, 8, 84, 0.08)",
+							transform: isScaled ? "scale(1.95, 1.95)" : `${siblingTransform} scale(1, 1)`,
+							zIndex: isScaled ? 120 : 10,
+							boxShadow: isScaled ? "0 30px 80px -15px rgba(46, 8, 84, 0.55), 0 0 0 1.5px rgba(168, 85, 247, 0.5)" : "0 2px 8px -2px rgba(46, 8, 84, 0.08)",
 							transition: "transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s ease, box-shadow 0.35s ease"
 						},
 						className: `w-[130px] sm:w-[155px] lg:w-[180px] h-[165px] sm:h-[195px] lg:h-[225px] shrink-0 cursor-pointer relative overflow-hidden select-none will-change-transform bg-[#250646] rounded-xl border ${isScaled ? "border-purple-400" : "border-purple-100/90 hover:border-purple-300"}`,

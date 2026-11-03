@@ -152,7 +152,7 @@ export default function PcpGalleryShowcase() {
                 cursor: isHoveringSection ? 'none' : 'default',
                 contain: 'none'
             }}
-            className={`w-full relative overflow-visible select-none py-8 sm:py-10 lg:py-12 flex flex-col justify-center border-y border-purple-100/90 transition-all duration-200 ${
+            className={`w-full relative overflow-visible select-none py-2 sm:py-2.5 flex flex-col justify-center border-y border-purple-100/80 transition-all duration-200 ${
                 scaledIndex !== null ? 'z-[100]' : 'z-30'
             }`}
         >
@@ -163,7 +163,7 @@ export default function PcpGalleryShowcase() {
                         left: `${mousePos.x}px`, 
                         top: `${mousePos.y}px` 
                     }}
-                    className={`fixed z-[120] pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-150 ease-out hidden md:flex ${
+                    className={`fixed z-[130] pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center transition-all duration-150 ease-out hidden md:flex ${
                         scaledIndex !== null
                             ? 'w-[52px] h-[52px] bg-[#2e0854] text-white shadow-xl ring-2 ring-purple-300' 
                             : 'w-[46px] h-[46px] bg-white text-[#2e0854] shadow-md ring-1 ring-purple-200 font-bold'
@@ -177,16 +177,16 @@ export default function PcpGalleryShowcase() {
 
             {/* ========================================================================= */}
             {/* HORIZONTAL CARDS TRACK: Direct In-Place Scale + Sibling Shift             */}
-            {/* Original Clean Ribbon Layout: No top text, no bottom gap, smooth scale    */}
+            {/* Ultra-compact padding: Card overlaps section boundaries smoothly on scale */}
             {/* ========================================================================= */}
-            <div className="relative z-20 w-full overflow-visible py-2">
+            <div className="relative z-20 w-full overflow-visible py-1">
                 
                 {/* Smooth Mouse-Panned Ribbon Track */}
                 <div 
                     ref={trackRef}
                     style={{ 
                         transform: `translate3d(${panningX}px, 0px, 0px)`,
-                        transition: scaledIndex !== null ? 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'transform 0.2s ease-out'
+                        transition: scaledIndex !== null ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'transform 0.2s ease-out'
                     }}
                     className="flex items-center gap-3 sm:gap-3.5 px-4 sm:px-8 lg:px-12 will-change-transform overflow-visible"
                 >
@@ -194,7 +194,7 @@ export default function PcpGalleryShowcase() {
                         const isScaled = scaledIndex === idx;
                         
                         // Smooth sibling shift ("Parting the Sea")
-                        const siblingShift = Math.round(itemWidth * 0.55);
+                        const siblingShift = Math.round(itemWidth * 0.72);
                         let siblingTransform = 'translate3d(0px, 0px, 0px)';
                         if (scaledIndex !== null) {
                             if (idx < scaledIndex) {
@@ -212,11 +212,11 @@ export default function PcpGalleryShowcase() {
                                 style={{
                                     transformOrigin: '50% 50%',
                                     transform: isScaled 
-                                        ? 'scale(1.65, 1.65)' 
+                                        ? 'scale(1.95, 1.95)' 
                                         : `${siblingTransform} scale(1, 1)`,
-                                    zIndex: isScaled ? 90 : 10,
+                                    zIndex: isScaled ? 120 : 10,
                                     boxShadow: isScaled 
-                                        ? '0 25px 60px -15px rgba(46, 8, 84, 0.45), 0 0 0 1px rgba(91, 64, 207, 0.3)' 
+                                        ? '0 30px 80px -15px rgba(46, 8, 84, 0.55), 0 0 0 1.5px rgba(168, 85, 247, 0.5)' 
                                         : '0 2px 8px -2px rgba(46, 8, 84, 0.08)',
                                     transition: 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), z-index 0.1s ease, box-shadow 0.35s ease'
                                 }}
