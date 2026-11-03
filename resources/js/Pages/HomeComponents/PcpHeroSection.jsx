@@ -53,27 +53,27 @@ export default function PcpHeroSection() {
     // BACKGROUND: 3 ROWS OF STYLED IMAGE CARDS (CIRCLES & ROUNDED-2XL WITH GLASS BADGES)
     // User Request: "jo image vala section tha na us me image card ki jo style hai us me sab me hi background me chalana hai aor 3 room me chale ga"
     const bgRow1 = [
-        { title: "Devesh Joshi", badge: "AIR 1 NEET (720/720)", image: "/uploads/pcp/toppers/devesh_joshi_air1.jpg", isCircle: false },
-        { title: "Vivek Gupta", badge: "AIR 225 JEE Adv", image: "/uploads/pcp/toppers/vivek_gupta_air225.jpg", isCircle: true },
+        { title: "Devesh Joshi", badge: "AIR 1 NEET (720/720)", image: "/uploads/pcp/theme_toppers/devesh_joshi_air1.jpg", isCircle: false },
+        { title: "Vivek Gupta", badge: "AIR 225 JEE Adv", image: "/uploads/pcp/theme_toppers/vivek_gupta_air225.jpg", isCircle: true },
         { title: "PCP Jaipur", badge: "Premier Campus", image: "/uploads/pcp/jaipur.jpg", isCircle: false },
-        { title: "Saurabh Agarwal", badge: "AIR 87 AIIMS", image: "/uploads/pcp/toppers/saurabh_agarwal_air87.jpg", isCircle: true },
-        { title: "Vikas Dhakharwal", badge: "AIR 779 IIT Kanpur", image: "/uploads/pcp/toppers/vikas_dhakharwal_air779.jpg", isCircle: false }
+        { title: "Saurabh Agarwal", badge: "AIR 87 AIIMS", image: "/uploads/pcp/theme_toppers/saurabh_agarwal_air87.jpg", isCircle: true },
+        { title: "Vikas Dhakharwal", badge: "AIR 779 IIT Kanpur", image: "/uploads/pcp/theme_toppers/vikas_dhakharwal_air779.jpg", isCircle: false }
     ];
 
     const bgRow2 = [
-        { title: "Navdeep Mann", badge: "AIR 469 IIT Delhi", image: "/uploads/pcp/toppers/navdeep_mann_air469.jpg", isCircle: false },
+        { title: "Navdeep Mann", badge: "AIR 469 IIT Delhi", image: "/uploads/pcp/theme_toppers/navdeep_mann_air469.jpg", isCircle: false },
         { title: "Prince Olympiad", badge: "₹108+ Cr Schol.", image: "/uploads/pcp/Olympiad.jpg", isCircle: true },
-        { title: "Nikhil", badge: "99.9478 %tile JEE", image: "/uploads/pcp/toppers/nikhil_jeemain.jpg", isCircle: true },
-        { title: "Braj Kishor", badge: "AIR 677 IIT-R", image: "/uploads/pcp/toppers/braj_kishor_air677.jpg", isCircle: false },
+        { title: "Nikhil", badge: "99.9478 %tile JEE", image: "/uploads/pcp/theme_toppers/nikhil_jeemain.jpg", isCircle: true },
+        { title: "Braj Kishor", badge: "AIR 677 IIT-R", image: "/uploads/pcp/theme_toppers/braj_kishor_air677.jpg", isCircle: false },
         { title: "JEE Main 2026", badge: "JEE Main 2026", image: "/uploads/pcp/slider/JeeMain2026.png", isCircle: true }
     ];
 
     const bgRow3 = [
-        { title: "Rahul Kumawat", badge: "Top Percentile JEE", image: "/uploads/pcp/toppers/rahul_kumawat_jeemain.jpg", isCircle: true },
-        { title: "Devesh AIIMS", badge: "AIIMS New Delhi", image: "/uploads/pcp/portraits/devesh_joshi.jpg", isCircle: false },
-        { title: "Vivek IIT-B", badge: "IIT Bombay Ranker", image: "/uploads/pcp/portraits/vivek_gupta.jpg", isCircle: true },
+        { title: "Rahul Kumawat", badge: "Top Percentile JEE", image: "/uploads/pcp/theme_toppers/rahul_kumawat_jeemain.jpg", isCircle: true },
+        { title: "Devesh AIIMS", badge: "AIIMS New Delhi", image: "/uploads/pcp/theme_toppers/devesh_joshi.jpg", isCircle: false },
+        { title: "Vivek IIT-B", badge: "IIT Bombay Ranker", image: "/uploads/pcp/theme_toppers/vivek_gupta.jpg", isCircle: true },
         { title: "PCP Sikar", badge: "25+ Yrs Legacy", image: "/uploads/pcp/360.png", isCircle: false },
-        { title: "Saurabh AIIMS", badge: "Classroom Ranker", image: "/uploads/pcp/portraits/saurabh_agarwal.jpg", isCircle: true }
+        { title: "Saurabh AIIMS", badge: "Classroom Ranker", image: "/uploads/pcp/theme_toppers/saurabh_agarwal.jpg", isCircle: true }
     ];
 
     // SEQUENTIAL WAVE ACHIEVEMENT STEPPER (0 -> 1 -> 2 -> 3 -> 4 -> 5)
@@ -109,7 +109,7 @@ export default function PcpHeroSection() {
             title: "AIR 779 IIT Kanpur",
             tag: "JEE Advanced",
             subtitle: "Vikas Dhakharwal • PCP Classroom",
-            thumb: "/uploads/pcp/toppers/vikas_dhakharwal_air779.jpg",
+            thumb: "/uploads/pcp/theme_toppers/vikas_dhakharwal_air779.jpg",
             icon: "topper"
         },
         {
@@ -131,7 +131,7 @@ export default function PcpHeroSection() {
             title: "AIR 225 IIT Bombay",
             tag: "JEE Topper",
             subtitle: "Vivek Gupta • 99.99 Percentile",
-            thumb: "/uploads/pcp/toppers/vivek_gupta_air225.jpg",
+            thumb: "/uploads/pcp/theme_toppers/vivek_gupta_air225.jpg",
             icon: "topper"
         },
         {
@@ -153,7 +153,7 @@ export default function PcpHeroSection() {
             title: "AIR 1 NEET (720/720)",
             tag: "🏆 Historic AIR 1",
             subtitle: "Devesh Joshi • AIIMS New Delhi",
-            thumb: "/uploads/pcp/toppers/devesh_joshi_air1.jpg",
+            thumb: "/uploads/pcp/theme_toppers/devesh_joshi_air1.jpg",
             isApex: true,
             icon: "trophy"
         }
@@ -453,9 +453,9 @@ export default function PcpHeroSection() {
                         {/* Social Proof Avatars & Reviews (Wave Line starts right next to here) */}
                         <div className="reveal-scroll flex items-center gap-3.5 pt-6 border-t border-purple-100/80 w-full relative">
                             <div className="flex -space-x-2.5 overflow-hidden">
-                                <img src="/uploads/pcp/portraits/devesh_joshi.jpg" alt="Devesh Joshi AIR 1" width="40" height="40" loading="lazy" decoding="async" className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-2xs" />
-                                <img src="/uploads/pcp/portraits/vivek_gupta.jpg" alt="Vivek Gupta AIR 225" width="40" height="40" loading="lazy" decoding="async" className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-2xs" />
-                                <img src="/uploads/pcp/portraits/saurabh_agarwal.jpg" alt="Saurabh Agarwal AIR 87" width="40" height="40" loading="lazy" decoding="async" className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-2xs" />
+                                <img src="/uploads/pcp/theme_toppers/devesh_joshi.jpg" alt="Devesh Joshi AIR 1" width="40" height="40" loading="lazy" decoding="async" className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-2xs" />
+                                <img src="/uploads/pcp/theme_toppers/vivek_gupta.jpg" alt="Vivek Gupta AIR 225" width="40" height="40" loading="lazy" decoding="async" className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-2xs" />
+                                <img src="/uploads/pcp/theme_toppers/saurabh_agarwal.jpg" alt="Saurabh Agarwal AIR 87" width="40" height="40" loading="lazy" decoding="async" className="w-10 h-10 rounded-full border-2 border-white object-cover shadow-2xs" />
                                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#2e0854] to-[#5b40cf] border-2 border-white flex items-center justify-center text-white text-[10.5px] font-black shadow-2xs">
                                     AIR 1
                                 </div>

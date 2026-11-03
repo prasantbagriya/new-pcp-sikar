@@ -82,7 +82,12 @@ Route::get('/about', function () {
     return redirect('/about-us', 301);
 });
 Route::get('/contact', [\App\Http\Controllers\PageController::class, 'contact'])->name('page.contact')->middleware('cacheResponse:86400');
-Route::get('/contacts', [\App\Http\Controllers\PageController::class, 'contact'])->name('page.contacts')->middleware('cacheResponse:86400');
+Route::get('/contacts', function () {
+    return redirect('/contact', 301);
+});
+Route::get('/contact-us', function () {
+    return redirect('/contact', 301);
+});
 Route::post('/contact', [\App\Http\Controllers\PageController::class, 'submitContact'])->name('page.contact.submit')->middleware('throttle:5,1');
 Route::get('/editorial-policy', [\App\Http\Controllers\PageController::class, 'editorialPolicy'])->name('page.editorialPolicy')->middleware('cacheResponse:86400');
 Route::get('/fact-checking-policy', [\App\Http\Controllers\PageController::class, 'factCheckingPolicy'])->name('page.factCheckingPolicy')->middleware('cacheResponse:86400');

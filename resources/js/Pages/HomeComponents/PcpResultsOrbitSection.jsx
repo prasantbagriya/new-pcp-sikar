@@ -14,7 +14,7 @@ export default function PcpResultsOrbitSection() {
             badge: "All India Rank 1",
             highlightLine: "Historic 720/720 Score in NEET-UG",
             story: "Devesh made history as the first classroom student from Sikar coaching history to deliver All India Rank 1 with an absolute 720/720 score in NEET. His structured daily testing and residential doubt support laid the bedrock for this milestone.",
-            image: "/uploads/pcp/toppers/devesh_joshi_air1.jpg",
+            image: "/uploads/pcp/theme_toppers/devesh_joshi_air1.jpg",
             category: "NEET-UG",
             batch: "NEET Elite Classroom"
         },
@@ -28,7 +28,7 @@ export default function PcpResultsOrbitSection() {
             badge: "Sikar Coaching Topper",
             highlightLine: "Top Rank Among All Sikar Coachings",
             story: "Vivek secured AIR 225 in JEE Advanced alongside his 12th board exams, marking the highest rank produced by any coaching institute in Sikar. He is currently pursuing Engineering at IIT Bombay.",
-            image: "/uploads/pcp/toppers/vivek_gupta_air225.jpg",
+            image: "/uploads/pcp/theme_toppers/vivek_gupta_air225.jpg",
             category: "JEE Advanced",
             batch: "Super-50 JEE Batch"
         },
@@ -42,7 +42,7 @@ export default function PcpResultsOrbitSection() {
             badge: "Top-100 All India",
             highlightLine: "Sikar's Only Top-100 Medical Rank",
             story: "Saurabh is one of only two students in the entire Sikar district to secure a Top-100 All India Rank in NEET-UG with 710/720 marks, qualifying directly for AIIMS New Delhi through intensive faculty guidance.",
-            image: "/uploads/pcp/toppers/saurabh_agarwal_air87.jpg",
+            image: "/uploads/pcp/theme_toppers/saurabh_agarwal_air87.jpg",
             category: "NEET-UG",
             batch: "Target Medical Pioneer"
         },
@@ -56,7 +56,7 @@ export default function PcpResultsOrbitSection() {
             badge: "Sikar JEE-Main Topper",
             highlightLine: "JEE Main Session-1 Sikar Topper",
             story: "Navdeep topped Sikar coaching in JEE Main Session-1 with a remarkable 99.9768 percentile and cracked JEE Advanced in his very first attempt with Class 12th through PCP's integrated academic system.",
-            image: "/uploads/pcp/toppers/navdeep_mann_air469.jpg",
+            image: "/uploads/pcp/theme_toppers/navdeep_mann_air469.jpg",
             category: "JEE Advanced",
             batch: "Class 12th Integrated"
         },
@@ -70,7 +70,7 @@ export default function PcpResultsOrbitSection() {
             badge: "With XII • 99.94%tile",
             highlightLine: "Conquered JEE Main in 1st Attempt",
             story: "Nikhil achieved 99.9478 percentile in JEE Main with Class 12th board exams. PCP's round-the-clock faculty doubt counters and disciplined hostel schedule ensured his uninterrupted focus.",
-            image: "/uploads/pcp/toppers/nikhil_jeemain.jpg",
+            image: "/uploads/pcp/theme_toppers/nikhil_jeemain.jpg",
             category: "JEE Main",
             batch: "PCP Residential Wing"
         },
@@ -84,7 +84,7 @@ export default function PcpResultsOrbitSection() {
             badge: "First Attempt IITian",
             highlightLine: "Direct IIT Selection with 12th",
             story: "Braj Kishor cracked JEE Advanced alongside 12th standard with a high national rank, transitioning seamlessly from pre-foundation to elite JEE batches at PCP Sikar.",
-            image: "/uploads/pcp/toppers/braj_kishor_air677.jpg",
+            image: "/uploads/pcp/theme_toppers/braj_kishor_air677.jpg",
             category: "JEE Advanced",
             batch: "Board + IIT Pioneer"
         },
@@ -98,7 +98,7 @@ export default function PcpResultsOrbitSection() {
             badge: "Premier Tech College",
             highlightLine: "IIT Kanpur Computer Science Seat",
             story: "Vikas secured top percentile in JEE Main (99.9519) and conquered JEE Advanced in the same year, qualifying for prestigious engineering branches at IIT Kanpur.",
-            image: "/uploads/pcp/toppers/vikas_dhakharwal_air779.jpg",
+            image: "/uploads/pcp/theme_toppers/vikas_dhakharwal_air779.jpg",
             category: "JEE Advanced",
             batch: "Target JEE Advanced"
         },
@@ -112,7 +112,7 @@ export default function PcpResultsOrbitSection() {
             badge: "Target Batch Star",
             highlightLine: "Mastered JEE in Single Attempt",
             story: "Rahul was part of PCP's dedicated Target batch, systematically mastering advanced physics and mathematics through comprehensive test desk series to score 99.9423 percentile.",
-            image: "/uploads/pcp/toppers/rahul_kumawat_jeemain.jpg",
+            image: "/uploads/pcp/theme_toppers/rahul_kumawat_jeemain.jpg",
             category: "JEE Main",
             batch: "Target Achiever Batch"
         }

@@ -43,7 +43,7 @@ export default function PcpCoursesSection() {
             circleShadow: 'shadow-emerald-500/25',
             accentIcon: Stethoscope,
             accentColor: 'text-emerald-400',
-            avatar: '/uploads/pcp/toppers/devesh_joshi_air1.jpg',
+            avatar: '/uploads/pcp/theme_toppers/devesh_joshi_air1.jpg',
             topperName: 'Devesh Joshi (AIR 1 AIIMS)',
             featured: false,
             idlePill: '⭐ AIR 1 Proven System • 1,000+ MBBS Selections',
@@ -90,7 +90,7 @@ export default function PcpCoursesSection() {
             circleShadow: 'shadow-amber-500/30',
             accentIcon: Atom,
             accentColor: 'text-amber-300',
-            avatar: '/uploads/pcp/toppers/vivek_gupta_air225.jpg',
+            avatar: '/uploads/pcp/theme_toppers/vivek_gupta_air225.jpg',
             topperName: 'Vivek Gupta (AIR 225 IIT-B)',
             featured: true, // Center Elevated Card
             idlePill: '⭐ AIR 225 Sikar Topper • 1:4 JEE Adv Ratio',

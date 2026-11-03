@@ -159,7 +159,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                     <div className="absolute -top-32 -right-32 w-96 h-96 bg-[#5b40cf]/30 rounded-full blur-3xl pointer-events-none"></div>
                     <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
-                    <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                         {/* Breadcrumbs */}
                         <nav className="inline-flex items-center gap-2 text-xs text-purple-200/80 mb-6 bg-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-md border border-white/10">
                             <Link href={`${basePath}/`} className="hover:text-amber-300 transition-colors">Home</Link>
@@ -232,7 +232,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* ========================================================================= */}
                 {/* 2. STATS RIBBON                                                          */}
                 {/* ========================================================================= */}
-                <section className="relative -mt-8 z-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <section className="relative -mt-8 z-20 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-4 p-4 sm:p-5 rounded-3xl bg-white dark:bg-[#0c1c38] border border-purple-100/90 dark:border-slate-800 shadow-xl shadow-purple-950/5">
                         {course.stats.map((s, idx) => (
                             <div key={idx} className="p-3 sm:p-4 rounded-2xl bg-purple-50/50 dark:bg-slate-900/50 border border-purple-100/60 dark:border-slate-800 text-center flex flex-col justify-center">
@@ -253,7 +253,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* ========================================================================= */}
                 {/* 3. BATCHES SCHEDULE & ENROLLMENT PLANS                                    */}
                 {/* ========================================================================= */}
-                <section className="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <section className="py-16 sm:py-24 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                     <div className="text-center max-w-3xl mx-auto mb-12">
                         <span className="text-xs font-black uppercase tracking-wider text-[#5b40cf] block mb-2">
                             Session 2026-27 Enrollment
@@ -326,7 +326,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* 4. SUBJECT-WISE CURRICULUM DEEP DIVE                                     */}
                 {/* ========================================================================= */}
                 <section className="py-16 sm:py-20 bg-white dark:bg-[#070e1b] border-y border-purple-100/90 dark:border-slate-800">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                         <div className="text-center max-w-2xl mx-auto mb-14">
                             <span className="text-xs font-black uppercase tracking-wider text-[#5b40cf] block mb-2">
                                 Academic Pedagogy
@@ -383,7 +383,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* ========================================================================= */}
                 {/* 5. ZERO-LEAKAGE DAILY ROUTINE TIMELINE                                    */}
                 {/* ========================================================================= */}
-                <section className="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <section className="py-16 sm:py-24 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                         <div className="lg:col-span-5 space-y-4">
                             <span className="text-xs font-black uppercase tracking-wider text-[#5b40cf] block">
@@ -422,7 +422,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* 6. HOSTEL & RESIDENTIAL LIFE + SCHOLARSHIP CARD                           */}
                 {/* ========================================================================= */}
                 <section className="py-16 sm:py-20 bg-white dark:bg-[#070e1b] border-y border-purple-100/90 dark:border-slate-800">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             
                             {/* Residential Hostels Card */}
@@ -501,7 +501,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* ========================================================================= */}
                 {/* 7. CAMPUS & HOSTEL INFRASTRUCTURE PHOTO SHOWCASE                          */}
                 {/* ========================================================================= */}
-                <section className="py-16 sm:py-24 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <section className="py-16 sm:py-24 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                     <div className="text-center max-w-3xl mx-auto mb-14">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-[#2e0854] text-xs font-bold uppercase tracking-wider mb-3 border border-purple-200">
                             <Building2 className="w-3.5 h-3.5 text-[#5b40cf]" />
@@ -565,7 +565,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* 8. STAR ACHIEVERS FROM THIS PROGRAM                                       */}
                 {/* ========================================================================= */}
                 <section className="py-16 sm:py-20 bg-white dark:bg-[#070e1b] border-y border-purple-100/90 dark:border-slate-800">
-                    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                         <div className="text-center max-w-2xl mx-auto mb-12">
                             <span className="text-xs font-black uppercase tracking-wider text-[#5b40cf] block mb-2">
                                 Hall of Fame
@@ -647,7 +647,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* ========================================================================= */}
                 {otherCourses.length > 0 && (
                     <section className="py-14 bg-white dark:bg-[#070e1b] border-t border-purple-100/90 dark:border-slate-800">
-                        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
                                     <span className="text-xs font-black uppercase tracking-wider text-[#5b40cf] block">
@@ -698,7 +698,7 @@ export default function CourseShow({ course, allCourses = [], meta }) {
                 {/* ========================================================================= */}
                 {/* 11. ADMISSIONS FINAL CTA BANNER                                           */}
                 {/* ========================================================================= */}
-                <section className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <section className="py-20 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
                     <div className="p-7 sm:p-10 bg-gradient-to-br from-purple-50/90 via-indigo-50/50 to-amber-50/40 dark:from-[#150e26] dark:via-[#1a1233] dark:to-[#0f172a] rounded-3xl border border-purple-200/80 dark:border-purple-800/50 shadow-lg shadow-purple-950/5 relative overflow-hidden">
                         <div className="absolute -top-16 -right-16 w-72 h-72 bg-gradient-to-br from-purple-300/25 to-pink-300/20 rounded-full blur-3xl pointer-events-none"></div>
 

@@ -10,8 +10,8 @@ export default function PcpFoudreVideoSection() {
             title: "Live Classroom Lectures & Faculty Guidance",
             category: "Academic Excellence",
             video: "/uploads/pcp/classroom-lecture.mp4",
-            poster: "/uploads/pcp/toppers/devesh_joshi_air1.jpg",
-            thumbnail: "/uploads/pcp/toppers/devesh_joshi_air1.jpg",
+            poster: "/uploads/pcp/theme_toppers/devesh_joshi_air1.jpg",
+            thumbnail: "/uploads/pcp/theme_toppers/devesh_joshi_air1.jpg",
             tag: "AIR 1 NEET-UG Mentors",
             highlight: "Interactive daily lectures by experienced Kota and Sikar HODs breaking down complex concepts step-by-step."
         },
@@ -20,8 +20,8 @@ export default function PcpFoudreVideoSection() {
             title: "12-Hour Continuous Faculty Doubt Desks",
             category: "Personal Mentorship",
             video: "/uploads/pcp/classroom-study.mp4",
-            poster: "/uploads/pcp/toppers/vivek_gupta_air225.jpg",
-            thumbnail: "/uploads/pcp/toppers/vivek_gupta_air225.jpg",
+            poster: "/uploads/pcp/theme_toppers/vivek_gupta_air225.jpg",
+            thumbnail: "/uploads/pcp/theme_toppers/vivek_gupta_air225.jpg",
             tag: "AIR 225 JEE Adv Mentors",
             highlight: "One-on-one personal concept clearance directly with senior faculty counters every morning and evening."
         },
@@ -30,8 +30,8 @@ export default function PcpFoudreVideoSection() {
             title: "Focused Night Library & Daily Problem Solving",
             category: "Self-Study Desks",
             video: "/uploads/pcp/study-bg-small.mp4",
-            poster: "/uploads/pcp/toppers/saurabh_agarwal_air87.jpg",
-            thumbnail: "/uploads/pcp/toppers/saurabh_agarwal_air87.jpg",
+            poster: "/uploads/pcp/theme_toppers/saurabh_agarwal_air87.jpg",
+            thumbnail: "/uploads/pcp/theme_toppers/saurabh_agarwal_air87.jpg",
             tag: "AIR 87 AIIMS Delhi Batch",
             highlight: "Supervised study sessions where 50+ Daily Practice Problems (DPPs) are solved with faculty support."
         },
@@ -40,8 +40,8 @@ export default function PcpFoudreVideoSection() {
             title: "Campus Energy & Residential Life",
             category: "Residential Wing",
             video: "/uploads/pcp/skills-visual.mp4",
-            poster: "/uploads/pcp/toppers/navdeep_mann_air469.jpg",
-            thumbnail: "/uploads/pcp/toppers/navdeep_mann_air469.jpg",
+            poster: "/uploads/pcp/theme_toppers/navdeep_mann_air469.jpg",
+            thumbnail: "/uploads/pcp/theme_toppers/navdeep_mann_air469.jpg",
             tag: "AIR 469 First Attempt",
             highlight: "Holistic student development with round-the-clock hostel mentorship, sports, and peer motivation."
         }

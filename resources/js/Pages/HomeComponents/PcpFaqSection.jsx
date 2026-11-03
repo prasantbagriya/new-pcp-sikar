@@ -113,7 +113,7 @@ export default function PcpFaqSection() {
     return (
         <section 
             id="faq-section" 
-            className="relative pt-6 sm:pt-8 lg:pt-10 pb-16 sm:pb-20 lg:pb-24 bg-gradient-to-b from-white via-[#faf7fe] to-white text-slate-900 overflow-visible font-sans border-t border-purple-100/90 select-none"
+            className="relative pt-4 sm:pt-6 pb-10 sm:pb-14 bg-gradient-to-b from-white via-[#faf7fe] to-white text-slate-900 overflow-visible font-sans border-t border-purple-100/90 select-none"
         >
             {/* Inject JSON-LD Structured Data for Google Rich Snippets */}
             <script 
@@ -229,7 +229,7 @@ export default function PcpFaqSection() {
                     </div>
 
                     {/* RIGHT COLUMN: Interactive Accordion Cards (lg:col-span-7) */}
-                    <div className="lg:col-span-7 space-y-3.5">
+                    <div className="lg:col-span-7 space-y-2.5">
                         {filteredFaqs.map((faq, index) => {
                             const isOpen = openIndex === index;
                             return (
@@ -247,7 +247,7 @@ export default function PcpFaqSection() {
                                     >
                                     <button 
                                         type="button"
-                                        className="w-full px-5 py-4 sm:px-6 sm:py-4.5 flex items-center justify-between text-left focus:outline-none focus:ring-0 border-none bg-transparent cursor-pointer"
+                                        className="w-full px-4 py-3 sm:px-5 sm:py-3.5 flex items-center justify-between text-left focus:outline-none focus:ring-0 border-none bg-transparent cursor-pointer"
                                         onClick={() => toggleFaq(index)}
                                         aria-expanded={isOpen}
                                     >
@@ -275,8 +275,8 @@ export default function PcpFaqSection() {
                                             isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                                         }`}
                                     >
-                                        <div className="px-5 pb-5 sm:px-6 sm:pb-5.5 pt-1">
-                                            <div className="w-full h-px bg-purple-50 mb-3" />
+                                        <div className="px-4 pb-3.5 sm:px-5 sm:pb-4 pt-0.5">
+                                            <div className="w-full h-px bg-purple-50 mb-2" />
                                             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal m-0">
                                                 {faq.a}
                                             </p>

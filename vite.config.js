@@ -21,6 +21,7 @@ export default defineConfig({
         react(),
     ],
     build: {
+        sourcemap: false,
         // Preload static module dependencies so route and icon chunks can be fetched
         // in parallel instead of creating a request chain after the app bundle runs.
         modulePreload: true,

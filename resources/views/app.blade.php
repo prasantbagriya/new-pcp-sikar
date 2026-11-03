@@ -346,28 +346,10 @@
                         <h1 style="font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; line-height: 1.2; margin-bottom: 24px; color: #0f172a;">{{ $staticTitle }}</h1>
                         <div style="height: 1px; width: 100%; background: #e2e8f0; margin-bottom: 32px;"></div>
                     </div>
-                @elseif (($page['component'] ?? '') === 'Reviews/Index')
-                    @php
-                        $preloadImage = $page['props']['meta']['preload_image'] ?? '/uploads/background.webp';
-                    @endphp
-                    <!-- Lite Reviews Index HTML for Instant FCP & LCP before React Hydrates -->
-                    <div class="lite-reviews-container" style="background:#0f172a; min-height:540px; color:#ffffff; padding:24px 16px 40px; text-align:center; position:relative; overflow:hidden; font-family:'Outfit',system-ui,-apple-system,sans-serif; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                        <img src="{{ $preloadImage }}" alt="" aria-hidden="true" fetchpriority="high" loading="eager" decoding="async" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; opacity:0.18;" />
-                        <div style="position:relative; z-index:10; max-width:850px; margin:0 auto; width:100%;">
-                            <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 16px; border-radius:9999px; background:rgba(59,130,246,0.2); color:#60a5fa; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; border:1px solid rgba(59,130,246,0.3); margin-bottom:16px;">
-                                Editorial Reputation Intelligence Platform
-                            </div>
-                            <h1 style="font-size:clamp(2.2rem, 5vw, 4rem); font-weight:800; line-height:1.1; margin-bottom:16px; color:#ffffff; letter-spacing:-0.02em;">
-                                Read Reviews. <br />
-                                <span style="color:#60a5fa;">Trust What You Buy.</span>
-                            </h1>
-                            <p style="color:rgba(255,255,255,0.8); font-size:1.1rem; max-width:640px; margin:0 auto 24px; line-height:1.6;">
-                                Discover 10M+ verified companies evaluated by real customer invoices, AI fraud detection, and 0–100 Trust Scores.
-                            </p>
-                            <div style="max-width:700px; margin:0 auto; height:50px; background:#ffffff; border-radius:9999px; display:flex; align-items:center; padding:0 20px; box-shadow:0 10px 25px -5px rgba(0,0,0,0.3);">
-                                <span style="color:#94a3b8; font-size:0.95rem;">Search company, category, or ask AI...</span>
-                            </div>
-                        </div>
+                @elseif ((['component'] ?? '') === 'Reviews/Index')
+                    <div class="skeleton-loader" style="padding: 20px; max-width: 900px; margin: 0 auto; margin-top: 100px;">
+                        <div class="skeleton-item" style="height: 48px; width: 60%; margin-bottom: 24px;"></div>
+                        <div class="skeleton-item" style="height: 20px; width: 80%; margin-bottom: 40px; border-radius: 4px;"></div>
                     </div>
                 @else
                     <!-- Skeleton Loader for FCP Boost (Fallback when SSR is offline) -->

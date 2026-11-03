@@ -62,10 +62,10 @@
     <style>
         *,*::before,*::after{box-sizing:border-box;padding:0;margin:0}
         html{overflow-x:clip;overflow-y:scroll;font-size:16px;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
-        body{max-width:100vw;overflow-x:clip;font-family:'Outfit',system-ui,-apple-system,sans-serif;background:#ffffff;color:#0f172a;line-height:1.65;letter-spacing:normal;-webkit-font-smoothing:antialiased}
+        body{max-width:100vw;overflow-x:clip;font-family:'Outfit',system-ui,-apple-system,sans-serif;background:#ffffff;color:#0f172a;line-height:1.75;letter-spacing:0.01em;-webkit-font-smoothing:antialiased}
         img,video{max-width:100%;height:auto;display:block}
-        h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.3;margin-bottom:1rem;color:#0f172a;letter-spacing:normal}
-        p,span,li,a{line-height:1.65;letter-spacing:normal}
+        h1,h2,h3,h4,h5,h6{font-weight:700;line-height:1.36;letter-spacing:0.01em;margin-bottom:1rem;color:#0f172a}
+        p,span,li,a{line-height:1.7;letter-spacing:0.01em}
         .tracking-tight,.tracking-tighter{letter-spacing:normal !important}
         a{color:inherit;text-decoration:none}
         .btn-brand-yellow{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:9999px;background:#ffc107;color:#000000;font-weight:800;font-size:.875rem;box-shadow:0 10px 15px -3px rgba(255,193,7,.3);transition:all .15s;border:none;cursor:pointer}

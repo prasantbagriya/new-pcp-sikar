@@ -9,11 +9,14 @@ class PageController extends Controller
 {
     public function about()
     {
+        $dbPage = \App\Models\Page::whereIn('slug', ['about', 'about-us'])->first();
+
         return Inertia::render('Static/About', [
+            'page' => $dbPage,
             'meta' => [
-                'title'       => 'About Us | PCP Sikar & Sikar Education Hub',
-                'h1'          => 'About PCP Sikar — 25 Years of Academic Legacy & AIR-1 Pedagogy',
-                'description' => 'Learn about PCP Sikar & Sikar Education Hub — Rajasthan’s premier coaching institute for NEET-UG, IIT-JEE, and Pre-Foundation with 100+ acre residential headquarters in Sikar and Gopalpura Bypass Center in Jaipur.',
+                'title'       => ($dbPage && $dbPage->seo_title) ? $dbPage->seo_title : 'About Us | PCP Sikar & Sikar Education Hub',
+                'h1'          => ($dbPage && $dbPage->title) ? $dbPage->title : 'About PCP Sikar — 25 Years of Academic Legacy & AIR-1 Pedagogy',
+                'description' => ($dbPage && $dbPage->seo_description) ? $dbPage->seo_description : 'Learn about PCP Sikar & Sikar Education Hub — Rajasthan’s premier coaching institute for NEET-UG, IIT-JEE, and Pre-Foundation with 100+ acre residential headquarters in Sikar and Gopalpura Bypass Center in Jaipur.',
                 'url'         => url('/about-us'),
             ],
         ]);
@@ -22,15 +25,13 @@ class PageController extends Controller
     public function contact()
     {
         $dbPage = \App\Models\Page::whereIn('slug', ['contacts', 'contact'])->first();
-        if ($dbPage) {
-            return $this->showDynamicPage($dbPage);
-        }
 
         return Inertia::render('Static/Contact', [
+            'page' => $dbPage,
             'meta' => [
-                'title'       => 'Contact Us | Sikar Education Hub',
-                'h1'          => 'Contact Sikar Education Hub — Get in Touch With Our Team',
-                'description' => 'Have a question about coaching or schools in Sikar? Reach out to the Sikar Education Hub team with suggestions, corrections, or inquiries.',
+                'title'       => ($dbPage && $dbPage->seo_title) ? $dbPage->seo_title : 'Contact Us & Campus Helpline | PCP Sikar & Sikar Education Hub',
+                'h1'          => ($dbPage && $dbPage->title) ? $dbPage->title : 'Contact PCP Sikar — Palwas Road HQ, Piprali Road & Jaipur Center Helplines',
+                'description' => ($dbPage && $dbPage->seo_description) ? $dbPage->seo_description : 'Get in touch with PCP Sikar and Sikar Education Hub. Palwas Road HQ, Piprali Road campus, and Jaipur center helplines, location maps, and admission counselor contact.',
                 'url'         => url('/contact'),
             ],
         ]);

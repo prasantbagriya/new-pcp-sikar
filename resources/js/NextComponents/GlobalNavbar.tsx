@@ -5,7 +5,7 @@ import { Facebook, Instagram, Youtube, PlayStore, Telegram } from "./BrandIcons"
 import { usePage } from "@inertiajs/react"
 export const DEFAULT_NAV_LINKS = [
   { id: 1, parent_id: null, label: 'Home', page: '/' },
-  { id: 10, parent_id: null, label: 'Courses', page: '#' },
+  { id: 10, parent_id: null, label: 'Courses', page: 'courses' },
   { id: 101, parent_id: 10, label: 'All Coaching Programs', page: 'courses' },
   { id: 102, parent_id: 10, label: 'NEET-UG Medical Division', page: 'courses/neet-ug' },
   { id: 103, parent_id: 10, label: 'IIT-JEE Engineering Wing', page: 'courses/iit-jee' },
@@ -23,8 +23,8 @@ export const DEFAULT_NAV_LINKS = [
   { id: 3, parent_id: null, label: 'Colleges', page: 'category/colleges' },
   { id: 4, parent_id: null, label: 'Hospitals', page: 'category/hospitals' },
   { id: 5, parent_id: null, label: 'News', page: 'category/news' },
-  { id: 6, parent_id: null, label: 'About', page: 'about-us' },
-  { id: 7, parent_id: null, label: 'Contact', page: 'contact' },
+  { id: 6, parent_id: null, label: 'About Us', page: 'about-us' },
+  { id: 7, parent_id: null, label: 'Contact Us', page: 'contact' },
 ];
 function NavbarCore({
   global_nav: passedNav,
@@ -376,21 +376,51 @@ function NavbarCore({
                     onMouseLeave={handleDropdownLeave}
                   >
                     <div className="relative h-full flex items-center">
-                      <button
-                        type="button"
-                        onClick={() => toggleDropdown(linkId)}
-                        aria-expanded={isDropdownOpen}
-                        className={`flex items-center gap-1.5 text-[13.5px] px-3 py-1.5 transition-colors duration-200 cursor-pointer bg-transparent outline-none ${
-                          isActive || isDropdownOpen
-                            ? 'text-[#3b1165] font-bold' 
-                            : 'text-slate-700 hover:text-[#3b1165] font-medium'
-                        }`}
-                      >
-                        <span>{link.label || link.name}</span>
-                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
-                          isDropdownOpen ? 'rotate-180 text-[#2e1065]' : 'text-slate-500 group-hover:rotate-180 group-hover:text-[#2e1065]'
-                        }`} />
-                      </button>
+                      {linkPath !== '#' ? (
+                        <div className="flex items-center">
+                          <a
+                            href={linkPath}
+                            className={`text-[13.5px] pl-3 pr-1 py-1.5 transition-colors duration-200 decoration-transparent ${
+                              isActive || isDropdownOpen
+                                ? 'text-[#3b1165] font-bold' 
+                                : 'text-slate-700 hover:text-[#3b1165] font-medium'
+                            }`}
+                          >
+                            {link.label || link.name}
+                          </a>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              toggleDropdown(linkId);
+                            }}
+                            aria-expanded={isDropdownOpen}
+                            className="pr-2 pl-0.5 py-1.5 text-slate-500 hover:text-[#2e1065] cursor-pointer bg-transparent border-none outline-none"
+                            aria-label="Toggle menu"
+                          >
+                            <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                              isDropdownOpen ? 'rotate-180 text-[#2e1065]' : 'group-hover:rotate-180 group-hover:text-[#2e1065]'
+                            }`} />
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => toggleDropdown(linkId)}
+                          aria-expanded={isDropdownOpen}
+                          className={`flex items-center gap-1.5 text-[13.5px] px-3 py-1.5 transition-colors duration-200 cursor-pointer bg-transparent outline-none ${
+                            isActive || isDropdownOpen
+                              ? 'text-[#3b1165] font-bold' 
+                              : 'text-slate-700 hover:text-[#3b1165] font-medium'
+                          }`}
+                        >
+                          <span>{link.label || link.name}</span>
+                          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
+                            isDropdownOpen ? 'rotate-180 text-[#2e1065]' : 'text-slate-500 group-hover:rotate-180 group-hover:text-[#2e1065]'
+                          }`} />
+                        </button>
+                      )}
                     </div>
 
                     {/* Semrush-Style Multi-Column Responsive Mega Menu Container */}
@@ -799,15 +829,31 @@ function NavbarCore({
                   return (
                     <div key={linkKey} className="rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800">
                       <div className="flex items-center justify-between bg-purple-50/50 hover:bg-purple-100/50 transition-colors">
-                        <span className="flex-1 px-4 py-3 text-[15px] font-normal text-slate-800 dark:text-slate-200">
-                          {link.label || link.name}
-                        </span>
+                        {linkPath !== '#' ? (
+                          <a 
+                            href={linkPath}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="flex-1 px-4 py-3 text-[15px] font-semibold text-slate-800 dark:text-slate-200 hover:text-[#2e1065]"
+                          >
+                            {link.label || link.name}
+                          </a>
+                        ) : (
+                          <button 
+                            type="button"
+                            onClick={() => {
+                              setExpandedMenus(prev => prev.includes(linkKey) ? prev.filter(item => item !== linkKey) : [...prev, linkKey]);
+                            }}
+                            className="flex-1 px-4 py-3 text-left text-[15px] font-semibold text-slate-800 dark:text-slate-200 bg-transparent border-none"
+                          >
+                            {link.label || link.name}
+                          </button>
+                        )}
                         <button 
                           type="button"
                           onClick={() => {
                             setExpandedMenus(prev => prev.includes(linkKey) ? prev.filter(item => item !== linkKey) : [...prev, linkKey]);
                           }}
-                          className="p-3 text-slate-500 hover:text-[#2e1065] dark:text-[#ffc107]"
+                          className="p-3 text-slate-500 hover:text-[#2e1065] dark:text-[#ffc107] bg-transparent border-none"
                           aria-label="Toggle submenu"
                         >
                           <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isExpanded ? 'rotate-180 text-[#2e1065] dark:text-[#ffc107]' : ''}`} />

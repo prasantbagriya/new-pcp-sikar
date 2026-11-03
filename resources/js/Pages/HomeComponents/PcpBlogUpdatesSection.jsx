@@ -37,7 +37,7 @@ export default function PcpBlogUpdatesSection() {
             tagColor: 'bg-purple-100 text-[#2e0854] border-purple-200',
             title: 'How Devesh Joshi Scored 720/720 in NEET-UG: Daily Revision Blueprint & Error Elimination Log',
             excerpt: 'An in-depth breakdown of NCERT line-by-line active recall, 3-tier biology diagrams, and how utilizing PCP Sikar’s 12-hour continuous faculty doubt desk converted weak areas into 100 percentile.',
-            image: '/uploads/pcp/portraits/devesh_joshi.jpg',
+            image: '/uploads/pcp/theme_toppers/devesh_joshi.jpg',
             readTime: '8 min read',
             date: 'Oct 28, 2026',
             author: 'Dr. M.R. Poonia',

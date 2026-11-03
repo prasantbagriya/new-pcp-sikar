@@ -103,7 +103,7 @@ export default function Contact() {
                 <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-[#5b40cf]/25 rounded-full blur-[140px] pointer-events-none" />
                 <div className="absolute top-1/3 -right-20 w-[450px] h-[450px] bg-purple-600/20 rounded-full blur-[130px] pointer-events-none" />
 
-                <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <div className="w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10 text-center">
                     
                     {/* Breadcrumbs */}
                     <div className="inline-flex items-center gap-2 text-xs font-semibold text-purple-200/80 mb-6 bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-md">
@@ -152,7 +152,7 @@ export default function Contact() {
             </section>
 
             {/* 4 Campus Helplines Grid (-mt-10 overlap) */}
-            <section className="relative z-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-12">
+            <section className="relative z-20 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 -mt-10 sm:-mt-12">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                     {campusCards.map((camp, idx) => (
                         <div 
@@ -200,7 +200,7 @@ export default function Contact() {
             </section>
 
             {/* Main Content: Counseling Form + Campus Visits Guide */}
-            <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto w-full flex-grow">
+            <section className="py-16 sm:py-20 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex-grow">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
                     
                     {/* Left: Guidance & Trust */}
