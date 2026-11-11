@@ -25,45 +25,45 @@ function PcpBlogUpdatesSection() {
 		},
 		{
 			id: 2,
-			tag: "National Scholarship",
+			tag: "National Admissions",
 			tagColor: "bg-amber-100 text-amber-950 border-amber-200",
-			title: "P-SAT 2026: North India’s ₹108+ Crore Scholarship Exam Syllabus, Test Centers & 100% Fee Waivers",
-			excerpt: "Everything parents and students must know about North India’s largest pre-selection talent exam covering Class 5th to 12th & Target Droppers. Discover how to secure up to 100% tuition + residential fee waiver.",
-			image: "/uploads/pcp/Olympiad.jpg",
+			title: "Admissions Open 2026-27: Target NEET-UG & IIT-JEE Batches at Sikar & Jaipur Campuses",
+			excerpt: "PCP Sikar announces fresh classroom batches for NEET-UG and IIT-JEE with up to 100% scholarships via P-SAT. Proven 1,000+ MBBS selections and North India’s highest selection ratio.",
+			image: "/uploads/pcp/pcp_banner_canva.png",
 			readTime: "6 min read",
 			date: "Oct 26, 2026",
 			author: "Academic Directorate",
-			role: "P-SAT Examination Board",
-			link: "/psat-2026-scholarship-guide",
-			stats: "₹108 Cr Scholarship Pool"
+			role: "PCP Admissions Cell",
+			link: "/contact",
+			stats: "1,000+ MBBS Selections"
 		},
 		{
 			id: 3,
-			tag: "Ecosystem Analysis",
+			tag: "Academic Infrastructure",
 			tagColor: "bg-purple-100 text-[#2e0854] border-purple-200",
-			title: "Why 1 in 4 Serious Aspirants is Choosing Sikar Over Kota: The Distraction-Free Residential Culture",
-			excerpt: "A data-backed comparative study on student mental well-being, mobile-free residential hostels, round-the-clock mentor supervision, and verified classroom selection ratios that have made Sikar India’s new coaching capital.",
-			image: "/uploads/pcp_campus_building.png",
+			title: "Inside PCP Sikar: 12-Hour Continuous Faculty Doubt Desks & Smart Digital Classrooms",
+			excerpt: "How one-on-one personalized doubt resolution desks from 8:00 AM to 8:00 PM daily eliminate student hesitation and build rock-solid concept mastery for national entrance exams.",
+			image: "/uploads/pcp/pcp_doubt_counter_mentoring.png",
 			readTime: "9 min read",
 			date: "Oct 22, 2026",
 			author: "Education Research Cell",
 			role: "PCP Academic Forum",
-			link: "/blog/why-sikar-is-beating-kota",
-			stats: "1,000+ MBBS Selections"
+			link: "/about",
+			stats: "12-Hr Daily Doubts"
 		},
 		{
 			id: 4,
-			tag: "JEE Advanced Edge",
+			tag: "Residential Excellence",
 			tagColor: "bg-amber-100 text-amber-950 border-amber-200",
-			title: "JEE Advanced Physics: Cracking Multi-Concept Rotational & Electrodynamics Questions with Veteran HODs",
-			excerpt: "Subject HODs analyze the previous 5 years of JEE Advanced pattern shifts and present a high-yield formula sheet with solved step-by-step illustrations for aspiring IITians.",
-			image: "/uploads/pcp/slider/JEE-ADVANCED-2025.jpg",
+			title: "Disciplined Residential Life at PCP: Distraction-Free Hostels & Mentored Self-Study Hours",
+			excerpt: "A comprehensive view inside the safe AC residential campuses with resident mentor supervision, biometric security, and dedicated evening study hours that foster top ranks.",
+			image: "/uploads/pcp/pcp_hostel_study_room.png",
 			readTime: "7 min read",
 			date: "Oct 18, 2026",
-			author: "Er. O.P. Choudhary",
-			role: "HOD Physics, PCP Sikar",
-			link: "/blog/jee-advanced-physics-mastery",
-			stats: "AIR 225 Sikar Topper"
+			author: "Hostel Administration",
+			role: "PCP Residential Directorate",
+			link: "/about",
+			stats: "5,000+ Hostellers"
 		}
 	];
 	useEffect(() => {

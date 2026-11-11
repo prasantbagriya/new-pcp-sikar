@@ -55,24 +55,24 @@ export default function PcpHeroSection() {
     const bgRow1 = [
         { title: "Devesh Joshi", badge: "AIR 1 NEET (720/720)", image: "/uploads/pcp/theme_toppers/devesh_joshi_air1.jpg", isCircle: false },
         { title: "Vivek Gupta", badge: "AIR 225 JEE Adv", image: "/uploads/pcp/theme_toppers/vivek_gupta_air225.jpg", isCircle: true },
-        { title: "PCP Jaipur", badge: "Premier Campus", image: "/uploads/pcp/jaipur.jpg", isCircle: false },
+        { title: "PCP Campus", badge: "100+ Acres Hub", image: "/uploads/pcp/pcp_sikar_campus_square.png", isCircle: false },
         { title: "Saurabh Agarwal", badge: "AIR 87 AIIMS", image: "/uploads/pcp/theme_toppers/saurabh_agarwal_air87.jpg", isCircle: true },
         { title: "Vikas Dhakharwal", badge: "AIR 779 IIT Kanpur", image: "/uploads/pcp/theme_toppers/vikas_dhakharwal_air779.jpg", isCircle: false }
     ];
 
     const bgRow2 = [
         { title: "Navdeep Mann", badge: "AIR 469 IIT Delhi", image: "/uploads/pcp/theme_toppers/navdeep_mann_air469.jpg", isCircle: false },
-        { title: "Prince Olympiad", badge: "₹108+ Cr Schol.", image: "/uploads/pcp/Olympiad.jpg", isCircle: true },
+        { title: "Smart Classes", badge: "Digital AI Desks", image: "/uploads/pcp/pcp_classroom_smart_board.png", isCircle: true },
         { title: "Nikhil", badge: "99.9478 %tile JEE", image: "/uploads/pcp/theme_toppers/nikhil_jeemain.jpg", isCircle: true },
         { title: "Braj Kishor", badge: "AIR 677 IIT-R", image: "/uploads/pcp/theme_toppers/braj_kishor_air677.jpg", isCircle: false },
-        { title: "JEE Main 2026", badge: "JEE Main 2026", image: "/uploads/pcp/slider/JeeMain2026.png", isCircle: true }
+        { title: "Doubt Counters", badge: "12-Hr Faculty Desks", image: "/uploads/pcp/pcp_doubt_counter_mentoring.png", isCircle: false }
     ];
 
     const bgRow3 = [
         { title: "Rahul Kumawat", badge: "Top Percentile JEE", image: "/uploads/pcp/theme_toppers/rahul_kumawat_jeemain.jpg", isCircle: true },
         { title: "Devesh AIIMS", badge: "AIIMS New Delhi", image: "/uploads/pcp/theme_toppers/devesh_joshi.jpg", isCircle: false },
         { title: "Vivek IIT-B", badge: "IIT Bombay Ranker", image: "/uploads/pcp/theme_toppers/vivek_gupta.jpg", isCircle: true },
-        { title: "PCP Sikar", badge: "25+ Yrs Legacy", image: "/uploads/pcp/360.png", isCircle: false },
+        { title: "Hostel Life", badge: "Disciplined Routine", image: "/uploads/pcp/pcp_hostel_study_room.png", isCircle: false },
         { title: "Saurabh AIIMS", badge: "Classroom Ranker", image: "/uploads/pcp/theme_toppers/saurabh_agarwal.jpg", isCircle: true }
     ];
 

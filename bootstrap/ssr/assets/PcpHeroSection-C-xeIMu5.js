@@ -89,9 +89,9 @@ function PcpHeroSection() {
 			isCircle: true
 		},
 		{
-			title: "PCP Jaipur",
-			badge: "Premier Campus",
-			image: "/uploads/pcp/jaipur.jpg",
+			title: "PCP Campus",
+			badge: "100+ Acres Hub",
+			image: "/uploads/pcp/pcp_sikar_campus_square.png",
 			isCircle: false
 		},
 		{
@@ -115,9 +115,9 @@ function PcpHeroSection() {
 			isCircle: false
 		},
 		{
-			title: "Prince Olympiad",
-			badge: "₹108+ Cr Schol.",
-			image: "/uploads/pcp/Olympiad.jpg",
+			title: "Smart Classes",
+			badge: "Digital AI Desks",
+			image: "/uploads/pcp/pcp_classroom_smart_board.png",
 			isCircle: true
 		},
 		{
@@ -133,10 +133,10 @@ function PcpHeroSection() {
 			isCircle: false
 		},
 		{
-			title: "JEE Main 2026",
-			badge: "JEE Main 2026",
-			image: "/uploads/pcp/slider/JeeMain2026.png",
-			isCircle: true
+			title: "Doubt Counters",
+			badge: "12-Hr Faculty Desks",
+			image: "/uploads/pcp/pcp_doubt_counter_mentoring.png",
+			isCircle: false
 		}
 	];
 	const bgRow3 = [
@@ -159,9 +159,9 @@ function PcpHeroSection() {
 			isCircle: true
 		},
 		{
-			title: "PCP Sikar",
-			badge: "25+ Yrs Legacy",
-			image: "/uploads/pcp/360.png",
+			title: "Hostel Life",
+			badge: "Disciplined Routine",
+			image: "/uploads/pcp/pcp_hostel_study_room.png",
 			isCircle: false
 		},
 		{

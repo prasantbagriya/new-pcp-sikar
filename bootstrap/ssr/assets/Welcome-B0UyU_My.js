@@ -1,11 +1,11 @@
 import { n as GlobalNavbar } from "./GlobalNavbar-qw3J78hM.js";
 import { t as HomeFooter } from "./HomeFooter-D1PJw1_P.js";
 import "./HomeNavbar-DHTI60cE.js";
-import PcpBlogUpdatesSection from "./PcpBlogUpdatesSection-C--MpPfK.js";
+import PcpBlogUpdatesSection from "./PcpBlogUpdatesSection-C9R-Yosc.js";
 import PcpCoursesSection from "./PcpCoursesSection-Dn60Y6LF.js";
 import PcpFaqSection from "./PcpFaqSection-B5hfmR20.js";
 import PcpGalleryShowcase from "./PcpGalleryShowcase-DufQ7uhe.js";
-import PcpHeroSection from "./PcpHeroSection-B3EFIoJ8.js";
+import PcpHeroSection from "./PcpHeroSection-C-xeIMu5.js";
 import PcpJaipurLaunchSection from "./PcpJaipurLaunchSection-yxXhLa1V.js";
 import PcpJourneySection from "./PcpJourneySection-B4ry74_L.js";
 import PcpResultsOrbitSection from "./PcpResultsOrbitSection-CtpUJ44K.js";

@@ -88,7 +88,7 @@ createServer((page) => createInertiaApp({
 		"./Pages/HomeComponents/HomeNavbar.tsx": () => import("./assets/HomeNavbar-DHTI60cE.js"),
 		"./Pages/HomeComponents/InstitutesSection.jsx": () => import("./assets/InstitutesSection-ByfCJohD.js"),
 		"./Pages/HomeComponents/PcpAppEcosystem.jsx": () => import("./assets/PcpAppEcosystem-DMaNobM9.js"),
-		"./Pages/HomeComponents/PcpBlogUpdatesSection.jsx": () => import("./assets/PcpBlogUpdatesSection-C--MpPfK.js"),
+		"./Pages/HomeComponents/PcpBlogUpdatesSection.jsx": () => import("./assets/PcpBlogUpdatesSection-C9R-Yosc.js"),
 		"./Pages/HomeComponents/PcpBrandLogo.jsx": () => import("./assets/PcpBrandLogo-pQJ-sF4e.js"),
 		"./Pages/HomeComponents/PcpCampusMapSection.jsx": () => import("./assets/PcpCampusMapSection-DLL2INK3.js"),
 		"./Pages/HomeComponents/PcpCampusesSection.jsx": () => import("./assets/PcpCampusesSection-Cm-S3qX4.js"),
@@ -99,7 +99,7 @@ createServer((page) => createInertiaApp({
 		"./Pages/HomeComponents/PcpFloatingBar.jsx": () => import("./assets/PcpFloatingBar-C82du19i.js"),
 		"./Pages/HomeComponents/PcpFoudreVideoSection.jsx": () => import("./assets/PcpFoudreVideoSection-DB2IXec0.js"),
 		"./Pages/HomeComponents/PcpGalleryShowcase.jsx": () => import("./assets/PcpGalleryShowcase-DufQ7uhe.js"),
-		"./Pages/HomeComponents/PcpHeroSection.jsx": () => import("./assets/PcpHeroSection-B3EFIoJ8.js"),
+		"./Pages/HomeComponents/PcpHeroSection.jsx": () => import("./assets/PcpHeroSection-C-xeIMu5.js"),
 		"./Pages/HomeComponents/PcpImagesCloudSection.jsx": () => import("./assets/PcpImagesCloudSection-BrQzMla8.js"),
 		"./Pages/HomeComponents/PcpJaipurLaunchSection.jsx": () => import("./assets/PcpJaipurLaunchSection-yxXhLa1V.js"),
 		"./Pages/HomeComponents/PcpJourneySection.jsx": () => import("./assets/PcpJourneySection-B4ry74_L.js"),
@@ -142,7 +142,7 @@ createServer((page) => createInertiaApp({
 		"./Pages/Static/Terms.jsx": () => import("./assets/Terms-J64tQpYO.js"),
 		"./Pages/Story/Index.jsx": () => import("./assets/Index-DgLO0G5_.js"),
 		"./Pages/User/Show.jsx": () => import("./assets/Show-Wfy5U-o1.js"),
-		"./Pages/Welcome.jsx": () => import("./assets/Welcome-Es6Ce5AL.js")
+		"./Pages/Welcome.jsx": () => import("./assets/Welcome-B0UyU_My.js")
 	})),
 	setup({ App, props }) {
 		return /* @__PURE__ */ jsx(App, { ...props });
