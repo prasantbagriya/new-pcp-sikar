@@ -40,6 +40,7 @@ Route::get('/ads.txt', function () {
 });
 
 Route::get('/blog', [\App\Http\Controllers\BlogController::class, 'index'])->name('blog.index')->middleware('cacheResponse:86400');
+Route::get('/blog/feed.xml', [\App\Http\Controllers\RssController::class, 'blogFeed'])->name('blog.rss');
 Route::get('/blog/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.show')->middleware('cacheResponse:86400');
 Route::get('/blog/{category}/{slug}', [\App\Http\Controllers\BlogController::class, 'show'])->name('blog.category.show')->middleware('cacheResponse:86400');
 
@@ -645,8 +646,6 @@ Route::post('/api/inquiries/collect', [\App\Http\Controllers\Api\AdminApiControl
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/blog/feed.xml', [\App\Http\Controllers\RssController::class, 'blogFeed'])->name('blog.rss');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
