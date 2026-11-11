@@ -1,7 +1,7 @@
 import { n as GlobalNavbar } from "./GlobalNavbar-qw3J78hM.js";
 import { t as HomeFooter } from "./HomeFooter-D1PJw1_P.js";
 import "./HomeNavbar-DHTI60cE.js";
-import PcpBlogUpdatesSection from "./PcpBlogUpdatesSection-C9R-Yosc.js";
+import PcpBlogUpdatesSection from "./PcpBlogUpdatesSection-D5Nud3qs.js";
 import PcpCoursesSection from "./PcpCoursesSection-Dn60Y6LF.js";
 import PcpFaqSection from "./PcpFaqSection-B5hfmR20.js";
 import PcpGalleryShowcase from "./PcpGalleryShowcase-DufQ7uhe.js";

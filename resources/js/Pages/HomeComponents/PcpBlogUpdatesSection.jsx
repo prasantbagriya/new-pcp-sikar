@@ -2,22 +2,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
     Flame, 
-    Newspaper, 
     ArrowRight, 
     ChevronLeft, 
     ChevronRight, 
-    Clock, 
-    User, 
-    Radio, 
     Bell, 
-    FileText, 
     ExternalLink, 
-    Sparkles, 
-    Calendar,
-    Award,
-    CheckCircle2,
-    BookOpen,
-    GraduationCap
+    Sparkles 
 } from 'lucide-react';
 
 export default function PcpBlogUpdatesSection() {
@@ -33,59 +23,33 @@ export default function PcpBlogUpdatesSection() {
     const featuredStories = [
         {
             id: 1,
-            tag: 'NEET Masterclass',
-            tagColor: 'bg-purple-100 text-[#2e0854] border-purple-200',
-            title: 'How Devesh Joshi Scored 720/720 in NEET-UG: Daily Revision Blueprint & Error Elimination Log',
-            excerpt: 'An in-depth breakdown of NCERT line-by-line active recall, 3-tier biology diagrams, and how utilizing PCP Sikar’s 12-hour continuous faculty doubt desk converted weak areas into 100 percentile.',
-            image: '/uploads/pcp/theme_toppers/devesh_joshi.jpg',
-            readTime: '8 min read',
-            date: 'Oct 28, 2026',
-            author: 'Dr. M.R. Poonia',
-            role: 'Chairman, Prince Eduhub',
-            link: '/blog/devesh-joshi-neet-720-strategy',
-            stats: 'AIR 1 (Classroom)'
+            image: '/uploads/pcp/pcp_banner_canva.png',
+            fit: 'object-contain bg-[#1c0333]',
+            link: '/contact'
         },
         {
             id: 2,
-            tag: 'National Admissions',
-            tagColor: 'bg-amber-100 text-amber-950 border-amber-200',
-            title: 'Admissions Open 2026-27: Target NEET-UG & IIT-JEE Batches at Sikar & Jaipur Campuses',
-            excerpt: 'PCP Sikar announces fresh classroom batches for NEET-UG and IIT-JEE with up to 100% scholarships via P-SAT. Proven 1,000+ MBBS selections and North India’s highest selection ratio.',
-            image: '/uploads/pcp/pcp_banner_canva.png',
-            readTime: '6 min read',
-            date: 'Oct 26, 2026',
-            author: 'Academic Directorate',
-            role: 'PCP Admissions Cell',
-            link: '/contact',
-            stats: '1,000+ MBBS Selections'
+            image: '/uploads/pcp/pcp_sikar_campus_square.png',
+            fit: 'object-cover object-center',
+            link: '/about'
         },
         {
             id: 3,
-            tag: 'Academic Infrastructure',
-            tagColor: 'bg-purple-100 text-[#2e0854] border-purple-200',
-            title: 'Inside PCP Sikar: 12-Hour Continuous Faculty Doubt Desks & Smart Digital Classrooms',
-            excerpt: 'How one-on-one personalized doubt resolution desks from 8:00 AM to 8:00 PM daily eliminate student hesitation and build rock-solid concept mastery for national entrance exams.',
-            image: '/uploads/pcp/pcp_doubt_counter_mentoring.png',
-            readTime: '9 min read',
-            date: 'Oct 22, 2026',
-            author: 'Education Research Cell',
-            role: 'PCP Academic Forum',
-            link: '/about',
-            stats: '12-Hr Daily Doubts'
+            image: '/uploads/pcp/pcp_classroom_smart_board.png',
+            fit: 'object-cover object-center',
+            link: '/courses'
         },
         {
             id: 4,
-            tag: 'Residential Excellence',
-            tagColor: 'bg-amber-100 text-amber-950 border-amber-200',
-            title: 'Disciplined Residential Life at PCP: Distraction-Free Hostels & Mentored Self-Study Hours',
-            excerpt: 'A comprehensive view inside the safe AC residential campuses with resident mentor supervision, biometric security, and dedicated evening study hours that foster top ranks.',
+            image: '/uploads/pcp/pcp_doubt_counter_mentoring.png',
+            fit: 'object-cover object-center',
+            link: '/about'
+        },
+        {
+            id: 5,
             image: '/uploads/pcp/pcp_hostel_study_room.png',
-            readTime: '7 min read',
-            date: 'Oct 18, 2026',
-            author: 'Hostel Administration',
-            role: 'PCP Residential Directorate',
-            link: '/about',
-            stats: '5,000+ Hostellers'
+            fit: 'object-cover object-center',
+            link: '/about'
         }
     ];
 
@@ -298,8 +262,8 @@ export default function PcpBlogUpdatesSection() {
                         onMouseEnter={() => setIsHovered(true)}
                         onMouseLeave={() => setIsHovered(false)}
                     >
-                        {/* Main Slide Card - Exactly Equal in Height to Right News Card */}
-                        <div className="relative rounded-2xl overflow-hidden bg-[#2e0854] border border-purple-200/80 shadow-lg group h-[470px] sm:h-[500px] lg:h-[520px] flex flex-col justify-end p-6 sm:p-8 lg:p-10 select-none">
+                        {/* Main Slide Card - Exactly Equal in Height to Right News Card (Clean Full-Bleed Image, Zero Text Overlay) */}
+                        <div className="relative rounded-2xl overflow-hidden bg-[#2e0854] border border-purple-200/80 shadow-lg group h-[470px] sm:h-[500px] lg:h-[520px] select-none">
                             
                             {/* Slide Countdown Progress Bar at Top */}
                             <div 
@@ -307,103 +271,61 @@ export default function PcpBlogUpdatesSection() {
                                 className="absolute top-0 left-0 h-1 bg-gradient-to-r from-[#5b40cf] via-[#7c3aed] to-[#ffc107] transition-all duration-75 z-30"
                             />
 
-                            {/* Slide Background Image with smooth zoom on hover */}
-                            <div className="absolute inset-0 z-0">
+                            {/* Full Slide Clickable Link Wrapping Image */}
+                            <a 
+                                href={featuredStories[currentSlide].link}
+                                className="block w-full h-full relative cursor-pointer overflow-hidden"
+                                title="Click to view details"
+                            >
                                 <img 
                                     src={featuredStories[currentSlide].image} 
-                                    alt={featuredStories[currentSlide].title}
+                                    alt="PCP Sikar Slide"
                                     width="800"
-                                    height="450"
+                                    height="520"
                                     loading="lazy"
                                     decoding="async"
-                                    className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                                    className={`w-full h-full ${featuredStories[currentSlide].fit || 'object-cover object-center'} transition-transform duration-700 ease-out group-hover:scale-102`}
                                 />
-                                {/* Multi-layer Russian Purple brand gradient overlays */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#2e0854] via-[#2e0854]/85 to-transparent" />
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#2e0854]/95 via-[#2e0854]/65 to-transparent" />
+                            </a>
+
+                            {/* Floating Slide Counter & Prev/Next Pill */}
+                            <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 bg-[#2e0854]/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-purple-300/30 shadow-lg">
+                                <button 
+                                    type="button"
+                                    onClick={handlePrevSlide}
+                                    aria-label="Previous Slide"
+                                    className="w-7 h-7 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all cursor-pointer"
+                                >
+                                    <ChevronLeft className="w-4 h-4" />
+                                </button>
+                                <span className="text-xs font-bold text-white px-2 tracking-wider font-mono">
+                                    0{currentSlide + 1} <span className="text-white/40">/</span> 0{featuredStories.length}
+                                </span>
+                                <button 
+                                    type="button"
+                                    onClick={handleNextSlide}
+                                    aria-label="Next Slide"
+                                    className="w-7 h-7 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all cursor-pointer"
+                                >
+                                    <ChevronRight className="w-4 h-4" />
+                                </button>
                             </div>
 
-                            {/* Top Header Floating Controls inside the slide */}
-                            <div className="absolute top-5 left-5 right-5 z-20 flex items-center justify-between pointer-events-none">
-                                <div className="flex items-center gap-2.5 pointer-events-auto">
-                                    <span className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-extrabold border backdrop-blur-md ${featuredStories[currentSlide].tagColor} bg-white/95 shadow-xs`}>
-                                        <BookOpen className="w-3.5 h-3.5" />
-                                        <span>{featuredStories[currentSlide].tag}</span>
-                                    </span>
-                                    <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-white/90 bg-[#2e0854]/75 backdrop-blur-md border border-purple-300/30">
-                                        <Clock className="w-3.5 h-3.5 text-[#ffc107]" />
-                                        <span>{featuredStories[currentSlide].readTime}</span>
-                                    </span>
-                                </div>
-
-                                {/* Slide Counter & Prev/Next Pill */}
-                                <div className="flex items-center gap-2 bg-[#2e0854]/85 backdrop-blur-md p-1.5 rounded-full border border-purple-300/30 pointer-events-auto shadow-md">
-                                    <button 
+                            {/* Bottom Pagination Dots */}
+                            <div className="absolute bottom-5 left-5 z-20 flex items-center gap-2">
+                                {featuredStories.map((_, idx) => (
+                                    <button
+                                        key={idx}
                                         type="button"
-                                        onClick={handlePrevSlide}
-                                        aria-label="Previous Slide"
-                                        className="w-8 h-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all cursor-pointer"
-                                    >
-                                        <ChevronLeft className="w-4 h-4" />
-                                    </button>
-                                    <span className="text-xs font-bold text-white px-2.5 tracking-wider font-mono">
-                                        0{currentSlide + 1} <span className="text-white/40">/</span> 0{featuredStories.length}
-                                    </span>
-                                    <button 
-                                        type="button"
-                                        onClick={handleNextSlide}
-                                        aria-label="Next Slide"
-                                        className="w-8 h-8 rounded-full flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 transition-all cursor-pointer"
-                                    >
-                                        <ChevronRight className="w-4 h-4" />
-                                    </button>
-                                </div>
-                            </div>
-
-                            {/* Bottom Card Content with Large Typography & High Legibility */}
-                            <div className="relative z-10 flex flex-col gap-3 max-w-3xl">
-                                
-                                {/* Stat pill */}
-                                <div className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-md bg-[#ffc107] text-[#2e0854] text-xs font-black tracking-wide uppercase shadow-xs">
-                                    <Award className="w-3.5 h-3.5 text-[#2e0854]" />
-                                    <span>{featuredStories[currentSlide].stats}</span>
-                                </div>
-
-                                {/* Story Title */}
-                                <h3 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white leading-snug drop-shadow-sm line-clamp-2">
-                                    {featuredStories[currentSlide].title}
-                                </h3>
-
-                                {/* Excerpt */}
-                                <p className="text-xs sm:text-sm lg:text-base text-purple-100/90 leading-relaxed line-clamp-2 sm:line-clamp-3">
-                                    {featuredStories[currentSlide].excerpt}
-                                </p>
-
-                                {/* Author info + Read Article button */}
-                                <div className="pt-3 sm:pt-4 border-t border-purple-300/20 flex items-center justify-between gap-4 flex-wrap">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#5b40cf] to-[#7c3aed] border border-purple-300/40 flex items-center justify-center text-white font-bold text-sm shadow-xs">
-                                            {featuredStories[currentSlide].author.charAt(0)}
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <span className="text-xs sm:text-sm font-bold text-white leading-none">
-                                                {featuredStories[currentSlide].author}
-                                            </span>
-                                            <span className="text-[11px] text-purple-200/80 leading-tight mt-1">
-                                                {featuredStories[currentSlide].role} • {featuredStories[currentSlide].date}
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <a
-                                        href={featuredStories[currentSlide].link}
-                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#ffc107] hover:bg-white text-[#2e0854] font-extrabold text-xs sm:text-sm shadow-md transition-all duration-200"
-                                    >
-                                        <span>Read Full Story</span>
-                                        <ArrowRight className="w-4 h-4 text-[#2e0854]" />
-                                    </a>
-                                </div>
-
+                                        onClick={() => handleSelectSlide(idx)}
+                                        aria-label={`Go to slide ${idx + 1}`}
+                                        className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                                            currentSlide === idx 
+                                                ? 'w-7 bg-[#ffc107] shadow-sm' 
+                                                : 'w-2 bg-white/70 hover:bg-white'
+                                        }`}
+                                    />
+                                ))}
                             </div>
                         </div>
                     </div>
