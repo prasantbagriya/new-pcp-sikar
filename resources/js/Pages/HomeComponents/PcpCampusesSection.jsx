@@ -28,7 +28,7 @@ export default function PcpCampusesSection() {
             phone: "+91 96105 72222",
             phoneAlt: "9610-83-2222",
             email: "pcpjaipur1@gmail.com",
-            image: "/uploads/pcp/jaipur.jpg",
+            image: "/uploads/pcp/PCPjaipur.jpg",
             tourUrl: "https://tour.princeeduhub.com/princt34/old-campus/",
             mapQuery: "Balaji+Tower+Gopalpura+Bypass+Jaipur",
             features: [
