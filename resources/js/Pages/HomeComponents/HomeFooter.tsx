@@ -257,11 +257,11 @@ export default function HomeFooter({ global_nav: passedNav }) {
           </div>
         </div>
 
-        {/* 4. Main Footer Columns (2 Columns on Mobile for Links: "do do me ane chaye aor clome me") */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-10 mb-14">
+        {/* 4. Main Footer Columns (2 Columns on Mobile for Links, 4 Columns on Desktop) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 sm:gap-x-8 lg:gap-x-6 xl:gap-x-8 gap-y-10 lg:gap-y-0 mb-14 items-start">
           
           {/* Brand Identity & Typography in Our Theme */}
-          <div className="col-span-2 md:col-span-2 lg:col-span-4 space-y-4">
+          <div className="col-span-2 lg:col-span-1 space-y-4">
             
             {/* Pure Typographic Brand Identity */}
             <div className="flex flex-col items-start gap-1">
@@ -277,7 +277,7 @@ export default function HomeFooter({ global_nav: passedNav }) {
               </p>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal pt-1 max-w-xl lg:max-w-none">
               <strong>PCP Sikar (Prince Career Pioneer)</strong> is North India's premier classroom coaching institute for NEET-UG and IIT-JEE, operational since 2009. Running under the visionary aegis of <strong>Prince Eduhub</strong> (25+ years of academic excellence in Sikar, Rajasthan).
             </p>
 
@@ -305,12 +305,12 @@ export default function HomeFooter({ global_nav: passedNav }) {
           </div>
 
           {/* Academic Wings (col-span-1 on mobile: 2-column layout for links) */}
-          <div className="col-span-1 lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+          <div className="col-span-1 space-y-3">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-2 whitespace-nowrap">
+              <span className="w-2 h-2 rounded-full bg-amber-500 shrink-0"></span>
               <span>Courses &amp; Batches</span>
             </h4>
-            <ul className="space-y-2 text-xs text-slate-600 list-none p-0 m-0 font-medium">
+            <ul className="space-y-2 text-[11.5px] sm:text-xs text-slate-600 list-none p-0 m-0 font-medium">
               <li>
                 <a href={getLinkHref('courses/neet-ug')} className="hover:text-[#5b40cf] hover:translate-x-1 inline-block transition-transform">
                   NEET-UG Target (Pre-Medical)
@@ -350,12 +350,12 @@ export default function HomeFooter({ global_nav: passedNav }) {
           </div>
 
           {/* Quick Links & Resources (col-span-1 on mobile: 2-column layout for links) */}
-          <div className="col-span-1 lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#5b40cf]"></span>
+          <div className="col-span-1 space-y-3">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-2 whitespace-nowrap">
+              <span className="w-2 h-2 rounded-full bg-[#5b40cf] shrink-0"></span>
               <span>Quick Links</span>
             </h4>
-            <ul className="space-y-2 text-xs text-slate-600 list-none p-0 m-0 font-medium">
+            <ul className="space-y-2 text-[11.5px] sm:text-xs text-slate-600 list-none p-0 m-0 font-medium">
               <li>
                 <a href="#results-orbit" className="hover:text-[#5b40cf] hover:translate-x-1 inline-block transition-transform">
                   PCP Hall of Fame
@@ -394,14 +394,14 @@ export default function HomeFooter({ global_nav: passedNav }) {
             </ul>
           </div>
 
-          {/* Admissions Newsletter & Support (col-span-2 on mobile) */}
-          <div className="col-span-2 sm:col-span-1 lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+          {/* Admissions Newsletter & Support (col-span-2 on mobile, col-span-1 on desktop) */}
+          <div className="col-span-2 lg:col-span-1 space-y-3">
+            <h4 className="text-xs font-black text-slate-900 uppercase tracking-wider flex items-center gap-2 whitespace-nowrap">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
               <span>Admissions Updates</span>
             </h4>
             
-            <p className="text-xs text-slate-600 leading-relaxed font-normal">
+            <p className="text-xs text-slate-600 leading-relaxed font-normal max-w-lg lg:max-w-none">
               Receive updates on NEET/JEE exam alerts, answer keys, and P-SAT scholarship dates.
             </p>
 
@@ -411,7 +411,7 @@ export default function HomeFooter({ global_nav: passedNav }) {
                 <span>Thank you for subscribing!</span>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="space-y-2">
+              <form onSubmit={handleSubscribe} className="space-y-2 max-w-md lg:max-w-none">
                 <div className="relative">
                   <input
                     type="email"
@@ -436,7 +436,7 @@ export default function HomeFooter({ global_nav: passedNav }) {
             )}
 
             <div className="pt-2">
-              <div className="p-3 rounded-xl bg-purple-50/70 border border-purple-100 flex items-center gap-2.5 shadow-2xs">
+              <div className="p-3 rounded-xl bg-purple-50/70 border border-purple-100 flex items-center gap-2.5 shadow-2xs max-w-md lg:max-w-none">
                 <Award className="w-4 h-4 text-amber-500 shrink-0" />
                 <span className="text-[11px] text-slate-700 font-medium">
                   Rajasthan's Highest Selection Ratio in NEET &amp; JEE

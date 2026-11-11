@@ -8,13 +8,10 @@ export default {
     darkMode: 'class',
     content: [
         './resources/views/home.blade.php',
-        './resources/js/Pages/Welcome.jsx',
-        './resources/js/Pages/HomeComponents/**/*.jsx',
-        './resources/js/NextComponents/GlobalNavbar.tsx',
-        './resources/js/NextComponents/BlogFooter.tsx',
-        './resources/js/NextComponents/BrandIcons.tsx',
-        './resources/js/Components/AnimatedBorderCard.jsx',
-        './resources/js/Components/ShareModal.jsx',
+        './resources/js/Pages/**/*.{jsx,tsx,js,ts}',
+        './resources/js/Pages/HomeComponents/**/*.{jsx,tsx,js,ts}',
+        './resources/js/NextComponents/**/*.{jsx,tsx,js,ts}',
+        './resources/js/Components/**/*.{jsx,tsx,js,ts}',
     ],
     theme: {
         extend: {
